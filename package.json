@@ -1,0 +1,27 @@
+{
+  "name": "bidhub",
+  "version": "0.0.1",
+  "description": "An auction site",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Berrinj/BidHub.git"
+  },
+  "keywords": [
+    "auction",
+    "bid",
+    "credits",
+    "buy",
+    "sell"
+  ],
+  "author": "Marte Lilleberre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Berrinj/BidHub/issues"
+  },
+  "homepage": "https://github.com/Berrinj/BidHub#readme"
+}
