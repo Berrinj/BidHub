@@ -1,0 +1,59 @@
+main {
+  max-width: 1180px;
+  margin: auto;
+  padding: 1rem 1rem;
+  .main-content-image {
+    img {
+      display: flex;
+      margin: auto;
+      height: 7rem;
+    }
+  }
+  .main-content {
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 1rem;
+    border: 1px solid $nav-footer-color;
+  }
+}
+
+.listings-containers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 1rem 0;
+    text-transform: uppercase;
+  }
+  .listing-card {
+    display: flex;
+    border: 1px solid #f4f4f4;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    .listing-image {
+      img {
+        width: 7rem;
+        height: 7rem;
+        border-radius: 0.5rem;
+      }
+    }
+    .listing-info {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      .listing-title {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin: 0.5rem 0;
+      }
+      .listing-price {
+        font-size: 1.2rem;
+        font-weight: 300;
+        margin: 0.5rem 0;
+      }
+    }
+  }
+}

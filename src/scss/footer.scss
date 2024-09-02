@@ -1,0 +1,14 @@
+@import "variables";
+
+footer {
+  background-color: $nav-footer-color;
+  color: $neutral-color;
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    align-items: center;
+    max-width: 1300px;
+    margin: auto;
+  }
+}

@@ -1,0 +1,47 @@
+@import "variables";
+@import "fonts";
+
+.header-container {
+  margin: 50px auto;
+  background-color: $primary-color;
+  max-width: 1300px;
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    .header-text {
+      color: $neutral-color;
+      font-family: $header-font;
+      padding: 1rem;
+      h1 {
+        font-size: 2.7rem;
+        font-weight: 200;
+        margin: 0.2rem;
+      }
+      p {
+        font-size: 1.5rem;
+        margin-top: 0.2rem;
+      }
+    }
+  }
+
+  .header-button {
+    button {
+      background-color: $secondary-color;
+      color: $neutral-color;
+      padding: 1rem 2rem;
+      border: none;
+      font-family: $header-font;
+      font-size: 3rem;
+      font-weight: 100;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-radius 0.3s;
+      &:hover {
+        background-color: $secondary-color;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@import "variables";
+
+nav {
+  background-color: $nav-footer-color;
+
+  .nav-content {
+    display: flex;
+    padding: 0.3rem;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px;
+    margin: auto;
+  }
+
+  .nav-logo {
+    display: flex;
+    color: $accent-color;
+
+    img {
+      width: 60px;
+      height: 60px;
+      margin-right: 0.5rem;
+      align-self: center;
+    }
+  }
+  .nav-links {
+    a {
+      color: $accent-color;
+      text-decoration: none;
+      padding: 0.5rem;
+      border-radius: 0.3rem;
+      transition: background-color 0.3s;
+      font-size: 1.5rem;
+
+      &:hover {
+        background-color: $secondary-color;
+        color: $neutral-color;
+      }
+    }
+  }
+}
