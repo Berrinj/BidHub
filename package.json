@@ -1,0 +1,54 @@
+{
+  "name": "bidhub",
+  "version": "0.0.3",
+  "description": "An auction site",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier -w src/**/*.{js,html,css,scss,json}",
+    "build": "sass src/scss:dist/css",
+    "watch": "sass --watch src/scss:dist/css & live-server",
+    "lint": "eslint src/**/*.js",
+    "lint-fix": "eslint src/**/*.js --cache --fix",
+    "prepare": "husky install",
+    "test": "npm run test-unit && npm run test-e2e-cli",
+    "test-unit": "jest",
+    "test-e2e": "cypress open",
+    "test-e2e-cli": "npm run test-e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Berrinj/BidHub.git"
+  },
+  "keywords": [
+    "auction",
+    "bid",
+    "credits",
+    "buy",
+    "sell"
+  ],
+  "author": "Marte Lilleberre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Berrinj/BidHub/issues"
+  },
+  "homepage": "https://github.com/Berrinj/BidHub#readme",
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.4",
+    "cypress": "^13.13.3",
+    "eslint": "^8.57.0",
+    "eslint-plugin-cypress": "^3.5.0",
+    "eslint-plugin-jest": "^28.8.0",
+    "husky": "^9.1.5",
+    "jest": "^29.2.0",
+    "lint-staged": "^15.2.9",
+    "live-server": "^1.2.2",
+    "prettier": "^3.3.3",
+    "sass": "^1.77.8"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,html,css,scss,json}": "prettier --write"
+  }
+}
