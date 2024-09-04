@@ -1,0 +1,12 @@
+@import "variables";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+$custom-colors: (
+  "secondary-custom": $secondary-color,
+  "primary-custom": $primary-color,
+  "accent-custom": $accent-color,
+);
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";

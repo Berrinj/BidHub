@@ -4,24 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bid Hub</title>
+    <link
+      rel="stylesheet"
+      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="dist/css/index.css" />
   </head>
 
-  <body>
-    <nav>
-      <div class="nav-content">
-        <div class="nav-logo">
-          <img src="./src/images/svg/bid-icon.svg" alt="Bid Hub Logo" />
-          <h1>BidHub</h1>
-        </div>
-        <div class="nav-links">
-          <a href="#">Login</a>
-          <a href="#">Sign up</a>
-        </div>
-      </div>
-    </nav>
+  <body class="bg-light">
     <header>
-      <div class="header-container">
+      <nav>
+        <div class="navbar container">
+          <a class="navbar-brand d-flex align-items-center" href="/"
+            ><img
+              src="./src/images/svg/bid-icon.svg"
+              alt="Bid Hub Logo"
+            />BidHub</a
+          >
+          <div class="navbar-nav col-lg-3 d-flex">
+            <ul class="d-flex list-unstyled justify-content-end">
+              <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Sign up</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container header-container shadow">
         <div class="header-content">
           <div class="header-text">
             <h1>Sign up now</h1>
@@ -32,10 +42,9 @@
           </div>
         </div>
       </div>
-    </header>
-    <main>
-      <div class="main-container">
-        <div class="introduction">
+
+      <div class="container col-lg-11">
+        <div class="introduction bg-white p-3 border rounded">
           <h2>What is BidHub?</h2>
           <p>
             Bid Hub is a platform that allows you to bid on items and services
@@ -44,72 +53,226 @@
             and services on BidHub and have them delivered to your customers.
           </p>
         </div>
-        <div class="main-content-image">
+        <div class="main-content-image mt-3">
           <img src="./src/images/svg/bid-icon.svg" alt="Bid Hub Logo" />
         </div>
-        <div class="searchbar">
+        <div class="input-group rounded mb-3 mt-3">
           <input
-            type="text"
-            class="search-term"
+            type="search"
+            class="form-control rounded"
             placeholder="Search for items"
+            aria-label="search for items"
           />
-          <button class="search-button">Search</button>
+          <button class="input-group-text border-0 btn">
+            <img src="./src/images/svg/tabler--search.svg" alt="Search Icon" />
+          </button>
         </div>
-        <div class="main-content">
-          <div class="listings-containers">
-            <div class="most-wanted-listings">
-              <h2>Most wanted</h2>
-              <div class="listing-card">
-                <div class="listing-image">
-                  <img
-                    src="./src/images/svg/bid-icon.svg"
-                    alt="Listing Image"
-                  />
-                </div>
-                <div class="listing-details">
-                  <h3>Item name</h3>
-                  <p>Item description</p>
+      </div>
+
+      <div class="container border d-flex rounded pb-3 bg-white">
+        <!-- <div class="container d-flex"> -->
+
+        <div class="row mt-2">
+          <div
+            class="col-lg-6 col-sm-12 d-flex flex-column align-items-center border-bottom border-end"
+          >
+            <h2 class="text-center m-2">Most wanted</h2>
+
+            <!-- //TODO: Add a fetch to display the 3 most wanted items, hardcoded under -->
+            <div class="card d-flex flex-row mb-3 bg-light shadow-sm">
+              <img
+                src="./src/images/svg/bid-icon.svg"
+                class="img-fluid"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Item name</h5>
+                <p class="card-text">Bids: x</p>
+                <p>Current bid: x credits</p>
+                <a href="#" class="btn btn-secondary-custom bid-btn">Bid now</a>
+                <a href="#" class="btn btn-primary-custom">View listing</a>
+              </div>
+            </div>
+            <div class="card d-flex flex-row mb-3 bg-light shadow-sm">
+              <img
+                src="./src/images/svg/bid-icon.svg"
+                class="img-fluid"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Item name</h5>
+                <p class="card-text">Bids: x</p>
+                <p>Current bid: x credits</p>
+                <a href="#" class="btn btn-secondary-custom bid-btn">Bid now</a>
+                <a href="#" class="btn btn-primary-custom">View listing</a>
+              </div>
+            </div>
+            <div class="card d-flex flex-row mb-3 bg-light shadow-sm">
+              <img
+                src="./src/images/svg/bid-icon.svg"
+                class="img-fluid"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Item name</h5>
+                <p class="card-text">Bids: x</p>
+                <p>Current bid: x credits</p>
+                <a href="#" class="btn btn-secondary-custom bid-btn">Bid now</a>
+                <a href="#" class="btn btn-primary-custom">View listing</a>
+              </div>
+            </div>
+            <a href="#" class="btn btn-accent-custom shadow-sm mt-3 mb-3"
+              >View more</a
+            >
+          </div>
+          <div
+            class="col-lg-6 col-sm-12 d-flex flex-column align-items-center border-bottom"
+          >
+            <h2 class="text-center m-2">Newest</h2>
+            <!-- //TODO: Add a fetch to display the 3 newest items, hardcoded under -->
+            <div class="card d-flex flex-row mb-3 bg-light shadow-sm">
+              <img
+                src="./src/images/svg/bid-icon.svg"
+                class="img-fluid"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Item name</h5>
+                <p class="card-text">Bids: x</p>
+                <p>Current bid: x credits</p>
+                <a href="#" class="btn btn-secondary-custom bid-btn">Bid now</a>
+                <a href="#" class="btn btn-primary-custom">View listing</a>
+              </div>
+            </div>
+            <div class="card d-flex flex-row mb-3 bg-light shadow-sm">
+              <img
+                src="./src/images/svg/bid-icon.svg"
+                class="img-fluid"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Item name</h5>
+                <p class="card-text">Bids: x</p>
+                <p>Current bid: x credits</p>
+                <a href="#" class="btn btn-secondary-custom bid-btn">Bid now</a>
+                <a href="#" class="btn btn-primary-custom">View listing</a>
+              </div>
+            </div>
+            <div class="card d-flex flex-row mb-3 bg-light shadow-sm">
+              <img
+                src="./src/images/svg/bid-icon.svg"
+                class="img-fluid"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">Item name</h5>
+                <p class="card-text">Bids: x</p>
+                <p>Current bid: x credits</p>
+                <a href="#" class="btn btn-secondary-custom bid-btn">Bid now</a>
+                <a href="#" class="btn btn-primary-custom">View listing</a>
+              </div>
+            </div>
+            <a href="#" class="btn btn-accent-custom shadow-sm mt-3 mb-3"
+              >View more</a
+            >
+          </div>
+          <div class="row mt-3">
+            <h2 class="text-center">Ending Soon</h2>
+            <div class="col-lg-12 d-flex justify-content-center flex-wrap">
+              <!-- //TODO: Add a fetch to display the 5 items ending the soonest, hardcoded under -->
+              <div class="card mt-2 bg-light shadow-sm">
+                <img
+                  src="./src/images/svg/bid-icon.svg"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Bids: x</p>
                   <p>Current bid: x credits</p>
-                  <button>Place bid</button>
+                  <a href="#" class="btn btn-secondary-custom bid-btn mb-2"
+                    >Bid now</a
+                  >
+                  <a href="#" class="btn btn-primary-custom">View listing</a>
+                </div>
+              </div>
+              <div class="card mt-2 ms-2 bg-light shadow-sm">
+                <img
+                  src="./src/images/svg/bid-icon.svg"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Bids: x</p>
+                  <p>Current bid: x credits</p>
+                  <a href="#" class="btn btn-secondary-custom bid-btn mb-2"
+                    >Bid now</a
+                  >
+                  <a href="#" class="btn btn-primary-custom">View listing</a>
+                </div>
+              </div>
+              <div class="card mt-2 ms-2 bg-light shadow-sm">
+                <img
+                  src="./src/images/svg/bid-icon.svg"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Bids: x</p>
+                  <p>Current bid: x credits</p>
+                  <a href="#" class="btn btn-secondary-custom bid-btn mb-2"
+                    >Bid now</a
+                  >
+                  <a href="#" class="btn btn-primary-custom">View listing</a>
+                </div>
+              </div>
+              <div class="card mt-2 ms-2 bg-light shadow-sm">
+                <img
+                  src="./src/images/svg/bid-icon.svg"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Bids: x</p>
+                  <p>Current bid: x credits</p>
+                  <a href="#" class="btn btn-secondary-custom bid-btn mb-2"
+                    >Bid now</a
+                  >
+                  <a href="#" class="btn btn-primary-custom">View listing</a>
+                </div>
+              </div>
+              <div class="card mt-2 ms-2 bg-light shadow-sm">
+                <img
+                  src="./src/images/svg/bid-icon.svg"
+                  class="card-img-top"
+                  alt="..."
+                />
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Bids: x</p>
+                  <p>Current bid: x credits</p>
+                  <a href="#" class="btn btn-secondary-custom bid-btn mb-2"
+                    >Bid now</a
+                  >
+                  <a href="#" class="btn btn-primary-custom">View listing</a>
                 </div>
               </div>
             </div>
-            <div class="newest-listings">
-              <h2>Newest</h2>
-              <div class="listing-card">
-                <div class="listing-image">
-                  <img
-                    src="./src/images/svg/bid-icon.svg"
-                    alt="Listing Image"
-                  />
-                </div>
-                <div class="listing-details">
-                  <h3>Item name</h3>
-                  <p>Item description</p>
-                  <p>Current bid: x credits</p>
-                  <button>Place bid</button>
-                </div>
-              </div>
-            </div>
-            <div class="ending-soon-listings">
-              <h2>Ending soon</h2>
-              <div class="listing-card">
-                <div class="listing-image">
-                  <img
-                    src="./src/images/svg/bid-icon.svg"
-                    alt="Listing Image"
-                  />
-                </div>
-                <div class="listing-details">
-                  <h3>Item name</h3>
-                  <p>Item description</p>
-                  <p>Current bid: x credits</p>
-                  <button>Place bid</button>
-                </div>
-              </div>
+            <div class="viewall-btn d-flex justify-content-center">
+              <a href="#" class="btn btn-accent-custom shadow-sm mt-3 mb-3"
+                >View more</a
+              >
             </div>
           </div>
         </div>
+      </div>
+      <div class="viewall-btn d-flex justify-content-center">
+        <a href="#" class="btn btn-accent-custom shadow-sm mt-3 mb-3"
+          >View all listings</a
+        >
       </div>
     </main>
     <footer>
