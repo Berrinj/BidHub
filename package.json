@@ -52,6 +52,6 @@
     "*.{js,html,css,scss,json}": "prettier --write"
   },
   "dependencies": {
-    "bootstrap": "^5.2.0"
+    "bootstrap": "^5.3.3"
   }
 }

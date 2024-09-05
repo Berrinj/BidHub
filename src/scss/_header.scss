@@ -26,22 +26,22 @@
     }
   }
 
-  .header-button {
-    button {
-      background-color: $secondary-color;
-      color: $neutral-color;
-      padding: 1rem 2rem;
-      border: none;
-      font-family: $header-font;
-      font-size: 3rem;
-      font-weight: 100;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: border-radius 0.3s;
-      &:hover {
-        background-color: $secondary-color;
-        border-radius: 0.5rem;
-      }
-    }
-  }
+  // .header-button {
+  //   button {
+  //     background-color: $secondary-color;
+  //     color: $neutral-color;
+  //     padding: 1rem 2rem;
+  //     border: none;
+  //     font-family: $header-font;
+  //     font-size: 3rem;
+  //     font-weight: 100;
+  //     text-transform: uppercase;
+  //     cursor: pointer;
+  //     transition: border-radius 0.3s;
+  //     &:hover {
+  //       background-color: $secondary-color;
+  //       border-radius: 0.5rem;
+  //     }
+  //   }
+  // }
 }
