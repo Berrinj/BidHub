@@ -15,7 +15,7 @@ export function checkLoggedInStatus() {
     headerTextP1.textContent = `Welcome back, ${username}!`;
     headerTextP2.textContent =
       "-Check out all the latest listings and find your next treasure!";
-    headerBtn.innerHTML = `<button type="button" class="btn btn-secondary-custom" id="listingsBtn">See listings</button>`;
+    headerBtn.innerHTML = `<button type="button" class="btn btn-secondary-custom" id="listingsBtn">See all listings</button>`;
     headerBtn.addEventListener("click", () => {
       window.location.href = "/listings.html";
     });
