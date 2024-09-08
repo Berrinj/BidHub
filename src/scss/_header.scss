@@ -1,0 +1,19 @@
+@import "variables";
+@import "fonts";
+
+.header-container {
+  margin: 30px auto;
+  background-color: $primary-color;
+  max-width: 1300px;
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    .header-text {
+      color: $neutral-color;
+      // font-family: $header-font;
+      padding: 0.5rem;
+    }
+  }
+}

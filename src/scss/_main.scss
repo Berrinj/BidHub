@@ -1,0 +1,18 @@
+main {
+  max-width: 1300px;
+  margin: auto;
+  padding: 1rem 1rem;
+  .main-content-image {
+    img {
+      display: flex;
+      margin: auto;
+      height: 7rem;
+    }
+  }
+  // .main-content {
+  //   background-color: #fff;
+  //   border-radius: 1rem;
+  //   padding: 1rem;
+  //   border: 1px solid $nav-footer-color;
+  // }
+}

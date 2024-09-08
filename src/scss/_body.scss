@@ -1,0 +1,11 @@
+@import "variables";
+
+body {
+  margin: 0;
+  background-color: $neutral-color;
+  display: flex;
+  flex-direction: column;
+}
+ul {
+  margin-bottom: 0;
+}
