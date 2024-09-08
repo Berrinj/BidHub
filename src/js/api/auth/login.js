@@ -26,13 +26,14 @@ export async function login(profile) {
       storage.save("profile", profile);
 
       //close the modal
-      const modal = document.querySelector("#loginModal");
-      const modalBackdrop = document.querySelector(".modal-backdrop");
-      modal.classList.remove("show");
-      modal.setAttribute("hidden", true);
-      modalBackdrop.remove();
+      //   const modal = document.querySelector("#loginModal");
+      //   const modalBackdrop = document.querySelector(".modal-backdrop");
+      //   modal.classList.remove("show");
+      //   modal.setAttribute("hidden", true);
+      //   modalBackdrop.remove();
 
-      document.body.style.overflow = "auto";
+      //   document.body.style.overflow = "auto";
+      window.location.href = "/";
 
       return profile;
     }
