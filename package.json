@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/Berrinj/BidHub#readme",
   "devDependencies": {
-    "@babel/core": "^7.19.3",
+    "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.19.4",
     "cypress": "^13.13.3",
     "eslint": "^8.57.0",
