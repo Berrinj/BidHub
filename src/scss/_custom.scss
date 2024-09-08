@@ -6,6 +6,7 @@ $custom-colors: (
   "secondary-custom": $secondary-color,
   "primary-custom": $primary-color,
   "accent-custom": $accent-color,
+  "neutral-custom": $neutral-color,
 );
 $theme-colors: map-merge($theme-colors, $custom-colors);
 

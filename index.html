@@ -18,15 +18,17 @@
 
   <body class="bg-light">
     <header>
-      <nav>
-        <div class="navbar container">
-          <a class="navbar-brand d-flex align-items-center" href="/"
-            ><img
-              src="./src/images/svg/bid-icon.svg"
-              alt="Bid Hub Logo"
-            />BidHub</a
-          >
-          <div class="navbar-nav col-lg-3 d-flex top-menu">
+      <nav class="container-fluid">
+        <div class="container navbar">
+          <div class="navbar-logo col-lg-5">
+            <a class="navbar-brand d-flex align-items-center" href="/"
+              ><img
+                src="./src/images/svg/bid-icon.svg"
+                alt="Bid Hub Logo"
+              />BidHub</a
+            >
+          </div>
+          <div class="navbar-nav col-lg-5 d-flex top-menu">
             <ul class="d-flex list-unstyled justify-content-end">
               <li class="nav-item">
                 <a
@@ -54,8 +56,8 @@
       <div class="container header-container shadow">
         <div class="header-content">
           <div class="header-text">
-            <h1></h1>
-            <p></p>
+            <p class="header-first-p text-capitalize fs-2 mb-0"></p>
+            <p class="header-second-p fs-5"></p>
           </div>
           <div class="header-button">
             <button
@@ -71,7 +73,7 @@
         </div>
       </div>
 
-      <div class="container col-lg-11">
+      <div class="container intro col-lg-11">
         <div class="introduction bg-white p-3 border rounded">
           <h2>What is BidHub?</h2>
           <p>
@@ -84,6 +86,9 @@
         <div class="main-content-image mt-3">
           <img src="./src/images/svg/bid-icon.svg" alt="Bid Hub Logo" />
         </div>
+      </div>
+
+      <div class="container col-lg-10">
         <div class="input-group rounded mb-3 mt-3">
           <input
             type="search"
@@ -97,10 +102,10 @@
         </div>
       </div>
 
-      <div class="container border d-flex rounded pb-3 bg-white">
+      <div class="container col-lg-11 border d-flex rounded pb-3 bg-white">
         <!-- <div class="container d-flex"> -->
 
-        <div class="row mt-2">
+        <div class="row mt-2 justify-content-center">
           <div
             class="col-lg-6 col-sm-12 d-flex flex-column align-items-center border-bottom border-end"
           >
@@ -149,7 +154,9 @@
                 <a href="#" class="btn btn-primary-custom">View listing</a>
               </div>
             </div>
-            <a href="#" class="btn btn-accent-custom shadow-sm mt-3 mb-3"
+            <a
+              href="#"
+              class="btn btn-neutral-custom shadow-sm mt-3 mb-3 border"
               >View more</a
             >
           </div>
@@ -200,14 +207,20 @@
                 <a href="#" class="btn btn-primary-custom">View listing</a>
               </div>
             </div>
-            <a href="#" class="btn btn-accent-custom shadow-sm mt-3 mb-3"
+            <a
+              href="#"
+              class="btn btn-neutral-custom shadow-sm mt-3 mb-3 border"
               >View more</a
             >
           </div>
-          <div class="row mt-3">
-            <h2 class="text-center">Ending Soon</h2>
-            <div class="col-lg-12 d-flex justify-content-center flex-wrap">
-              <!-- //TODO: Add a fetch to display the 5 items ending the soonest, hardcoded under -->
+          <div class="col-lg-12 d-flex flex-column">
+            <div class="ending-soon-heading">
+              <h2 class="text-center m-2">Ending Soon</h2>
+            </div>
+            <!-- //TODO: Add a fetch to display the 5 items ending the soonest, hardcoded under -->
+            <div
+              class="ending-soon-cards d-flex flex-wrap justify-content-center"
+            >
               <div class="card mt-2 bg-light shadow-sm">
                 <img
                   src="./src/images/svg/bid-icon.svg"
@@ -290,11 +303,72 @@
               </div>
             </div>
             <div class="viewall-btn d-flex justify-content-center">
-              <a href="#" class="btn btn-accent-custom shadow-sm mt-3 mb-3"
+              <a
+                href="#"
+                class="btn btn-neutral-custom shadow-sm mt-3 mb-3 border"
                 >View more</a
               >
             </div>
           </div>
+          <!--<div class="row mt-3">
+                    <h2 class="text-center">Ending Soon</h2>
+                    <div class="col-lg-12 d-flex justify-content-center flex-wrap">
+                        
+                        <div class="card mt-2 bg-light shadow-sm">
+                            <img src="./src/images/svg/bid-icon.svg" class="card-img-top" alt="..." />
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Bids: x</p>
+                                <p>Current bid: x credits</p>
+                                <a href="#" class="btn btn-secondary-custom bid-btn mb-2">Bid now</a>
+                                <a href="#" class="btn btn-primary-custom">View listing</a>
+                            </div>
+                        </div>
+                        <div class="card mt-2 ms-2 bg-light shadow-sm">
+                            <img src="./src/images/svg/bid-icon.svg" class="card-img-top" alt="..." />
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Bids: x</p>
+                                <p>Current bid: x credits</p>
+                                <a href="#" class="btn btn-secondary-custom bid-btn mb-2">Bid now</a>
+                                <a href="#" class="btn btn-primary-custom">View listing</a>
+                            </div>
+                        </div>
+                        <div class="card mt-2 ms-2 bg-light shadow-sm">
+                            <img src="./src/images/svg/bid-icon.svg" class="card-img-top" alt="..." />
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Bids: x</p>
+                                <p>Current bid: x credits</p>
+                                <a href="#" class="btn btn-secondary-custom bid-btn mb-2">Bid now</a>
+                                <a href="#" class="btn btn-primary-custom">View listing</a>
+                            </div>
+                        </div>
+                        <div class="card mt-2 ms-2 bg-light shadow-sm">
+                            <img src="./src/images/svg/bid-icon.svg" class="card-img-top" alt="..." />
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Bids: x</p>
+                                <p>Current bid: x credits</p>
+                                <a href="#" class="btn btn-secondary-custom bid-btn mb-2">Bid now</a>
+                                <a href="#" class="btn btn-primary-custom">View listing</a>
+                            </div>
+                        </div>
+                        <div class="card mt-2 ms-2 bg-light shadow-sm">
+                            <img src="./src/images/svg/bid-icon.svg" class="card-img-top" alt="..." />
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Bids: x</p>
+                                <p>Current bid: x credits</p>
+                                <a href="#" class="btn btn-secondary-custom bid-btn mb-2">Bid now</a>
+                                <a href="#" class="btn btn-primary-custom">View listing</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="viewall-btn d-flex justify-content-center">
+                        <a href="#" class="btn btn-accent-custom shadow-sm mt-3 mb-3">View more</a>
+                    </div>
+                </div> -->
         </div>
       </div>
       <div class="viewall-btn d-flex justify-content-center">
@@ -310,18 +384,21 @@
           aria-labelledby="registerModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="registerModalLabel">
-                  Register User
-                </h5>
+              <div class="modal-header bg-primary-custom flex-column">
                 <button
                   type="button"
-                  class="btn-close"
+                  class="btn-close bg-light"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
+                <div class="modal-h-text text-light">
+                  <h4 class="modal-title fs-4" id="registerModalLabel">
+                    Register to BidHub today
+                  </h4>
+                  <p>and recieve 1000 credits right away!</p>
+                </div>
               </div>
               <div class="modal-body">
                 <form class="registerForm">
@@ -425,28 +502,29 @@
                       id="banner-alt"
                     />
                   </div>
-
-                  <button
-                    type="submit"
-                    class="btn btn-primary-custom"
-                    id="registerUserBtn"
-                  >
-                    REGISTER
-                  </button>
+                  <div class="btn-holder text-center">
+                    <button
+                      type="submit"
+                      class="btn btn-primary-custom"
+                      id="registerUserBtn"
+                    >
+                      REGISTER
+                    </button>
+                  </div>
                 </form>
               </div>
 
-              <div class="modal-footer">
+              <div class="modal-footer mx-auto">
                 <div
                   class="sign-in d-flex flex-wrap align-items-center justify-content-center"
                 >
-                  <button
-                    class="btn btn-primary"
+                  <p
+                    class="link fst-italic"
                     data-bs-target="#loginModal"
                     data-bs-toggle="modal"
                   >
-                    Or Login here
-                  </button>
+                    Returning user? Login here
+                  </p>
                 </div>
               </div>
             </div>
@@ -460,20 +538,28 @@
           aria-labelledby="loginModalToggleLabel"
           tabindex="-1"
         >
-          <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="loginModalToggleLabel">
-                  Log in
-                </h1>
+              <div class="modal-header bg-primary-custom flex-column">
                 <button
                   type="button"
-                  class="btn-close"
+                  class="btn-close bg-light"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
+                <div class="modal-h-text text-light">
+                  <h4 class="modal-title fs-4" id="loginModalToggleLabel">
+                    Log in to BidHub
+                  </h4>
+                  <p>To start listing and bidding</p>
+                </div>
               </div>
-              <div class="modal-body">
+              <div class="modal-body d-flex flex-column">
+                <img
+                  src="./src/images/svg/bid-icon.svg"
+                  alt="Bid Hub Logo"
+                  class="mx-auto"
+                />
                 <form class="loginForm">
                   <div class="form-group mb-3">
                     <label for="email" class="form-label">Email:</label>
@@ -502,23 +588,25 @@
                       required
                     />
                   </div>
-                  <button
-                    type="submit"
-                    class="btn btn-primary-custom"
-                    id="loginUserBtn"
-                  >
-                    LOGIN
-                  </button>
+                  <div class="btn-holder text-center">
+                    <button
+                      type="submit"
+                      class="btn btn-primary-custom"
+                      id="loginUserBtn"
+                    >
+                      LOG IN
+                    </button>
+                  </div>
                 </form>
               </div>
-              <div class="modal-footer">
-                <button
-                  class="btn btn-primary"
+              <div class="modal-footer mx-auto">
+                <p
+                  class="link fst-italic"
                   data-bs-target="#registerModal"
                   data-bs-toggle="modal"
                 >
-                  Or register user
-                </button>
+                  New user? Register here
+                </p>
               </div>
             </div>
           </div>

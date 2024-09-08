@@ -1,34 +1,38 @@
-const headerTextH1 = document.querySelector(".header-text h1");
-const headerTextP = document.querySelector(".header-text p");
+const headerTextP1 = document.querySelector(".header-first-p");
+const headerTextP2 = document.querySelector(".header-second-p");
 const headerBtn = document.querySelector(".header-button");
 const topNav = document.querySelector(".top-menu ul");
+const intro = document.querySelector(".intro");
 import { load } from "../storage/index.js";
 
 // Check if the user is logged in
 export function checkLoggedInStatus() {
   if (load("token")) {
-    headerTextH1.textContent = "Welcome back!";
-    headerTextP.textContent =
-      "Check out all the latest listings and find your next treasure!";
-    headerBtn.innerHTML =
-      '<button type="button" class="btn btn-secondary-custom" id="listingsBtn">See listings</button>';
+    const username = load("profile").name;
+    //show username in the header
+    headerTextP1.textContent = `Welcome back, ${username}!`;
+    headerTextP2.textContent =
+      "-Check out all the latest listings and find your next treasure!";
+    headerBtn.innerHTML = `<button type="button" class="btn btn-secondary-custom" id="listingsBtn">See listings</button>`;
     headerBtn.addEventListener("click", () => {
       window.location.href = "/listings.html";
     });
+    //hide the intro
+    intro.setAttribute("hidden", true);
     //change the links in the topNav
     topNav.innerHTML = `
-      <li class="nav-item">
-        <a class="nav-link" href="/listings.html">Listings</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/profile.html">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/logout.html">Logout</a>
-      </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex" data-bs-toggle="modal" data-bs-target="#newListingModal"><img
+                                    src="./src/images/svg/new-listing.svg">&nbsp;New Listing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex" id="myProfile" href="/profile"><img
+                                    src="./src/images/svg/avatar.svg">&nbsp;My profile</a>
+                        </li>
     `;
   } else {
-    headerTextH1.textContent = "Sign up now";
-    headerTextP.textContent = "-And recieve a gift of 1000 credits to buy for!";
+    headerTextP1.textContent = "Sign up now";
+    headerTextP2.textContent =
+      "-And recieve a gift of 1000 credits to buy for!";
   }
 }

@@ -2,46 +2,36 @@
 
 nav {
   background-color: $nav-footer-color;
+  .navbar {
+    max-width: 1300px;
+    padding: 0;
+  }
 
   .navbar-brand {
     color: $accent-color;
-    font-size: 2rem;
+    font-size: 1.7rem;
+    &:hover {
+      color: $accent-color-hover;
+    }
     img {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       margin-right: 0.5rem;
       align-self: center;
     }
   }
-  ul {
-    margin-bottom: 0;
-  }
+
   .nav-link {
     color: $accent-color;
     padding: 0.5rem;
     border-radius: 0.3rem;
     transition: background-color 0.3s;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: pointer;
 
     &:hover {
       background-color: $secondary-color;
       color: $neutral-color;
-    }
-  }
-  .nav-links {
-    a {
-      color: $accent-color;
-      text-decoration: none;
-      padding: 0.5rem;
-      border-radius: 0.3rem;
-      transition: background-color 0.3s;
-      font-size: 1.5rem;
-
-      &:hover {
-        background-color: $secondary-color;
-        color: $neutral-color;
-      }
     }
   }
 }

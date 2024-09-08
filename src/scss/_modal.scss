@@ -1,0 +1,14 @@
+.link {
+  cursor: pointer;
+}
+
+.modal-content {
+  border: 5px solid $primary-color;
+}
+.modal-header {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  .btn-close {
+    color: $neutral-color;
+  }
+}
