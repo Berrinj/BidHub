@@ -1,9 +1,12 @@
 import * as handlers from "./handlers/index.js";
-import * as status from "./status/landingpage.js";
+import * as status from "./status/index.js";
+import * as profile from "./api/profile/display.js";
 // import { getAPIKey } from "./api/auth/apikey.js";
 
 handlers.registerFormListener();
 handlers.loginFormListener();
-status.checkLoggedInStatus();
+status.headerListener();
+status.navListener();
+profile.getProfile();
 
 // getAPIKey();
