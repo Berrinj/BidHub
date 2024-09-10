@@ -1,22 +1,30 @@
 import { API_URL_PROFILE } from "../constants.js";
-import { API_KEY } from "../constants.js";
-import { load } from "../../storage/index.js";
+import { authFetch } from "../authFetch.js";
 
-export async function getProfile() {
-  const name = load("profile").name;
-  const response = await fetch(API_URL_PROFILE + `/` + name, {
-    headers: {
-      Authorization: `Bearer ${load("token")}`,
-      "X-Noroff-API-Key": API_KEY,
-    },
-  });
-  return await response.json();
+const bids = "_bids=true";
+const listings = "_listings=true";
+const wins = "_wins=true";
+
+/**
+ * Fetches a single profile from the API
+ * @param {string} name username of the profile to fetch
+ * @returns {promise} result of the get
+ * @throws {Error} If the name parameter is empty or an error occurs during the process.
+ */
+
+export async function displayProfile(name) {
+  try {
+    if (!name) {
+      throw new Error("get requires a profile name");
+    }
+    const displayProfileURL = `${API_URL_PROFILE}/${name}?${listings}&${bids}&${wins}`;
+    console.log(displayProfileURL);
+    const response = await authFetch(displayProfileURL);
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to display profile");
+  }
 }
-
-const profile = await getProfile();
-console.log(profile);
-console.log(profile.data.name);
-console.log(profile.data.bio);
-console.log(profile.data.avatar.url);
-
-console.log(profile.data.credits);
