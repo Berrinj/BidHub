@@ -20,7 +20,6 @@ export function loginFormListener() {
 
     try {
       await login(profile);
-      console.log("Profile logged in successfully:", profile);
       //   const listings = await getListings();
       //   console.log(listings);
     } catch (error) {
