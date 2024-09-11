@@ -12,21 +12,3 @@
   height: 100px;
   opacity: 0.5;
 }
-
-@media screen and (max-width: 992px) {
-  .profile-container {
-    min-width: 100%;
-  }
-  .profile-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .profile-listings-img {
-    width: 80px;
-    height: 80px;
-  }
-  .profile-listings.lead {
-    margin-bottom: 7px;
-  }
-}

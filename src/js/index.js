@@ -9,10 +9,14 @@ handlers.loginFormListener();
 status.headerListener();
 status.navListener();
 
-//create path for the pages
+//create switch path for the pages
 const path = window.location.pathname;
+
 if (path === "/profile/") {
   templates.renderProfile();
+}
+if (path === "/listings/") {
+  templates.renderListings();
 }
 
 // getAPIKey();
