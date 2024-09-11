@@ -7,3 +7,40 @@
     margin-bottom: 0;
   }
 }
+
+.listing-card {
+  // width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  .card-body {
+    flex-grow: 1; /* Allow the card body to take up remaining space */
+    // overflow: hidden; /* Ensure no overflow */
+    display: flex;
+    flex-direction: column;
+  }
+
+  // .card-body h2 {
+  //   margin-bottom: 0.5rem; /* Space between title and description */
+  //   flex-shrink: 0; /* Ensure heading doesn't collapse */
+  // }
+
+  .card-body p {
+    flex-grow: 1; /* Allow the description to take up available space */
+    // overflow-wrap: break-word;
+    // word-wrap: break-word;
+    // word-break: break-word;
+    margin-bottom: 0; /* Remove extra margins to avoid overflow */
+    overflow: hidden; /* Prevent overflow if the text is too long */
+    text-overflow: ellipsis; /* Add ellipsis for long text */
+  }
+
+  .card-body .listing-bids {
+    flex-shrink: 0; /* Ensure the bids are not collapsed */
+  }
+}

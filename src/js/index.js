@@ -1,7 +1,7 @@
 import * as handlers from "./handlers/index.js";
 import * as status from "./status/index.js";
 // import * as profile from "./api/profile/display.js";
-import * as templates from "./api/templates/renderProfile.js";
+import * as templates from "./api/templates/index.js";
 // import { getAPIKey } from "./api/auth/apikey.js";
 
 handlers.registerFormListener();
@@ -16,7 +16,7 @@ if (path === "/profile/") {
   templates.renderProfile();
 }
 if (path === "/listings/") {
-  templates.renderListings();
+  templates.renderAllListings();
 }
 
 // getAPIKey();
