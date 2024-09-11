@@ -17,7 +17,7 @@ export function headerListener() {
         "-Check out all the latest listings and find your next treasure!";
       headerBtn.innerHTML = `<button type="button" class="btn btn-secondary-custom" id="listingsBtn">See all listings</button>`;
       headerBtn.addEventListener("click", () => {
-        window.location.href = "/listings.html";
+        window.location.href = "/listings";
       });
       //hide the intro
       intro.setAttribute("hidden", true);

@@ -1,8 +1,10 @@
+import { load } from "../storage/index.js";
 const topNav = document.querySelector(".top-menu ul");
 
 export function navListener() {
-  // change the links in the topNav
-  topNav.innerHTML = `
+  if (load("token")) {
+    // change the links in the topNav
+    topNav.innerHTML = `
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="modal" data-bs-target="#newListingModal"><svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 14 14">
 <path fill="none" stroke="#fbbf24" stroke-linecap="round" stroke-linejoin="round" 
@@ -22,4 +24,5 @@ d="M7 4v6M4 7h6" />
 </svg></a>
         </li>
 `;
+  }
 }

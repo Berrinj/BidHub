@@ -1,4 +1,5 @@
 import { load } from "../../storage/index.js";
+import { remove } from "../../storage/index.js";
 import { displayProfile } from "../profile/display.js";
 // import { getProfile } from "../profile/get.js";
 
@@ -6,11 +7,14 @@ export async function renderProfile() {
   const placeholders = {
     avatar: "../../../src/images/placeholder-images/avatar.jpg",
     bidImg: "../../../src/images/placeholder-images/token-branded--bidz.png",
+    bidSVG: "../../../src/images/svg/token--bidz.svg",
   };
   const storage = load("profile");
   const url = new URL(location.href);
   const getName = url.searchParams.get("name") || storage.name;
   const profileInfo = await displayProfile(getName);
+  const loading = document.querySelector(".loading");
+  loading.remove();
   console.log(profileInfo);
   const avatarURL = profileInfo.data.avatar.url || placeholders.avatar;
 
@@ -22,6 +26,7 @@ export async function renderProfile() {
     "profile-avatar",
     "rounded-circle",
     "object-fit-cover",
+    "mx-auto",
   );
   profileImage.src = avatarURL;
   profileImage.alt = profileInfo.data.avatar.alt || "Profile image";
@@ -31,12 +36,13 @@ export async function renderProfile() {
     "text-primary",
     "fw-light",
     "fst-italic",
+    "mx-auto",
   );
   editProfileBtn.textContent = "Edit Profile";
 
   //create profile name
   const profileName = document.createElement("h2");
-  profileName.classList.add("profile-name", "display-6");
+  profileName.classList.add("profile-name", "display-6", "mb-0");
   profileName.textContent = profileInfo.data.name;
 
   //create profile bio
@@ -52,10 +58,21 @@ export async function renderProfile() {
   //create listings info from the profile
   const listings = profileInfo.data._count.listings;
   const listingsContainer = document.querySelector(".profile-listings");
-  listingsContainer.classList.add("d-flex", "align-items-center");
+
+  // create number of listings from the profile
+  const listingsSumContainer = document.createElement("div");
+  listingsSumContainer.classList.add(
+    "profile-listings-sum",
+    "d-flex",
+    "align-items-center",
+    "col-md-6",
+    "col-12",
+    "justify-content-center",
+    "mt-4",
+  );
   const listingsImg = document.createElement("img");
   listingsImg.classList.add("profile-listings-img");
-  listingsImg.src = placeholders.bidImg;
+  listingsImg.src = placeholders.bidSVG;
   const listingsInfo = document.createElement("div");
   listingsInfo.classList.add("profile-listings-info");
   const listingsValue = document.createElement("p");
@@ -64,17 +81,68 @@ export async function renderProfile() {
   const viewAllBtn = document.createElement("a");
   viewAllBtn.classList.add("btn", "btn-primary", "btn-sm");
   viewAllBtn.textContent = "View all";
+  viewAllBtn.addEventListener("click", () => {
+    window.location.href = "./listings/index.html";
+  });
+  listingsSumContainer.appendChild(listingsImg);
+  listingsInfo.appendChild(listingsValue);
+  listingsInfo.appendChild(viewAllBtn);
+  listingsSumContainer.appendChild(listingsInfo);
+  listingsContainer.appendChild(listingsSumContainer);
+
+  //create listings wins from the profile
+  const wins = profileInfo.data._count.wins;
+  const listingsWinsContainer = document.createElement("div");
+  listingsWinsContainer.classList.add(
+    "profile-listings-wins",
+    "d-flex",
+    "align-items-center",
+    "col-md-6",
+    "col-12",
+    "justify-content-center",
+    "mt-4",
+  );
+  const listingsWinsImg = document.createElement("img");
+  listingsWinsImg.classList.add("profile-listings-img");
+  listingsWinsImg.src = placeholders.bidSVG;
+  const listingsWinsInfo = document.createElement("div");
+  listingsWinsInfo.classList.add("profile-listings-info");
+  const listingsWinsValue = document.createElement("p");
+  listingsWinsValue.classList.add("profile-listings", "lead");
+  listingsWinsValue.textContent = `${wins} Wins`;
+  const viewAllWinsBtn = document.createElement("a");
+  viewAllWinsBtn.classList.add("btn", "btn-primary", "btn-sm");
+  viewAllWinsBtn.textContent = "View all";
+  listingsWinsContainer.appendChild(listingsWinsImg);
+  listingsWinsInfo.appendChild(listingsWinsValue);
+  listingsWinsInfo.appendChild(viewAllWinsBtn);
+  listingsWinsContainer.appendChild(listingsWinsInfo);
+  listingsContainer.appendChild(listingsWinsContainer);
+
+  // add logout button
+  const logoutBtn = document.querySelector(".logout");
+  const logoutBtnLink = document.createElement("p");
+  logoutBtnLink.classList.add("link", "fst-italic");
+  logoutBtnLink.textContent = "Log out";
+  logoutBtn.appendChild(logoutBtnLink);
+  logoutBtn.addEventListener("click", () => {
+    remove("profile");
+    remove("token");
+    window.location.href = "/";
+  });
+
+  listingsContainer.appendChild(logoutBtn);
 
   // append everything to the profile
   profileImg.appendChild(profileImage);
-  profileImg.appendChild(editProfileBtn);
   profileBody.appendChild(profileName);
   if (storage.name === profileInfo.data.name) {
+    profileImg.appendChild(editProfileBtn);
     profileBody.appendChild(profileCredits);
   }
   profileBody.appendChild(profileBio);
-  listingsContainer.appendChild(listingsImg);
-  listingsInfo.appendChild(listingsValue);
-  listingsInfo.appendChild(viewAllBtn);
-  listingsContainer.appendChild(listingsInfo);
+  //   listingsContainer.appendChild(listingsImg);
+  //   listingsInfo.appendChild(listingsValue);
+  //   listingsInfo.appendChild(viewAllBtn);
+  //   listingsContainer.appendChild(listingsInfo);
 }
