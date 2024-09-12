@@ -1,5 +1,7 @@
 import { displayListing } from "../api/listings/display.js";
 import { countdownTimer } from "../handlers/timeDate.js";
+import { formatDate } from "../handlers/timeDate.js";
+import { load } from "../storage/index.js";
 
 export async function renderSingleListing() {
   //get id from url
@@ -7,63 +9,140 @@ export async function renderSingleListing() {
   const id = url.searchParams.get("id");
   const response = await displayListing(id);
   const listing = response.data;
-  const listingContainer = document.querySelector(".single-listings-container");
+  //   const listingContainer = document.querySelector(".single-listings-container");
+  const listingHeader = document.querySelector(".single-listing-header");
+  const listingBody = document.querySelector(".single-listing-body");
+  listingBody.innerHTML = "";
+  //   const listingFooter = document.querySelector(".single-listing-footer");
   console.log(listing);
   const coinSVG = `../../../src/images/svg/noto--coin.svg`;
 
+  const listingSellerAvatar = listing.seller.avatar.url || "";
+
   let lastBidAmount = 0;
-  let lastBidder = "";
-  let bidderName = "";
   if (listing.bids && listing.bids.length > 0) {
     const lastBid = listing.bids[listing.bids.length - 1];
     lastBidAmount = lastBid.amount;
-    lastBidder = `(@${lastBid.bidder.name})`;
-    bidderName = lastBid.bidder.name;
   }
 
-  const listingCard = document.createElement("div");
-  listingCard.classList.add(
-    "listing-card",
-    "card",
-    "col-10",
-    "text-truncate",
-    "rounded",
-    "m-1",
-    "p-0",
-    "bg-light",
-    "shadow-sm",
-    "m-4",
+  //Create Listing Title
+  const listingTitle = document.createElement("h1");
+  listingTitle.classList.add(
+    "listing-title",
+    "text-center",
+    "display-3",
+    "mb-0",
   );
+  listingTitle.textContent = listing.title;
 
-  let mediaURL = "";
-  if (listing.media.length > 0) {
-    mediaURL = `${listing.media[0].url}`;
-  } else {
-    mediaURL = `../../../src/images/placeholder-images/token-branded--bidz.png`;
+  //Create Listing Seller
+  const listingSeller = document.createElement("a");
+  listingSeller.classList.add(
+    "mx-auto",
+    "text-center",
+    "d-block",
+    "mb-2",
+    "mt-1",
+  );
+  listingSeller.innerHTML = `<img src="${listingSellerAvatar}" alt="seller avatar" class="rounded-circle avatar-listing"> ${listing.seller.name}`;
+  listingSeller.href = `/profile/?name=${listing.seller.name}`;
+
+  //append listing title and seller to header
+  listingHeader.appendChild(listingTitle);
+  listingHeader.appendChild(listingSeller);
+
+  //Create Image Gallery Carousel
+  const imageGalleryContainer = document.createElement("div");
+  imageGalleryContainer.classList.add("carousel-container");
+  const carousel = document.createElement("div");
+  carousel.classList.add("carousel", "slide", "carousel-fade");
+  carousel.id = "carouselControls";
+  carousel.setAttribute("data-bs-ride", "carousel");
+  const carouselInner = document.createElement("div");
+  carouselInner.classList.add("carousel-inner");
+  //Carousel items
+  listing.media.forEach((media, index) => {
+    const carouselItem = document.createElement("div");
+    carouselItem.classList.add("carousel-item");
+    if (index === 0) {
+      carouselItem.classList.add("active");
+    }
+    const carouselImg = document.createElement("img");
+
+    carouselImg.src = media.url;
+
+    carouselImg.classList.add("d-block", "w-100", "listing-image", "rounded");
+    carouselImg.alt = "listing image";
+    carouselItem.appendChild(carouselImg);
+    carouselInner.appendChild(carouselItem);
+  });
+
+  if (carouselInner.children.length === 0) {
+    const carouselItem = document.createElement("div");
+    carouselItem.classList.add("carousel-item", "active", "opacity-50");
+    const carouselImg = document.createElement("img");
+    carouselImg.src = `../../../src/images/placeholder-images/banner.jpg`;
+    carouselImg.classList.add("d-block", "w-100", "listing-image", "rounded");
+    carouselImg.alt = "no listing image found, placeholder image";
+    carouselItem.appendChild(carouselImg);
+    carouselInner.appendChild(carouselItem);
   }
 
-  const cardHeader = document.createElement("div");
-  cardHeader.classList.add("card-header", "position-relative", "p-0");
+  carousel.appendChild(carouselInner);
+  //Carousel controls
+  const carouselPrev = document.createElement("button");
+  carouselPrev.classList.add("carousel-control-prev");
+  carouselPrev.setAttribute("type", "button");
+  carouselPrev.setAttribute("data-bs-target", "#carouselControls");
+  carouselPrev.setAttribute("data-bs-slide", "prev");
+  const carouselPrevIcon = document.createElement("span");
+  carouselPrevIcon.classList.add("carousel-control-prev-icon");
+  carouselPrevIcon.setAttribute("aria-hidden", "true");
+  const carouselPrevText = document.createElement("span");
+  carouselPrevText.classList.add("visually-hidden");
+  carouselPrevText.textContent = "Previous";
+  carouselPrev.appendChild(carouselPrevIcon);
+  carouselPrev.appendChild(carouselPrevText);
+  const carouselNext = document.createElement("button");
+  carouselNext.classList.add("carousel-control-next");
+  carouselNext.setAttribute("type", "button");
+  carouselNext.setAttribute("data-bs-target", "#carouselControls");
+  carouselNext.setAttribute("data-bs-slide", "next");
+  const carouselNextIcon = document.createElement("span");
+  carouselNextIcon.classList.add("carousel-control-next-icon");
+  carouselNextIcon.setAttribute("aria-hidden", "true");
+  const carouselNextText = document.createElement("span");
+  carouselNextText.classList.add("visually-hidden");
+  carouselNextText.textContent = "Next";
+  carouselNext.appendChild(carouselNextIcon);
+  carouselNext.appendChild(carouselNextText);
+  carousel.appendChild(carouselPrev);
+  carousel.appendChild(carouselNext);
+  if (carouselInner.children.length <= 1) {
+    carouselPrev.classList.add("d-none");
+    carouselNext.classList.add("d-none");
+  }
 
-  // Create the listing header image container
-  const listingHeaderImg = document.createElement("div");
-  listingHeaderImg.classList.add("listing-header-img");
+  imageGalleryContainer.appendChild(carousel);
+  listingBody.appendChild(imageGalleryContainer);
 
-  // Create and append the image
-  const headerImg = document.createElement("img");
-  headerImg.src = mediaURL;
-  headerImg.classList.add("border-bottom", "header-img");
-  listingHeaderImg.appendChild(headerImg);
+  //create listing details container
+  const listingDetailsContainer = document.createElement("div");
+  listingDetailsContainer.classList.add("listing-details");
+
+  const listingDetails = document.createElement("div");
+  listingDetails.classList.add("card-body", "p-2", "text-wrap");
 
   // Create the countdown container
   const countdownContainer = document.createElement("div");
   countdownContainer.classList.add(
     "countdown",
-    "position-absolute",
-    "top-0",
-    "start-0",
-    "mt-1",
-    "ms-1",
+    "text-end",
+    // "position-absolute",
+    // "top-0",
+    // "start-0",
+    // "mt-1",
+    // "ms-1",
   );
 
   // Create the countdown text
@@ -80,82 +159,89 @@ export async function renderSingleListing() {
   countdownText.textContent = "..Loading";
   countdownContainer.appendChild(countdownText);
 
-  // Append image and countdown to the card header
-  cardHeader.appendChild(listingHeaderImg);
-  cardHeader.appendChild(countdownContainer);
+  listingDetails.appendChild(countdownContainer);
 
-  // Create the card body
-  const cardBody = document.createElement("div");
-  cardBody.classList.add("card-body", "pb-0", "pt-0");
+  // Create the listing details
+  const listingDescription = document.createElement("p");
+  listingDescription.classList.add("card-text", "listing-description");
+  if (listing.description === "") {
+    listing.description = "No description provided";
+  }
+  listingDescription.innerHTML = `<b>Description:</b> ${listing.description}`;
+  listingDetails.appendChild(listingDescription);
+  listingDetailsContainer.appendChild(listingDetails);
+  listingBody.appendChild(listingDetailsContainer);
 
-  // Create the title
-  const cardTitle = document.createElement("h5");
-  cardTitle.classList.add("text-wrap", "card-title");
-  cardTitle.textContent = listing.title;
-  cardBody.appendChild(cardTitle);
+  const Qs = document.createElement("p");
+  Qs.innerHTML = `<strong>Questions?</strong> Send an email to the seller: <a href="mailto:${listing.seller.email}">${listing.seller.email}</a>`;
+  listingDetails.appendChild(Qs);
 
-  // Create the bids container
   const bidsContainer = document.createElement("div");
-  bidsContainer.classList.add("d-flex", "bids");
+  bidsContainer.classList.add("d-flex", "flex-column", "bids");
 
-  // Create the price text
-  const priceText = document.createElement("p");
-  priceText.classList.add("card-text", "d-flex", "align-items-center");
-  priceText.textContent = "Price: ";
-
-  // Create the coin image
-  const coinImg = document.createElement("img");
-  coinImg.src = coinSVG;
-  coinImg.alt = "coin icon";
-  coinImg.classList.add("bids-img", "ms-1");
-  priceText.appendChild(coinImg);
-
-  // Append the last bid amount
-  const lastBidAmountText = document.createTextNode(lastBidAmount);
-  priceText.appendChild(lastBidAmountText);
-
-  // Create the last bidder text
-  const lastBidderLink = document.createElement("a");
-  lastBidderLink.classList.add("card-text", "fst-italic", "ms-1");
-  lastBidderLink.textContent = lastBidder;
-  lastBidderLink.href = `/profile/?name=${bidderName}`;
-
-  // Append price and last bidder to bids container
-  bidsContainer.appendChild(priceText);
-  bidsContainer.appendChild(lastBidderLink);
-
-  // Append bids container to card body
-  cardBody.appendChild(bidsContainer);
-
-  // Create the number of bids text
-  const bidsCount = document.createElement("p");
-  bidsCount.classList.add("card-text");
-  bidsCount.textContent = `Bids: ${listing._count.bids}`;
-  cardBody.appendChild(bidsCount);
-
-  // Create the listing buttons container
-  const listingBtns = document.createElement("div");
-  listingBtns.classList.add(
-    "listing-btns",
+  const bids = document.createElement("div");
+  bids.classList.add("bids", "d-flex", "flex-column", "align-items-center");
+  const highestBid = document.createElement("p");
+  highestBid.classList.add(
+    "card-text",
+    "highest-bid",
+    "display-6",
     "d-flex",
     "align-items-center",
-    "justify-content-around",
   );
+  highestBid.innerHTML = `Current Bid: <img src="${coinSVG}" class="current-bid-svg ps-1 pe-1"> ${lastBidAmount}`;
 
-  // Create the bid now button
-  const bidBtn = document.createElement("a");
-  bidBtn.href = "#";
-  bidBtn.classList.add("btn", "btn-secondary-custom", "bid-btn");
-  bidBtn.textContent = "Bid now";
+  const bidButton = document.createElement("button");
+  bidButton.classList.add("btn", "btn-secondary-custom", "bid-btn", "mb-3");
+  bidButton.textContent = "Place Bid";
 
-  // Append listing buttons to the card body
-  cardBody.appendChild(bidBtn);
+  const bidHistoryTitle = document.createElement("p");
+  bidHistoryTitle.classList.add("h6");
+  bidHistoryTitle.textContent = "Bid History:";
+  bidHistoryTitle.classList.add("bid-history-title");
+  const bidHistoryUl = document.createElement("ol");
+  bidHistoryUl.classList.add("bid-history-list");
+  if (listing.bids && listing.bids.length > 0) {
+    listing.bids.forEach((bid) => {
+      const bidSet = formatDate(bid.created);
+      const bidHistoryLi = document.createElement("li");
+      bidHistoryLi.setAttribute("data-toggle", "tooltip");
+      bidHistoryLi.setAttribute("data-placement", "top");
+      bidHistoryLi.setAttribute("title", `Bid placed at: ${bidSet}`);
+      bidHistoryLi.classList.add("bid-history-item");
+      bidHistoryLi.innerHTML = `<img src="${coinSVG}" alt="" class="pb-1">
+                                <strong>${bid.amount}</strong> Bid by: <a href="/profile/?name=${bid.bidder.name}" aria-label="Profile of ${bid.bidder.name}">@${bid.bidder.name}</a>`;
 
-  // Append everything to the card
-  listingCard.appendChild(cardHeader);
-  listingCard.appendChild(cardBody);
+      bidHistoryUl.appendChild(bidHistoryLi);
+    });
+  } else {
+    const noBids = document.createElement("li");
+    noBids.textContent = "No bids yet";
+    bidHistoryUl.appendChild(noBids);
+  }
 
-  listingContainer.appendChild(listingCard);
-  const getCoundown = listingCard.querySelector(".countdown p");
+  bids.appendChild(highestBid);
+  if (load("profile")) {
+    bids.appendChild(bidHistoryTitle);
+    bids.appendChild(bidHistoryUl);
+    bids.appendChild(bidButton);
+  } else {
+    const loginToBid = document.createElement("p");
+    loginToBid.classList.add("fst-italic");
+    loginToBid.textContent = "Login to place a bid and view stats";
+    bids.appendChild(loginToBid);
+  }
+  bidsContainer.appendChild(bids);
+  listingDetails.appendChild(bidsContainer);
+
+  //   listingContainer.appendChild(listingBody);
+  //create button in footer
+  //   const bidButton = document.createElement("button");
+  //   bidButton.classList.add("btn", "btn-secondary-custom", "bid-btn");
+  //   bidButton.textContent = "Place Bid";
+  //   listingFooter.appendChild(bidButton);
+
+  // Target the countdown element and start the countdown
+  const getCoundown = listingBody.querySelector(".countdown p");
   countdownTimer(listing.endsAt, getCoundown);
 }

@@ -6,13 +6,15 @@ import * as templates from "./templates/index.js";
 
 handlers.registerFormListener();
 handlers.loginFormListener();
-status.headerListener();
 status.navListener();
 
 //create switch path for the pages
 const path = location.pathname;
 
 switch (path) {
+  case "/":
+    status.headerListener();
+    break;
   case "/profile/":
     templates.renderProfile();
     break;

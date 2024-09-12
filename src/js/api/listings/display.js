@@ -29,7 +29,6 @@ export async function displayListing(id) {
       throw new Error("get requires a listing id");
     }
     const displayListingURL = `${API_URL_LISTINGS}/${id}?${bids}&${seller}`;
-    console.log(displayListingURL);
     const response = await authFetch(displayListingURL);
     if (response.ok) {
       return await response.json();

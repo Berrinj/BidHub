@@ -15,3 +15,10 @@
     margin-bottom: 7px;
   }
 }
+@media screen and (max-width: 500px) {
+  .carousel-item {
+    img {
+      height: 200px;
+    }
+  }
+}
