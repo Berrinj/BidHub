@@ -1,6 +1,6 @@
-import { load } from "../../storage/index.js";
-import { remove } from "../../storage/index.js";
-import { displayProfile } from "../profile/display.js";
+import { load } from "../storage/index.js";
+import { remove } from "../storage/index.js";
+import { displayProfile } from "../api/profile/display.js";
 // import { getProfile } from "../profile/get.js";
 
 export async function renderProfile() {

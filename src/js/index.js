@@ -1,7 +1,7 @@
 import * as handlers from "./handlers/index.js";
 import * as status from "./status/index.js";
 // import * as profile from "./api/profile/display.js";
-import * as templates from "./api/templates/renderProfile.js";
+import * as templates from "./templates/index.js";
 // import { getAPIKey } from "./api/auth/apikey.js";
 
 handlers.registerFormListener();
@@ -10,13 +10,21 @@ status.headerListener();
 status.navListener();
 
 //create switch path for the pages
-const path = window.location.pathname;
+const path = location.pathname;
 
-if (path === "/profile/") {
-  templates.renderProfile();
+switch (path) {
+  case "/profile/":
+    templates.renderProfile();
+    break;
+  case "/listings/":
+    templates.renderAllListings();
 }
-if (path === "/listings/") {
-  templates.renderListings();
-}
+
+// if (path === "/profile/") {
+//   templates.renderProfile();
+// }
+// if (path === "/listings/") {
+//   templates.renderAllListings();
+// }
 
 // getAPIKey();

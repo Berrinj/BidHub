@@ -56,8 +56,56 @@
     </header>
     <main>
       <div
-        class="container-fluid w-100 profile-container border rounded d-flex pb-3 bg-white d-flex flex-column"
-      ></div>
+        class="container-fluid w-100 main-content border rounded-3 d-flex pb-3 bg-white d-flex flex-column mt-5"
+      >
+        <div class="row">
+          <h1 class="text-center mt-3 mb-3 display-3">Listings</h1>
+          <div class="filter-listings">
+            <div class="filter-listings-container">
+              <div
+                class="filter-listings-content d-flex align-items-center justify-content-center"
+              >
+                <div class="filter-listings-content-item">
+                  <label for="sort">Sort by:</label>
+                  <select name="sort" id="sort" class="rounded border">
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="Most Wanted">Most Wanted</option>
+                    <option value="Ending soon">Ending soon</option>
+                    <option value="Ended">Ended</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                  </select>
+                </div>
+                <!-- <div class="filter-listings-content-item ms-2">
+                            <button class="btn btn-primary-custom" id="filterBtn">
+                                Filter
+                            </button>
+                        </div> -->
+              </div>
+            </div>
+            <div class="container col-8 p-0">
+              <div class="input-group rounded-end mb-4 mt-3 border-1">
+                <button class="input-group-text border btn bg-white">
+                  <img
+                    src="../src/images/svg/tabler--search.svg"
+                    alt="Search Icon"
+                  />
+                </button>
+                <input
+                  type="search"
+                  class="form-control rounded-end border"
+                  placeholder="Search for items"
+                  aria-label="search for items"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="all-listings-container">
+          <div class="row d-flex flex-wrap justify-content-center"></div>
+        </div>
+      </div>
       <div class="container"></div>
       <div
         class="modal"
