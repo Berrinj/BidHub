@@ -10,13 +10,21 @@ status.headerListener();
 status.navListener();
 
 //create switch path for the pages
-const path = window.location.pathname;
+const path = location.pathname;
 
-if (path === "/profile/") {
-  templates.renderProfile();
+switch (path) {
+  case "/profile/":
+    templates.renderProfile();
+    break;
+  case "/listings/":
+    templates.renderAllListings();
 }
-if (path === "/listings/") {
-  templates.renderAllListings();
-}
+
+// if (path === "/profile/") {
+//   templates.renderProfile();
+// }
+// if (path === "/listings/") {
+//   templates.renderAllListings();
+// }
 
 // getAPIKey();
