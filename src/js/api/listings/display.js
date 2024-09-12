@@ -22,3 +22,20 @@ export async function displayListings() {
     throw new Error("Failed to display listings");
   }
 }
+
+export async function displayListing(id) {
+  try {
+    if (!id) {
+      throw new Error("get requires a listing id");
+    }
+    const displayListingURL = `${API_URL_LISTINGS}/${id}?${bids}&${seller}`;
+    console.log(displayListingURL);
+    const response = await authFetch(displayListingURL);
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to display listing");
+  }
+}

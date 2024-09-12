@@ -18,6 +18,10 @@ switch (path) {
     break;
   case "/listings/":
     templates.renderAllListings();
+    break;
+  case "/listings/listing/":
+    templates.renderSingleListing();
+    break;
 }
 
 // if (path === "/profile/") {
