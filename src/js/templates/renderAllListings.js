@@ -1,6 +1,6 @@
-import { displayListings } from "../listings/display.js";
+import { displayListings } from "../api/listings/display.js";
 // import { formatDate } from "../../handlers/timeDate.js";
-import { countdownTimer } from "../../handlers/timeDate.js";
+import { countdownTimer } from "../handlers/timeDate.js";
 
 export async function renderAllListings() {
   const listings = await displayListings();
