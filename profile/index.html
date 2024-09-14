@@ -6,14 +6,14 @@
     <title>Bid Hub</title>
     <link
       rel="stylesheet"
-      href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+      href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
     <script
-      src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+      src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
       defer
     ></script>
-    <link rel="stylesheet" href="../dist/css/index.css" />
-    <script src="../src/js/index.js" type="module"></script>
+    <link rel="stylesheet" href="/dist/css/index.css" />
+    <script src="/src/js/index.js" type="module"></script>
   </head>
 
   <body class="bg-light min-vh-100">
@@ -23,7 +23,7 @@
           <div class="navbar-logo col-lg-5">
             <a class="navbar-brand d-flex align-items-center" href="/"
               ><img
-                src="../src/images/svg/bid-icon.svg"
+                src="/src/images/svg/bid-icon.svg"
                 alt="Bid Hub Logo"
               />BidHub</a
             >
@@ -67,13 +67,19 @@
     </header>
     <main>
       <div
-        class="container-fluid w-100 profile-container border rounded-3 d-flex pb-3 bg-white d-flex flex-column"
+        class="container-fluid w-100 profile-container main-content border rounded-3 d-flex pb-3 bg-white d-flex flex-column"
       >
-        <p class="loading mx-auto mt-5">Loading profile</p>
         <div class="profile-content d-flex flex-column mt-4 w-100">
           <div class="row align-items-center">
             <div class="profile-img col-12 col-lg-4 d-flex flex-column"></div>
-            <div class="profile-body col-12 col-lg-8"></div>
+            <div class="profile-body col-12 col-lg-8">
+              <p
+                class="loading-text position-absolute top-50 start-50 translate-middle display-6"
+              >
+                Loading profile...
+              </p>
+              <div class="error-message"></div>
+            </div>
           </div>
 
           <div class="row">
@@ -324,7 +330,7 @@
     <footer>
       <div class="footer-container">
         <div class="footer-content">
-          <img src="../src/images/svg/bid-icon.svg" alt="Bid Hub Logo" />
+          <img src="/src/images/svg/bid-icon.svg" alt="Bid Hub Logo" />
           <p>BidHub &copy; 2024</p>
           <!-- <div class="footer-links">
                     <a href="#">About us</a>

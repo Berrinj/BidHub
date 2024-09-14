@@ -13,13 +13,12 @@ export async function renderProfile() {
   const url = new URL(location.href);
   const getName = url.searchParams.get("name") || storage.name;
   const profileInfo = await displayProfile(getName);
-  const loading = document.querySelector(".loading");
-  loading.remove();
   console.log(profileInfo);
   const avatarURL = profileInfo.data.avatar.url || placeholders.avatar;
-
   const profileImg = document.querySelector(".profile-img");
   const profileBody = document.querySelector(".profile-body");
+  profileBody.innerHTML = "";
+
   // create the profile image
   const profileImage = document.createElement("img");
   profileImage.classList.add(

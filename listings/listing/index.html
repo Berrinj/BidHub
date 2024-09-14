@@ -1,1 +1,321 @@
-hello
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bid Hub - Single Listing</title>
+    <link
+      rel="stylesheet"
+      href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <script
+      src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+    <link rel="stylesheet" href="/dist/css/index.css" />
+    <script src="/src/js/index.js" type="module"></script>
+  </head>
+
+  <body class="bg-light min-vh-100">
+    <header>
+      <nav class="container-fluid">
+        <div class="container navbar">
+          <div class="navbar-logo col-lg-5">
+            <a class="navbar-brand d-flex align-items-center" href="/"
+              ><img
+                src="/src/images/svg/bid-icon.svg"
+                alt="Bid Hub Logo"
+              />BidHub</a
+            >
+          </div>
+          <div class="navbar-nav col-lg-5 d-flex top-menu">
+            <ul
+              class="d-flex list-unstyled justify-content-end align-items-center"
+            >
+              <li class="nav-item logged-out">
+                <a
+                  class="nav-link"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+                  >Login</a
+                >
+              </li>
+              <li class="nav-item logged-out">
+                <a
+                  class="nav-link"
+                  id="registerBtn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#registerModal"
+                  >Sign up</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div
+        class="container-fluid w-100 main-content border rounded-3 d-flex pb-3 bg-white d-flex flex-column mt-5"
+      >
+        <div
+          class="single-listings-container d-flex flex-column justify-content-center"
+        >
+          <div class="single-listing-header text-center mt-3 mb-0"></div>
+          <div class="single-listing-body mx-auto">
+            <p
+              class="loading-text position-absolute top-50 start-50 translate-middle display-6"
+            >
+              Loading listing...
+            </p>
+            <div class="error-message"></div>
+          </div>
+          <div class="single-listing-footer text-center"></div>
+        </div>
+      </div>
+      <div
+        class="modal"
+        id="registerModal"
+        tabindex="-1"
+        aria-labelledby="registerModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content border border-primary-custom border-5">
+            <div class="modal-header bg-primary-custom flex-column">
+              <button
+                type="button"
+                class="btn-close bg-light"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              <div class="modal-h-text text-light">
+                <h4 class="modal-title fs-4" id="registerModalLabel">
+                  Register to BidHub today
+                </h4>
+                <p>and recieve 1000 credits right away!</p>
+              </div>
+            </div>
+            <div class="modal-body">
+              <form class="registerForm">
+                <div class="form-group mb-3">
+                  <label for="username" class="form-label"
+                    >Create Username:</label
+                  >
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    id="username"
+                    aria-required="true"
+                    required
+                    pattern="^[\w]+$"
+                    title="The username can not contain punctuation symbols apart from underscore (_)."
+                  />
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="email" class="form-label">Email:</label>
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    id="email"
+                    aria-required="true"
+                    required
+                    pattern="^[\w\-.]+@stud.noroff.no$"
+                    title="Only emails ending in stud.noroff.no can register."
+                  />
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="bio" class="form-label">Create Bio:</label>
+                  <input
+                    type="text"
+                    name="bio"
+                    class="form-control"
+                    id="bio"
+                    aria-required="false"
+                  />
+                </div>
+
+                <div class="form-group mb-4">
+                  <label for="password" class="form-label"
+                    >Create Password:</label
+                  >
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    id="password"
+                    aria-required="true"
+                    minlength="8"
+                    title="Min length is 8"
+                    required
+                  />
+                </div>
+
+                <div class="form-group mb-4">
+                  <label for="avatar" class="form-label">Add avatar URL:</label>
+                  <input
+                    type="url"
+                    name="avatar"
+                    class="form-control"
+                    id="avatar"
+                    title="Only accept an image url"
+                  />
+                  <label for="avatar-alt" class="form-label"
+                    >Avatar Alt Text:</label
+                  >
+                  <input
+                    type="text"
+                    name="avatar-alt"
+                    class="form-control"
+                    id="avatar-alt"
+                  />
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="banner" class="form-label">Add banner URL:</label>
+                  <input
+                    type="url"
+                    name="banner"
+                    class="form-control"
+                    id="banner"
+                    title="Only accept an image url"
+                  />
+                  <label for="banner-alt" class="form-label"
+                    >Banner Alt Text:</label
+                  >
+                  <input
+                    type="text"
+                    name="banner-alt"
+                    class="form-control"
+                    id="banner-alt"
+                  />
+                </div>
+                <div class="btn-holder text-center">
+                  <button
+                    type="submit"
+                    class="btn btn-primary-custom"
+                    id="registerUserBtn"
+                  >
+                    REGISTER
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="modal-footer mx-auto">
+              <div
+                class="sign-in d-flex flex-wrap align-items-center justify-content-center"
+              >
+                <p
+                  class="link fst-italic"
+                  data-bs-target="#loginModal"
+                  data-bs-toggle="modal"
+                >
+                  Returning user? Login here
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="loginModal"
+        aria-hidden="true"
+        aria-labelledby="loginModalToggleLabel"
+        tabindex="-1"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content border border-primary-custom border-5">
+            <div class="modal-header bg-primary-custom flex-column">
+              <button
+                type="button"
+                class="btn-close bg-light"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              <div class="modal-h-text text-light">
+                <h4 class="modal-title fs-4" id="loginModalToggleLabel">
+                  Log in to BidHub
+                </h4>
+                <p>To start listing and bidding</p>
+              </div>
+            </div>
+            <div class="modal-body d-flex flex-column">
+              <img
+                src="/src/images/svg/bid-icon.svg"
+                alt="Bid Hub Logo"
+                class="mx-auto"
+              />
+              <form class="loginForm">
+                <div class="form-group mb-3">
+                  <label for="email" class="form-label">Email:</label>
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    id="email"
+                    aria-required="true"
+                    required
+                    pattern="^[\w\-.]+@stud.noroff.no$"
+                    title="Only emails ending in stud.noroff.no can log in."
+                  />
+                </div>
+
+                <div class="form-group mb-4">
+                  <label for="password" class="form-label">Password:</label>
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    id="password"
+                    aria-required="true"
+                    minlength="8"
+                    title="Min length is 8"
+                    required
+                  />
+                </div>
+                <div class="btn-holder text-center">
+                  <button
+                    type="submit"
+                    class="btn btn-primary-custom"
+                    id="loginUserBtn"
+                  >
+                    LOG IN
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer mx-auto">
+              <p
+                class="link fst-italic"
+                data-bs-target="#registerModal"
+                data-bs-toggle="modal"
+              >
+                New user? Register here
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-content">
+          <img src="/src/images/svg/bid-icon.svg" alt="Bid Hub Logo" />
+          <p>BidHub &copy; 2024</p>
+          <!-- <div class="footer-links">
+                            <a href="#">About us</a>
+                            <a href="#">Contact us</a>
+                            <a href="#">Terms and conditions</a>
+                        </div> -->
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

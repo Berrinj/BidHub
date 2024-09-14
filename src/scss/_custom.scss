@@ -7,6 +7,7 @@ $custom-colors: (
   "primary-custom": $primary-color,
   "accent-custom": $accent-color,
   "neutral-custom": $neutral-color,
+  "nav-footer-custom": $nav-footer-color,
 );
 $theme-colors: map-merge($theme-colors, $custom-colors);
 

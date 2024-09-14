@@ -1,5 +1,6 @@
 import { API_URL_PROFILE } from "../constants.js";
 import { authFetch } from "../authFetch.js";
+import { errorTemplate } from "../../templates/error.js";
 
 const bids = "_bids=true";
 const listings = "_listings=true";
@@ -22,6 +23,10 @@ export async function displayProfile(name) {
     const response = await authFetch(displayProfileURL);
     if (response.ok) {
       return await response.json();
+    }
+    if (response.status !== 200) {
+      errorTemplate();
+      throw new Error("profile not found");
     }
   } catch (error) {
     console.error(error);

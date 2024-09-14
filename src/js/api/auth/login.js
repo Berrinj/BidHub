@@ -33,7 +33,11 @@ export async function login(profile) {
       //   modalBackdrop.remove();
 
       //   document.body.style.overflow = "auto";
-      window.location.href = "/";
+
+      //reload the current page
+      window.location.reload();
+
+      // window.location.href = "/";
 
       return profile;
     }

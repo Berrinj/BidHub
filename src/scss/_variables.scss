@@ -1,14 +1,16 @@
 $primary-color: #1e3a8a;
 $secondary-color: #f97316;
 $accent-color: #fbbf24;
+$accent-color-opacity: rgba($accent-color, 0.5);
 $accent-color-hover: #fcc945;
 $neutral-color: #f3f4f6;
 $nav-footer-color: #1b203d;
+$nav-footer-color-opacity: rgba($nav-footer-color, 0.5);
 
-:root {
-  --primary-color: #1e3a8a;
-  --secondary-color: #f97316;
-  --accent-color: #fbbf24;
-  --neutral-color: #f3f4f6;
-  --nav-footer-color: #1b203d;
-}
+// :root {
+//   --primary-color: #1e3a8a;
+//   --secondary-color: #f97316;
+//   --accent-color: #fbbf24;
+//   --neutral-color: #f3f4f6;
+//   --nav-footer-color: #1b203d;
+// }

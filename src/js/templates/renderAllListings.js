@@ -12,11 +12,14 @@ export async function renderAllListings() {
     console.error("Expected an array but got:", listingsArray);
     return;
   }
-
+  const listingsHeader = document.querySelector(".listings-header");
+  listingsHeader.classList.remove("d-none");
   const listingsContainer = document.querySelector(
     ".all-listings-container .row",
   );
 
+  const loading = document.querySelector(".loading-text");
+  loading.innerHTML = "";
   listingsArray.forEach((listing) => {
     // const endsAt = formatDate(listing.endsAt);
     const coinSVG = `../../../src/images/svg/noto--coin.svg`;
