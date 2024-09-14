@@ -1,5 +1,6 @@
 import { getProfile } from "../api/profile/get.js";
-
+// import { placeListingBid } from "./PlaceBidBtn.js";
+import { placeBid } from "../api/listings/bid.js";
 export async function openBidModal(
   listing,
   listingID,
@@ -23,7 +24,7 @@ export async function openBidModal(
   const modalBody = modal.querySelector(".modal-body");
   modalBody.innerHTML = "";
 
-  // Add the listing image
+  // listing image
   const modalImg = document.createElement("img");
   modalImg.src = mediaURL;
   modalImg.classList.add(
@@ -34,7 +35,7 @@ export async function openBidModal(
   );
   modalBody.appendChild(modalImg);
 
-  // Add the current bid information
+  // current bid information
   const modalTopBidTitle = document.createElement("h2");
   modalTopBidTitle.classList.add(
     "bid-modal-bids",
@@ -55,7 +56,7 @@ export async function openBidModal(
   modalBody.appendChild(modalTopBidTitle);
   modalBody.appendChild(modalTopBidInfo);
 
-  // Create the bid form
+  // bid form
   const bidForm = document.createElement("form");
   bidForm.classList.add(
     "bid-form",
@@ -91,15 +92,20 @@ export async function openBidModal(
   bidError.classList.add("text-danger", "fst-italic", "mb-2");
   bidError.textContent = "Bid amount must be greater than the current bid";
   bidError.style.display = "none";
+  const bidSuccess = document.createElement("p");
+  bidSuccess.classList.add("text-success", "fst-italic", "mb-2");
+  bidSuccess.textContent = "Bid placed successfully";
+  bidSuccess.style.display = "none";
 
   bidFormGroup.appendChild(bidLabel);
   bidFormGroup.appendChild(bidInput);
+  bidFormGroup.appendChild(bidSuccess);
   bidFormGroup.appendChild(bidError);
   bidFormGroup.appendChild(tokensAvailable);
   bidForm.appendChild(bidFormGroup);
   modalBody.appendChild(bidForm);
 
-  // Add the place bid button
+  // place bid button
   const placeBidBtn = document.createElement("button");
   placeBidBtn.classList.add(
     "btn",
@@ -115,7 +121,34 @@ export async function openBidModal(
   placeBidBtn.dataset.id = listingID;
   modalBody.appendChild(placeBidBtn);
 
-  // Add the listing ID
+  placeBidBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
+    const bidAmount = parseInt(bidInput.value);
+    if (bidAmount <= lastBidAmount) {
+      bidError.style.display = "block";
+      return;
+    }
+    bidError.style.display = "none";
+    const response = await placeBid(event.target.dataset.id, bidAmount);
+    console.log("Bid placed successfully:", response);
+    if (response) {
+      bidError.style.display = "none";
+      bidSuccess.style.display = "block";
+      bidLabel.textContent =
+        "Your bid has been placed! Page will update shortly";
+      modalTopBidInfo.textContent = `${bidAmount} Credits`;
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    } else {
+      bidSuccess.style.display = "none";
+      bidError.style.display = "block";
+      bidLabel.textContent = "Failed to place bid";
+    }
+  });
+
+  // listing ID
   const modalId = document.createElement("p");
   modalId.classList.add(
     "bid-modal-id",

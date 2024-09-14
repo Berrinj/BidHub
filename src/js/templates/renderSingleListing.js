@@ -2,7 +2,7 @@ import { displayListing } from "../api/listings/display.js";
 import { countdownTimer } from "../handlers/timeDate.js";
 import { formatDate } from "../handlers/timeDate.js";
 import { load } from "../storage/index.js";
-import { openBidModal } from "../handlers/OpenBidModal.js";
+import { openBidModal } from "../handlers/bidModal.js";
 
 export async function renderSingleListing() {
   //get id from url

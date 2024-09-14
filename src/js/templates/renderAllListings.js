@@ -2,7 +2,7 @@ import { displayListings } from "../api/listings/display.js";
 // import { formatDate } from "../../handlers/timeDate.js";
 import { countdownTimer } from "../handlers/timeDate.js";
 // import { getProfile } from "../api/profile/get.js";
-import { openBidModal } from "../handlers/OpenBidModal.js";
+import { openBidModal } from "../handlers/bidModal.js";
 
 export async function renderAllListings() {
   const listings = await displayListings();
