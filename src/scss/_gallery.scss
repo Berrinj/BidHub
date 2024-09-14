@@ -1,8 +1,17 @@
+.carousel-container {
+  max-width: 600px;
+}
 .carousel-item {
+  // background-color: $nav-footer-color;
   img {
     // display: flex;
     // margin: auto;
-    height: 400px;
+    max-height: 400px;
+    object-fit: contain;
+  }
+}
+.listing-placeholer-img {
+  img {
     object-fit: cover;
   }
 }

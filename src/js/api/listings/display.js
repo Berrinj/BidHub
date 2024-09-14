@@ -1,5 +1,6 @@
 import { API_URL_LISTINGS } from "../constants.js";
 import { authFetch } from "../authFetch.js";
+import { errorTemplate } from "../../templates/error.js";
 
 const bids = "_bids=true";
 const seller = "_seller=true";
@@ -17,7 +18,12 @@ export async function displayListings() {
     if (response.ok) {
       return await response.json();
     }
+    if (response.status !== 200) {
+      errorTemplate();
+      throw new Error("Listings not found");
+    }
   } catch (error) {
+    errorTemplate();
     console.error(error);
     throw new Error("Failed to display listings");
   }
@@ -32,6 +38,10 @@ export async function displayListing(id) {
     const response = await authFetch(displayListingURL);
     if (response.ok) {
       return await response.json();
+    }
+    if (response.status !== 200) {
+      errorTemplate();
+      throw new Error("Listing not found");
     }
   } catch (error) {
     console.error(error);

@@ -53,19 +53,53 @@ export async function renderSingleListing() {
 
   //Create Image Gallery Carousel
   const imageGalleryContainer = document.createElement("div");
-  imageGalleryContainer.classList.add("carousel-container");
+  imageGalleryContainer.classList.add("carousel-container", "mx-auto");
   const carousel = document.createElement("div");
   carousel.classList.add("carousel", "slide", "carousel-fade");
   carousel.id = "carouselControls";
   carousel.setAttribute("data-bs-ride", "carousel");
+
+  //indicators
+  const carouselIndicators = document.createElement("div");
+  carouselIndicators.classList.add("carousel-indicators");
+  // listing.media.forEach((media, index) => {
+  //   const carouselIndicator = document.createElement("button");
+  //   carouselIndicator.setAttribute("type", "button");
+  //   carouselIndicator.setAttribute("data-bs-target", "#carouselControls");
+  //   carouselIndicator.setAttribute("data-bs-slide-to", index);
+  //   if (index === 0) {
+  //     carouselIndicator.classList.add("active");
+  //   }
+  //   carouselIndicators.appendChild(carouselIndicator);
+  // });
+  // carousel.appendChild(carouselIndicators);
+
+  //Carousel inner
   const carouselInner = document.createElement("div");
-  carouselInner.classList.add("carousel-inner");
+  carouselInner.classList.add(
+    "carousel-inner",
+    "rounded",
+    "bg-nav-footer-custom",
+  );
+
   //Carousel items
   listing.media.forEach((media, index) => {
+    const carouselIndicator = document.createElement("button");
+    carouselIndicator.classList.add("carousel-indicator");
+    carouselIndicator.setAttribute("type", "button");
+    carouselIndicator.setAttribute("data-bs-target", "#carouselControls");
+    carouselIndicator.setAttribute("data-bs-slide-to", index);
+    carouselIndicator.setAttribute("aria-label", `Slide ${index + 1}`);
+
     const carouselItem = document.createElement("div");
     carouselItem.classList.add("carousel-item");
     if (index === 0) {
+      carouselIndicator.classList.add("active");
       carouselItem.classList.add("active");
+    }
+    //if there is only one image, hide the indicators
+    if (listing.media.length <= 1) {
+      carouselIndicator.classList.add("d-none");
     }
     const carouselImg = document.createElement("img");
 
@@ -73,21 +107,51 @@ export async function renderSingleListing() {
 
     carouselImg.classList.add("d-block", "w-100", "listing-image", "rounded");
     carouselImg.alt = "listing image";
+    carouselIndicators.appendChild(carouselIndicator);
     carouselItem.appendChild(carouselImg);
     carouselInner.appendChild(carouselItem);
   });
 
   if (carouselInner.children.length === 0) {
     const carouselItem = document.createElement("div");
-    carouselItem.classList.add("carousel-item", "active", "opacity-50");
+    carouselItem.classList.add(
+      "carousel-item",
+      "active",
+      "listing-placeholer-img",
+      "position-relative",
+    );
     const carouselImg = document.createElement("img");
     carouselImg.src = `../../../src/images/placeholder-images/banner.jpg`;
-    carouselImg.classList.add("d-block", "w-100", "listing-image", "rounded");
+    carouselImg.classList.add(
+      "d-block",
+      "w-100",
+      "listing-image",
+      "rounded",
+      "opacity-50",
+    );
     carouselImg.alt = "no listing image found, placeholder image";
+    const noImageText = document.createElement("p");
+    noImageText.classList.add(
+      "no-image-text",
+      "position-absolute",
+      "top-50",
+      "start-50",
+      "translate-middle",
+      "fst-italic",
+      "mb-0",
+      "bg-neutral-custom",
+      "bg-opacity-50",
+      "p-2",
+      "rounded",
+      "text-center",
+    );
+    noImageText.textContent = "No image available";
     carouselItem.appendChild(carouselImg);
+    carouselItem.appendChild(noImageText);
     carouselInner.appendChild(carouselItem);
   }
 
+  carousel.appendChild(carouselIndicators);
   carousel.appendChild(carouselInner);
   //Carousel controls
   const carouselPrev = document.createElement("button");
@@ -121,6 +185,7 @@ export async function renderSingleListing() {
   if (carouselInner.children.length <= 1) {
     carouselPrev.classList.add("d-none");
     carouselNext.classList.add("d-none");
+    carouselInner.classList.remove("bg-nav-footer-custom");
   }
 
   imageGalleryContainer.appendChild(carousel);
@@ -137,7 +202,11 @@ export async function renderSingleListing() {
   const countdownContainer = document.createElement("div");
   countdownContainer.classList.add(
     "countdown",
-    "text-end",
+    "text-center",
+    "mb-2",
+    // "rounded",
+    // "d-flex",
+    // "justify-content-end",
     // "position-absolute",
     // "top-0",
     // "start-0",
@@ -145,19 +214,37 @@ export async function renderSingleListing() {
     // "ms-1",
   );
 
+  //create img and text div for countdown
+  const countdownSvgText = document.createElement("div");
+  countdownSvgText.classList.add(
+    "rounded",
+    "d-inline-block",
+    "shadow-sm",
+    "bg-accent-custom",
+    "bg-opacity-50",
+  );
+
+  // Create the countdown SVG
+  const countdownSVG = document.createElement("img");
+  countdownSVG.src = `../../../src/images/svg/eos-icons--hourglass.svg`;
+  countdownSVG.classList.add("countdown-svg", "pb-1", "ps-1", "pe-1");
+
   // Create the countdown text
   const countdownText = document.createElement("p");
   countdownText.classList.add(
-    "card-text",
-    "countdown",
-    "rounded",
-    "bg-accent-custom",
+    "countdown-p",
+    // "rounded",
+    // "bg-accent-custom",
     "d-inline-block",
-    "ps-1",
     "pe-1",
+    "m-0",
   );
   countdownText.textContent = "..Loading";
-  countdownContainer.appendChild(countdownText);
+  countdownSvgText.appendChild(countdownSVG);
+  countdownSvgText.appendChild(countdownText);
+  countdownContainer.appendChild(countdownSvgText);
+
+  // countdownContainer.appendChild(countdownText);
 
   listingDetails.appendChild(countdownContainer);
 
