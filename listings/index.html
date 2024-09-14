@@ -342,6 +342,46 @@
           </div>
         </div>
       </div>
+
+      <!-- Place bid modal -->
+      <div
+        class="modal fade"
+        id="bidModal"
+        tabindex="-1"
+        aria-labelledby="bidModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content bg-primary-custom text-white d-flex">
+            <div class="modal-header d-flex flex-column border-0 pb-0">
+              <button
+                type="button"
+                class="btn-close bg-light"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              <h1 class="modal-title" id="bidModalLabel"></h1>
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center"></div>
+            <div class="modal-footer border-0">
+              <button
+                type="button"
+                id="view-listing-btn"
+                class="btn btn-primary-custom border border-1"
+              >
+                View Listing
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary-custom border border-1"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer>
       <div class="footer-container">

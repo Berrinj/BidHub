@@ -1,11 +1,14 @@
 import { displayListings } from "../api/listings/display.js";
 // import { formatDate } from "../../handlers/timeDate.js";
 import { countdownTimer } from "../handlers/timeDate.js";
+// import { getProfile } from "../api/profile/get.js";
+import { openBidModal } from "../handlers/OpenBidModal.js";
 
 export async function renderAllListings() {
   const listings = await displayListings();
 
   console.log(listings);
+  // const profile = await getProfile();
 
   const listingsArray = listings.data;
   if (!Array.isArray(listingsArray)) {
@@ -59,6 +62,7 @@ export async function renderAllListings() {
       "shadow-sm",
       "m-4",
     );
+    listingCard.dataset.id = listingID;
 
     let mediaURL = "";
     if (listing.media.length > 0) {
@@ -168,10 +172,110 @@ export async function renderAllListings() {
     );
 
     // Create the bid now button
-    const bidBtn = document.createElement("a");
-    bidBtn.href = "#";
+    const bidBtn = document.createElement("button");
     bidBtn.classList.add("btn", "btn-secondary-custom", "bid-btn");
     bidBtn.textContent = "Bid now";
+    bidBtn.dataset.id = listingID;
+    bidBtn.setAttribute("data-bs-target", "#bidModal");
+    bidBtn.setAttribute("data-bs-toggle", "modal");
+
+    bidBtn.addEventListener("click", () => {
+      openBidModal(listing, listingID, mediaURL, lastBidAmount);
+      // const modal = document.querySelector("#bidModal");
+      // modal.dataset.id = listingID;
+      // const modalHeader = modal.querySelector(".modal-header");
+      // // const modalFooter = modal.querySelector(".modal-footer");
+      // const modalTitle = modalHeader.querySelector("#bidModalLabel");
+      // modalTitle.textContent = listing.title;
+
+      // const modalBody = modal.querySelector(".modal-body");
+      // modalBody.innerHTML = "";
+      // modalTitle.classList.add("bid-modal-title");
+      // modalTitle.textContent = listing.title;
+      // modalHeader.appendChild(modalTitle);
+      // const modalImg = document.createElement("img");
+      // modalImg.src = mediaURL;
+      // modalImg.classList.add("bid-modal-img", "img-fluid", "rounded");
+      // modalBody.appendChild(modalImg);
+      // const modalTopBidTitle = document.createElement("h2");
+      // modalTopBidTitle.classList.add(
+      //   "bid-modal-bids",
+      //   "text-center",
+      //   "mt-2",
+      //   "fs-4",
+      // );
+      // modalTopBidTitle.textContent = `Current bid:`;
+      // const modalTopBidInfo = document.createElement("h3");
+      // modalTopBidInfo.classList.add(
+      //   "bid-modal-bids",
+      //   "text-center",
+      //   "text-uppercase",
+      // );
+      // modalTopBidInfo.textContent = `${lastBidAmount} Credits`;
+      // modalBody.appendChild(modalTopBidTitle);
+      // modalBody.appendChild(modalTopBidInfo);
+
+      // const bidForm = document.createElement("form");
+      // bidForm.classList.add(
+      //   "bid-form",
+      //   "d-flex",
+      //   "flex-column",
+      //   "align-items-center",
+      // );
+      // const bidFormGroup = document.createElement("div");
+      // bidFormGroup.classList.add("form-group", "text-center");
+      // const bidLabel = document.createElement("label");
+      // bidLabel.setAttribute("for", "bidAmount");
+      // bidLabel.classList.add("form-label", "text-center", "mt-3", "fs-4");
+      // bidLabel.textContent = "Ready to place your bid?";
+      // const bidInput = document.createElement("input");
+      // bidInput.classList.add("form-control", "text-center");
+      // bidInput.type = "number";
+      // bidInput.name = "bidAmount";
+      // bidInput.id = "bidAmount";
+      // bidInput.ariaRequired = true;
+      // bidInput.ariaLabel = "Bid amount";
+      // bidInput.title = "Bid amount must be greater than the current bid";
+      // bidInput.min = lastBidAmount + 1;
+      // bidInput.placeholder = "Enter bid amount";
+      // const tokensAvailable = document.createElement("p");
+      // tokensAvailable.classList.add("text-center", "fst-italic", "mb-0");
+      // tokensAvailable.innerHTML = `<small>You have ${profile.data.credits} credits available</small>`;
+      // const bidError = document.createElement("p");
+      // bidError.classList.add("text-danger", "fst-italic", "mb-2");
+      // bidError.textContent = "Bid amount must be greater than the current bid";
+      // bidError.style.display = "none";
+      // bidFormGroup.appendChild(bidLabel);
+      // bidFormGroup.appendChild(bidInput);
+      // bidFormGroup.appendChild(bidError);
+      // bidFormGroup.appendChild(tokensAvailable);
+      // bidForm.appendChild(bidFormGroup);
+      // modalBody.appendChild(bidForm);
+
+      // const placeBidBtn = document.createElement("button");
+      // placeBidBtn.classList.add(
+      //   "btn",
+      //   "btn-secondary-custom",
+      //   "place-bid-btn",
+      //   "text-uppercase",
+      //   "text-white",
+      //   "mt-2",
+      //   "mb-3",
+      // );
+      // placeBidBtn.textContent = "Place bid";
+      // placeBidBtn.dataset.id = listingID;
+      // modalBody.appendChild(placeBidBtn);
+      // const modalId = document.createElement("p");
+      // modalId.classList.add(
+      //   "bid-modal-id",
+      //   "fst-italic",
+      //   "text-center",
+      //   "mb-0",
+      //   "opacity-75",
+      // );
+      // modalId.innerHTML = `<small>Listing ID: ${listingID}</small>`;
+      // modalBody.appendChild(modalId);
+    });
 
     // Create the view listing button
     const viewBtn = document.createElement("a");
