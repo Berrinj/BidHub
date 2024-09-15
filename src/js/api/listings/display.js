@@ -11,9 +11,9 @@ const seller = "_seller=true";
 //  * @throws {Error} If the name parameter is empty or an error occurs during the process.
 //  */
 
-export async function displayListings() {
+export async function displayListings(page) {
   try {
-    const displayListingsURL = `${API_URL_LISTINGS}?${bids}&${seller}`;
+    const displayListingsURL = `${API_URL_LISTINGS}?${bids}&${seller}&page=${page}`;
     const response = await authFetch(displayListingsURL);
     if (response.ok) {
       return await response.json();

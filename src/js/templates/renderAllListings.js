@@ -3,9 +3,25 @@ import { countdownTimer } from "../handlers/timeDate.js";
 import { openBidModal } from "../handlers/bidModal.js";
 
 export async function renderAllListings() {
-  const listings = await displayListings();
+  // const listings = await displayListings();
+  let page = 1;
+  const firstResponse = await displayListings(1);
+  console.log(firstResponse);
+  const pageCount = firstResponse.meta.pageCount;
+  console.log(`Page count: ${pageCount}`);
+  let allListings = [...firstResponse.data];
+  console.log(`Page ${page} data:`, firstResponse);
 
-  const listingsArray = listings.data;
+  for (let i = 2; i <= pageCount; i++) {
+    const response = await displayListings(i);
+    console.log(`Page ${i} data:`, response);
+    allListings = allListings.concat(response.data);
+    console.log(allListings);
+  }
+
+  const listingsArray = allListings;
+  listingsArray.sort((a, b) => new Date(b.endsAt) - new Date(a.endsAt));
+  console.log(listingsArray);
   // if (!Array.isArray(listingsArray)) {
   //   console.error("Expected an array but got:", listingsArray);
   //   return;
