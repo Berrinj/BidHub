@@ -1,16 +1,16 @@
 import { getProfile } from "../api/profile/get.js";
-// import { placeListingBid } from "./PlaceBidBtn.js";
 import { placeBid } from "../api/listings/bid.js";
+
 export async function openBidModal(
   listing,
   listingID,
   mediaURL,
   lastBidAmount,
 ) {
-  // Get the profile data
+  // Profile data
   const profile = await getProfile();
   const creditsAvailable = profile.data.credits;
-  // Get the modal element
+  // Modal
   const modal = document.querySelector("#bidModal");
   modal.dataset.id = listingID;
 
@@ -35,7 +35,7 @@ export async function openBidModal(
   );
   modalBody.appendChild(modalImg);
 
-  // current bid information
+  // current bid
   const modalTopBidTitle = document.createElement("h2");
   modalTopBidTitle.classList.add(
     "bid-modal-bids",
