@@ -3,6 +3,7 @@ import * as status from "./status/index.js";
 // import * as profile from "./api/profile/display.js";
 import * as templates from "./templates/index.js";
 // import { getAPIKey } from "./api/auth/apikey.js";
+// import { deleteListing } from "./api/listings/delete.js";
 
 const placeBidBtn = document.querySelector(".place-bid-btn");
 if (placeBidBtn) {
@@ -40,3 +41,6 @@ switch (path) {
 // }
 
 // getAPIKey();
+
+//for testing deleteListing
+// deleteListing(id);
