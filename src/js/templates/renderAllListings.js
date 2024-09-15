@@ -1,17 +1,16 @@
 import { displayListings } from "../api/listings/display.js";
-// import { formatDate } from "../../handlers/timeDate.js";
 import { countdownTimer } from "../handlers/timeDate.js";
+import { openBidModal } from "../handlers/bidModal.js";
 
 export async function renderAllListings() {
   const listings = await displayListings();
 
-  console.log(listings);
-
   const listingsArray = listings.data;
-  if (!Array.isArray(listingsArray)) {
-    console.error("Expected an array but got:", listingsArray);
-    return;
-  }
+  // if (!Array.isArray(listingsArray)) {
+  //   console.error("Expected an array but got:", listingsArray);
+  //   return;
+  // }
+
   const listingsHeader = document.querySelector(".listings-header");
   listingsHeader.classList.remove("d-none");
   const listingsContainer = document.querySelector(
@@ -37,11 +36,12 @@ export async function renderAllListings() {
     if (listing.title === "test") {
       return;
     }
-    //if endsAt is in the past, skip
+    //skip if ended
     if (new Date(listing.endsAt) < new Date()) {
       return;
     }
 
+    //Listing Card and its components
     const listingCard = document.createElement("div");
     listingCard.classList.add(
       "listing-card",
@@ -59,6 +59,7 @@ export async function renderAllListings() {
       "shadow-sm",
       "m-4",
     );
+    listingCard.dataset.id = listingID;
 
     let mediaURL = "";
     if (listing.media.length > 0) {
@@ -70,17 +71,19 @@ export async function renderAllListings() {
     const cardHeader = document.createElement("div");
     cardHeader.classList.add("card-header", "position-relative", "p-0");
 
-    // Create the listing header image container
+    // listing header image container
     const listingHeaderImg = document.createElement("div");
     listingHeaderImg.classList.add("listing-header-img");
 
-    // Create and append the image
+    // append the image
     const headerImg = document.createElement("img");
     headerImg.src = mediaURL;
     headerImg.classList.add("border-bottom", "header-img");
     listingHeaderImg.appendChild(headerImg);
 
-    // Create the countdown container
+    cardHeader.appendChild(listingHeaderImg);
+
+    // countdown container and its components
     const countdownContainer = document.createElement("div");
     countdownContainer.classList.add(
       "countdown",
@@ -91,7 +94,6 @@ export async function renderAllListings() {
       "ms-1",
     );
 
-    // Create the countdown text
     const countdownText = document.createElement("p");
     countdownText.classList.add(
       "card-text",
@@ -105,58 +107,66 @@ export async function renderAllListings() {
     countdownText.textContent = "..Loading";
     countdownContainer.appendChild(countdownText);
 
-    // Append image and countdown to the card header
-    cardHeader.appendChild(listingHeaderImg);
     cardHeader.appendChild(countdownContainer);
 
-    // Create the card body
+    // Card body and its components
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "pb-0", "pt-0");
 
-    // Create the title
+    // title
     const cardTitle = document.createElement("h5");
     cardTitle.classList.add("text-wrap", "card-title");
     cardTitle.textContent = listing.title;
     cardBody.appendChild(cardTitle);
 
-    // Create the bids container
+    // bids
     const bidsContainer = document.createElement("div");
-    bidsContainer.classList.add("d-flex", "bids");
+    bidsContainer.classList.add("d-flex", "bids", "flex-column");
 
-    // Create the price text
+    const priceContainer = document.createElement("div");
+    priceContainer.classList.add("d-inline-flex", "card-text");
+
+    // price
     const priceText = document.createElement("p");
-    priceText.classList.add("card-text", "d-flex", "align-items-center");
+    priceText.classList.add(
+      "card-text",
+      "d-flex",
+      "align-items-center",
+      "fw-semibold",
+    );
     priceText.textContent = "Price: ";
 
-    // Create the coin image
+    // svg
     const coinImg = document.createElement("img");
     coinImg.src = coinSVG;
     coinImg.alt = "coin icon";
     coinImg.classList.add("bids-img", "ms-1");
     priceText.appendChild(coinImg);
 
-    // Append the last bid amount
+    // last bid amount
     const lastBidAmountText = document.createTextNode(lastBidAmount);
     priceText.appendChild(lastBidAmountText);
 
-    // Create the last bidder text
+    // last bidder @
     const lastBidderLink = document.createElement("a");
     lastBidderLink.classList.add("card-text", "fst-italic", "ms-1");
     lastBidderLink.textContent = lastBidder;
     lastBidderLink.href = `/profile/?name=${bidderName}`;
 
-    // Append price and last bidder to bids container
-    bidsContainer.appendChild(priceText);
-    bidsContainer.appendChild(lastBidderLink);
+    priceContainer.appendChild(priceText);
+    priceContainer.appendChild(lastBidderLink);
+    bidsContainer.appendChild(priceContainer);
+
+    // number of bids
+    const bidsCount = document.createElement("p");
+    bidsCount.classList.add("card-text");
+    bidsCount.textContent = `Bids: ${listing._count.bids}`;
+    bidsContainer.appendChild(bidsCount);
 
     // Append bids container to card body
     cardBody.appendChild(bidsContainer);
 
-    // Create the number of bids text
-    const bidsCount = document.createElement("p");
-    bidsCount.classList.add("card-text");
-    bidsCount.textContent = `Bids: ${listing._count.bids}`;
-    cardBody.appendChild(bidsCount);
+    // cardBody.appendChild(bidsCount);
 
     // Create the listing buttons container
     const listingBtns = document.createElement("div");
@@ -168,10 +178,16 @@ export async function renderAllListings() {
     );
 
     // Create the bid now button
-    const bidBtn = document.createElement("a");
-    bidBtn.href = "#";
+    const bidBtn = document.createElement("button");
     bidBtn.classList.add("btn", "btn-secondary-custom", "bid-btn");
     bidBtn.textContent = "Bid now";
+    bidBtn.dataset.id = listingID;
+    bidBtn.setAttribute("data-bs-target", "#bidModal");
+    bidBtn.setAttribute("data-bs-toggle", "modal");
+
+    bidBtn.addEventListener("click", () => {
+      openBidModal(listing, listingID, mediaURL, lastBidAmount);
+    });
 
     // Create the view listing button
     const viewBtn = document.createElement("a");
@@ -190,36 +206,8 @@ export async function renderAllListings() {
     listingCard.appendChild(cardHeader);
     listingCard.appendChild(cardBody);
 
-    // listingCard.innerHTML = `
-    // <div class="card-header position-relative p-0">
-    // <div class="listing-header-img">
-    //     <img src="${mediaURL}" class="border-bottom header-img"/>
-    //     </div>
-    //     <div class="countdown position-absolute top-0 start-0 mt-1 ms-1">
-    //     <p class="card-text countdown rounded bg-accent-custom d-inline-block ps-1 pe-1">..Loading</p>
-    //     </div>
-    //     </div>
-    //     <div class="card-body pb-0 pt-0">
-    //     <h5 class="text-wrap card-title">${listing.title}</h5>
-    //     <div class="d-flex bids">
-    //     <p class="card-text d-flex align-items-center">Price: <img src="${coinSVG}" alt="coin icon" class="bids-img ms-1">${lastBidAmount}</p>
-    //     <p class="card-text fst-italic ms-1">${lastBidder}</p>
-    //     </div>
-    //     <p class="card-text">Bids: ${listing._count.bids}</p>
-    //     <div class="listing-btns d-flex align-items-center justify-content-around">
-    //     <a href="#" class="btn btn-secondary-custom bid-btn">Bid now</a>
-    //             <a href="#" class="btn btn-primary-custom view-btn">View listing</a>
-    //     </div>
-    //     </div>
-    //   `;
-
     listingsContainer.appendChild(listingCard);
     const getCoundown = listingCard.querySelector(".countdown p");
     countdownTimer(listing.endsAt, getCoundown);
   });
-}
-
-{
-  /* <p class="fst-italic card-text">By: ${listing.seller.name}</p> */
-  //   <button class="btn btn-primary-custom">View Listing</button>
 }

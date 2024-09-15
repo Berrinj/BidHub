@@ -2,6 +2,7 @@ import { displayListing } from "../api/listings/display.js";
 import { countdownTimer } from "../handlers/timeDate.js";
 import { formatDate } from "../handlers/timeDate.js";
 import { load } from "../storage/index.js";
+import { openBidModal } from "../handlers/bidModal.js";
 
 export async function renderSingleListing() {
   //get id from url
@@ -280,7 +281,44 @@ export async function renderSingleListing() {
 
   const bidButton = document.createElement("button");
   bidButton.classList.add("btn", "btn-secondary-custom", "bid-btn", "mb-3");
-  bidButton.textContent = "Place Bid";
+  bidButton.textContent = "Bid Now";
+  bidButton.dataset.id = listing.id;
+  bidButton.setAttribute("data-bs-target", "#bidModal");
+  bidButton.setAttribute("data-bs-toggle", "modal");
+  const listingID = listing.id;
+  let mediaURL = "";
+  if (listing.media.length === 0) {
+    mediaURL = "../../../src/images/placeholder-images/banner.jpg";
+  } else {
+    mediaURL = listing.media[0].url;
+  }
+
+  bidButton.addEventListener("click", () => {
+    openBidModal(listing, listingID, mediaURL, lastBidAmount);
+  });
+
+  // const modal = document.querySelector("#bidModal");
+  // modal.setAttribute("data-id", listing.id);
+  // modal.setAttribute("data-title", listing.title);
+  // modal.setAttribute("data-price", lastBidAmount);
+  // const modalBody = modal.querySelector(".modal-body");
+
+  // const modalTitle = document.createElement("h5");
+  // modalTitle.classList.add("bid-modal-title");
+  // modalTitle.textContent = listing.title;
+  // modalBody.appendChild(modalTitle);
+  // const modalImg = document.createElement("img");
+  // modalImg.classList.add("bid-modal-img");
+  // modalImg.src = listing.media.url;
+  // modalImg.classList.add("bid-modal-img");
+  // modalBody.appendChild(modalImg);
+  // const modalId = document.createElement("p");
+  // modalId.classList.add("bid-modal-id");
+  // modalId.dataset.id = listing.id;
+  // modalId.textContent = "Listing ID: " + listing.id;
+  // modalId.classList.add("modal-id");
+  // modalId.textContent = listing.id;
+  // modalBody.appendChild(modalId);
 
   const bidHistoryTitle = document.createElement("p");
   bidHistoryTitle.classList.add("h6");
@@ -309,9 +347,9 @@ export async function renderSingleListing() {
 
   bids.appendChild(highestBid);
   if (load("profile")) {
+    bids.appendChild(bidButton);
     bids.appendChild(bidHistoryTitle);
     bids.appendChild(bidHistoryUl);
-    bids.appendChild(bidButton);
   } else {
     const loginToBid = document.createElement("p");
     loginToBid.classList.add("fst-italic");

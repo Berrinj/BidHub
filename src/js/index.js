@@ -4,6 +4,11 @@ import * as status from "./status/index.js";
 import * as templates from "./templates/index.js";
 // import { getAPIKey } from "./api/auth/apikey.js";
 
+const placeBidBtn = document.querySelector(".place-bid-btn");
+if (placeBidBtn) {
+  handlers.placeListingBid();
+}
+
 handlers.registerFormListener();
 handlers.loginFormListener();
 status.navListener();
