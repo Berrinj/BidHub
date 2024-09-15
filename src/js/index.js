@@ -19,6 +19,7 @@ const path = location.pathname;
 switch (path) {
   case "/":
     status.headerListener();
+    templates.renderListingsLandingPage();
     break;
   case "/profile/":
     templates.renderProfile();

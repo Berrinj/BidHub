@@ -264,6 +264,28 @@ export async function renderSingleListing() {
   Qs.innerHTML = `<strong>Questions?</strong> Send an email to the seller: <a href="mailto:${listing.seller.email}">${listing.seller.email}</a>`;
   listingDetails.appendChild(Qs);
 
+  const tagsContainer = document.createElement("div");
+  tagsContainer.classList.add("tags", "mb-2", "d-inline-block");
+  if (listing.tags.length === 0) {
+    const noTags = document.createElement("p");
+    noTags.textContent = "No tags provided";
+    tagsContainer.appendChild(noTags);
+  }
+  listing.tags.forEach((tag) => {
+    const tags = document.createElement("span");
+    tags.classList.add(
+      "badge",
+      "bg-accent-custom",
+      "opacity-75",
+      "me-1",
+      "mb-1",
+      "text-dark",
+    );
+    tags.textContent = tag;
+    tagsContainer.appendChild(tags);
+  });
+  listingDetails.appendChild(tagsContainer);
+
   const bidsContainer = document.createElement("div");
   bidsContainer.classList.add("d-flex", "flex-column", "bids");
 

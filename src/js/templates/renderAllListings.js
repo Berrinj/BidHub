@@ -3,13 +3,36 @@ import { countdownTimer } from "../handlers/timeDate.js";
 import { openBidModal } from "../handlers/bidModal.js";
 
 export async function renderAllListings() {
-  const listings = await displayListings();
+  // const listings = await displayListings();
+  // let page = 1;
+  const firstResponse = await displayListings(1);
+  // console.log(firstResponse);
+  const pageCount = firstResponse.meta.pageCount;
+  // console.log(`Page count: ${pageCount}`);
+  let allListings = [...firstResponse.data];
+  // console.log(`Page ${page} data:`, firstResponse);
 
-  const listingsArray = listings.data;
+  for (let i = 2; i <= pageCount; i++) {
+    const response = await displayListings(i);
+    console.log(`Page ${i} data:`, response);
+    allListings = allListings.concat(response.data);
+  }
+
+  const listingsArray = allListings;
+  listingsArray.sort((a, b) => new Date(b.created) - new Date(a.created)),
+    console.log("New to old:", listingsArray);
   // if (!Array.isArray(listingsArray)) {
   //   console.error("Expected an array but got:", listingsArray);
   //   return;
   // }
+
+  const activeListings = listingsArray.filter(
+    (listing) =>
+      new Date(listing.endsAt) >= new Date() &&
+      listing.title.toLowerCase() !== "test" &&
+      listing.title.toLowerCase() !== "test123",
+  );
+  console.log("Active listings:", activeListings);
 
   const listingsHeader = document.querySelector(".listings-header");
   listingsHeader.classList.remove("d-none");
@@ -19,7 +42,7 @@ export async function renderAllListings() {
 
   const loading = document.querySelector(".loading-text");
   loading.innerHTML = "";
-  listingsArray.forEach((listing) => {
+  activeListings.forEach((listing) => {
     // const endsAt = formatDate(listing.endsAt);
     const coinSVG = `../../../src/images/svg/noto--coin.svg`;
     const listingID = listing.id;
@@ -31,14 +54,6 @@ export async function renderAllListings() {
       lastBidAmount = lastBid.amount;
       lastBidder = `(@${lastBid.bidder.name})`;
       bidderName = lastBid.bidder.name;
-    }
-    //skip if listing has a title of test
-    if (listing.title === "test") {
-      return;
-    }
-    //skip if ended
-    if (new Date(listing.endsAt) < new Date()) {
-      return;
     }
 
     //Listing Card and its components
@@ -59,9 +74,13 @@ export async function renderAllListings() {
       "shadow-sm",
       "m-4",
     );
+    if (new Date(listing.endsAt) < new Date()) {
+      listingCard.classList.add("d-none");
+    }
     listingCard.dataset.id = listingID;
 
     let mediaURL = "";
+
     if (listing.media.length > 0) {
       mediaURL = `${listing.media[0].url}`;
     } else {
@@ -69,11 +88,15 @@ export async function renderAllListings() {
     }
 
     const cardHeader = document.createElement("div");
-    cardHeader.classList.add("card-header", "position-relative", "p-0");
+    cardHeader.classList.add(
+      "all-listings-card-header",
+      "position-relative",
+      "p-0",
+    );
 
     // listing header image container
     const listingHeaderImg = document.createElement("div");
-    listingHeaderImg.classList.add("listing-header-img");
+    listingHeaderImg.classList.add("all-listings-header-img");
 
     // append the image
     const headerImg = document.createElement("img");
@@ -82,7 +105,6 @@ export async function renderAllListings() {
     listingHeaderImg.appendChild(headerImg);
 
     cardHeader.appendChild(listingHeaderImg);
-
     // countdown container and its components
     const countdownContainer = document.createElement("div");
     countdownContainer.classList.add(
@@ -94,19 +116,34 @@ export async function renderAllListings() {
       "ms-1",
     );
 
+    //create img and text div for countdown
+    const countdownSvgText = document.createElement("div");
+    countdownSvgText.classList.add(
+      "rounded",
+      "d-inline-block",
+      "shadow-sm",
+      "bg-accent-custom",
+    );
+
+    // Create the countdown SVG
+    const countdownSVG = document.createElement("img");
+    countdownSVG.src = `../../../src/images/svg/eos-icons--hourglass.svg`;
+    countdownSVG.classList.add("countdown-svg", "pb-1", "ps-1", "pe-1");
+
     const countdownText = document.createElement("p");
     countdownText.classList.add(
       "card-text",
-      "countdown",
+      "countdown-text",
       "rounded",
-      "bg-accent-custom",
       "d-inline-block",
-      "ps-1",
       "pe-1",
     );
     countdownText.textContent = "..Loading";
-    countdownContainer.appendChild(countdownText);
+    countdownSvgText.appendChild(countdownSVG);
+    countdownSvgText.appendChild(countdownText);
+    countdownContainer.appendChild(countdownSvgText);
 
+    // countdownContainer.appendChild(countdownText);
     cardHeader.appendChild(countdownContainer);
 
     // Card body and its components
