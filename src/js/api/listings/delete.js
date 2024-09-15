@@ -10,9 +10,6 @@ export async function deleteListing(id) {
     const response = await authFetch(deleteListingURL, {
       method: "DELETE",
     });
-    if (response.ok) {
-      return await response.json();
-    }
     if (response.status !== 200) {
       throw new Error("Listing not deleted");
     }

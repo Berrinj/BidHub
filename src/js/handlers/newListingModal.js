@@ -117,7 +117,7 @@ export async function openNewListingModal() {
     const formData = new FormData(form);
     const title = formData.get("title");
     const description = formData.get("description");
-    const tags = formData.get("tags").split(",");
+    const tags = formData.get("tags");
     const media = formData.get("media");
     const endsAt = formData.get("endsAt");
     const newListingData = {

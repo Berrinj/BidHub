@@ -18,14 +18,10 @@ export async function placeBid(id, amount) {
       body: JSON.stringify({ amount: amount }),
     });
     if (response.status === 201) {
-      console.log("Bid placed successfully");
       return await response.json();
     }
     if (response.status !== 200) {
       console.log("OH NOOOO");
-
-      //   const { message } = await response.json();
-      //   errorMessage.innerHTML = `<p class="text-danger">${message}</p>`;
       throw new Error("Bid not placed");
     }
   } catch (error) {

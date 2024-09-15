@@ -168,7 +168,7 @@ function renderListings(listings, selectContainer) {
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "p-2");
     const cardTitle = document.createElement("h5");
-    cardTitle.classList.add("card-title", "text-truncate");
+    cardTitle.classList.add("card-title", "text-wrap");
     cardTitle.textContent = listing.title;
     cardBody.appendChild(cardTitle);
     const bidContainer = document.createElement("div");
