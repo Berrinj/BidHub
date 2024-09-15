@@ -135,7 +135,7 @@ export async function openBidModal(
       bidError.style.display = "none";
       bidSuccess.style.display = "block";
       bidLabel.textContent =
-        "Your bid has been placed! Page will update shortly";
+        "Your bid has been placed! Refreshing the page in 3 seconds...";
       modalTopBidInfo.textContent = `${bidAmount} Credits`;
 
       setTimeout(() => {
