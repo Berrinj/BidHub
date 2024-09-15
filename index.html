@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bid Hub</title>
     <link
+      rel="icon"
+      type="image"
+      href="/src/images/placeholder-images/token-branded--bidz.png"
+    />
+    <link
       rel="stylesheet"
       href="node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
@@ -67,12 +72,12 @@
     </header>
     <main>
       <div class="container header-container shadow">
-        <div class="header-content">
-          <div class="header-text">
+        <div class="header-content d-flex flex-wrap">
+          <div class="header-text text-center">
             <p class="header-first-p text-capitalize fs-2 mb-0"></p>
-            <p class="header-second-p lead"></p>
+            <p class="header-second-p lead mb-0"></p>
           </div>
-          <div class="header-button">
+          <div class="header-button mx-auto pb-3 pt-3">
             <button
               type="button"
               class="btn btn-secondary-custom"
@@ -125,31 +130,39 @@
             class="most-wanted-container col-12 col-lg-6 d-flex flex-column align-items-center border-bottom border-end"
           >
             <h2 class="text-center m-2 display-6">Most wanted</h2>
-            <div class="most-wanted-listings"></div>
+            <div class="most-wanted-listings">
+              <p class="loading">Loading listings</p>
+            </div>
             <a
               href="#"
               class="btn btn-neutral-custom shadow-sm mt-3 mb-3 border"
               >View more</a
             >
           </div>
+
           <div
-            class="col-lg-6 col-sm-12 d-flex flex-column align-items-center border-bottom"
+            class="newest-listings-container col-12 col-lg-6 d-flex flex-column align-items-center border-bottom"
           >
             <h2 class="text-center m-2 display-6">Newest</h2>
-            <!-- //TODO: Add a fetch to display the 3 newest items, hardcoded under -->
-            <div class="newest-listings"></div>
+            <div class="newest-listings">
+              <p class="loading">Loading listings</p>
+            </div>
             <a
               href="#"
               class="btn btn-neutral-custom shadow-sm mt-3 mb-3 border"
               >View more</a
             >
           </div>
-          <div class="col-lg-12 d-flex flex-column">
+
+          <div class="ending-soon-container col-lg-12 d-flex flex-column">
             <div class="ending-soon-heading">
               <h2 class="text-center m-2 display-6">Ending Soon</h2>
             </div>
-            <!-- //TODO: Add a fetch to display the 5 items ending the soonest, hardcoded under -->
-            <div class="ending-soon-listings"></div>
+            <div class="row">
+              <div class="ending-soon-listings position-relative">
+                <p class="loading text-center">Loading listings</p>
+              </div>
+            </div>
           </div>
           <div class="viewall-btn d-flex justify-content-center">
             <a
@@ -161,7 +174,7 @@
         </div>
       </div>
       <div class="viewall-btn d-flex justify-content-center">
-        <a href="#" class="btn btn-accent-custom shadow-sm mt-3 mb-3"
+        <a href="/listings/" class="btn btn-accent-custom shadow-sm mt-3 mb-3"
           >View all listings</a
         >
       </div>

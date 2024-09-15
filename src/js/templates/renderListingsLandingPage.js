@@ -23,19 +23,25 @@ export async function renderListingsLandingPage({
       console.log(allListings);
     }
 
+    const activeListings = allListings.filter(
+      (listing) =>
+        new Date(listing.endsAt) >= new Date() &&
+        listing.title.toLowerCase() !== "test" &&
+        listing.title.toLowerCase() !== "test123",
+    );
     // const listings = response.data;
     // console.log(listings);
-    const mostBidsListings = allListings
+    const mostBidsListings = activeListings
       .sort((a, b) => b.bids.length - a.bids.length)
       .slice(0, mostBids);
 
-    const newestListings = allListings
-      .sort((a, b) => new Date(b.endsAt) - new Date(a.endsAt))
+    const newestListings = activeListings
+      .sort((a, b) => new Date(b.created) - new Date(a.created))
       .slice(0, newest);
     console.log(newestListings);
 
-    const endingSoonListings = allListings
-      .sort((a, b) => new Date(a.bids.endsAt) - new Date(b.bids.endsAt))
+    const endingSoonListings = activeListings
+      .sort((a, b) => new Date(a.endsAt) - new Date(b.endsAt))
       .slice(0, endingSoon);
     console.log(endingSoonListings);
 
@@ -50,6 +56,10 @@ export async function renderListingsLandingPage({
 function renderListings(listings, selectContainer) {
   const container = document.querySelector(selectContainer);
   container.innerHTML = "";
+  //   const activeListings = listings.filter(
+  //     (listing) => new Date(listing.endsAt) >= new Date(),
+  //     console.log(activeListings),
+  //   );
   listings.forEach((listing) => {
     const listingCard = document.createElement("div");
     listingCard.classList.add(
@@ -60,6 +70,7 @@ function renderListings(listings, selectContainer) {
       "bg-light",
       "shadow-sm",
       "flex-wrap",
+      "mx-auto",
     );
 
     const listingID = listing.id;
@@ -70,6 +81,7 @@ function renderListings(listings, selectContainer) {
       "position-relative",
       "p-0",
       "mx-auto",
+      "border-0",
     );
 
     const listingImage = document.createElement("img");
@@ -82,6 +94,32 @@ function renderListings(listings, selectContainer) {
     listingImage.src = mediaURL;
     listingImage.classList.add("img-fluid", "landing-listing-img");
     listingImage.alt = "Listing image";
+
+    if (selectContainer === ".ending-soon-listings") {
+      const endingSoonListings = document.querySelector(
+        ".ending-soon-listings",
+      );
+      endingSoonListings.classList.add(
+        "d-flex",
+        "flex-row",
+        "flex-wrap",
+        "justify-content-around",
+      );
+      listingCard.classList.add(
+        "ending-soon-card",
+        "col-12",
+        "col-sm-5",
+        "col-md-4",
+        "col-xl-2",
+        "m-1",
+      );
+      listingCard.classList.remove("mx-auto");
+      cardHeader.classList.add("ending-soon-card-header");
+      cardHeader.classList.remove("card-header");
+      listingImage.classList.remove("landing-listing-img");
+      listingImage.classList.add("img-fluid", "ending-soon-img");
+    }
+
     cardHeader.appendChild(listingImage);
 
     // countdown container and its components
@@ -128,11 +166,13 @@ function renderListings(listings, selectContainer) {
     listingCard.appendChild(cardHeader);
 
     const cardBody = document.createElement("div");
-    cardBody.classList.add("card-body");
+    cardBody.classList.add("card-body", "p-2");
     const cardTitle = document.createElement("h5");
-    cardTitle.classList.add("card-title");
+    cardTitle.classList.add("card-title", "text-truncate");
     cardTitle.textContent = listing.title;
     cardBody.appendChild(cardTitle);
+    const bidContainer = document.createElement("div");
+    bidContainer.classList.add("d-flex", "flex-row", "flex-wrap");
     const currentBid = document.createElement("p");
     currentBid.classList.add("card-text");
     let lastBidAmount = 0;
@@ -149,8 +189,10 @@ function renderListings(listings, selectContainer) {
     lastBidderLink.classList.add("card-text", "fst-italic", "ms-1");
     lastBidderLink.textContent = lastBidder;
     lastBidderLink.href = `/profile/?name=${bidderName}`;
-    currentBid.appendChild(lastBidderLink);
-    cardBody.appendChild(currentBid);
+    bidContainer.appendChild(currentBid);
+    bidContainer.appendChild(lastBidderLink);
+    // currentBid.appendChild(lastBidderLink);
+    cardBody.appendChild(bidContainer);
     const bids = document.createElement("p");
     bids.classList.add("card-text");
     bids.textContent = `Bids: ${listing.bids.length}`;
