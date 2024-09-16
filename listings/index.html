@@ -31,25 +31,7 @@
           <div class="navbar-nav col-lg-5 d-flex top-menu">
             <ul
               class="d-flex list-unstyled justify-content-end align-items-center"
-            >
-              <li class="nav-item logged-out">
-                <a
-                  class="nav-link"
-                  data-bs-toggle="modal"
-                  data-bs-target="#loginModal"
-                  >Login</a
-                >
-              </li>
-              <li class="nav-item logged-out">
-                <a
-                  class="nav-link"
-                  id="registerBtn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#registerModal"
-                  >Sign up</a
-                >
-              </li>
-            </ul>
+            ></ul>
           </div>
         </div>
       </nav>
@@ -103,11 +85,7 @@
           </div>
         </div>
         <div class="all-listings-container">
-          <p
-            class="loading-text position-absolute top-50 start-50 translate-middle display-6"
-          >
-            Loading listings...
-          </p>
+          <p class="loading-text display-6 text-center">Loading listings...</p>
           <div class="error-message"></div>
           <div class="row d-flex flex-wrap justify-content-center"></div>
         </div>
@@ -371,6 +349,39 @@
               >
                 View Listing
               </button>
+              <button
+                type="button"
+                class="btn btn-primary-custom border border-1"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- place new listing modal -->
+      <div
+        class="modal fade"
+        id="newListingModal"
+        tabindex="-1"
+        aria-labelledby="newListingModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content bg-primary-custom text-white d-flex">
+            <div class="modal-header d-flex flex-column border-0 pb-0">
+              <button
+                type="button"
+                class="btn-close bg-light"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              <h1 class="modal-title" id="newListingModal"></h1>
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center"></div>
+            <div class="modal-footer border-0">
               <button
                 type="button"
                 class="btn btn-primary-custom border border-1"

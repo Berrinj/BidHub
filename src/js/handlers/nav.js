@@ -1,5 +1,5 @@
 import { load } from "../storage/index.js";
-import { openNewListingModal } from "../handlers/newListingModal.js";
+import { openNewListingModal } from "./newListingModal.js";
 const topNav = document.querySelector(".top-menu ul");
 
 export function navListener() {
@@ -59,5 +59,12 @@ export function navListener() {
     topNav.appendChild(newListItem);
     topNav.appendChild(profileListItem);
     topNav.appendChild(hamburgerListItem);
+  } else {
+    topNav.innerHTML = ` <li class="nav-item logged-out">
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+            </li>
+            <li class="nav-item logged-out">
+              <a class="nav-link" id="registerBtn" data-bs-toggle="modal" data-bs-target="#registerModal">Sign up</a>
+            </li>`;
   }
 }

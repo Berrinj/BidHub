@@ -1,3 +1,11 @@
+@media screen and (max-width: 1200px) {
+  .card {
+    .ending-soon-card-header {
+      width: 150px;
+    }
+  }
+}
+
 @media screen and (max-width: 992px) {
   .profile-container {
     min-width: 100%;

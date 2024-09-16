@@ -1,6 +1,7 @@
 import { displayListings } from "../api/listings/display.js";
 import { countdownTimer } from "../handlers/timeDate.js";
 import { openBidModal } from "../handlers/bidModal.js";
+import { truncateText } from "../handlers/truncateText.js";
 
 export async function renderAllListings() {
   // const listings = await displayListings();
@@ -78,7 +79,6 @@ export async function renderAllListings() {
       listingCard.classList.add("d-none");
     }
     listingCard.dataset.id = listingID;
-
     let mediaURL = "";
 
     if (listing.media.length > 0) {
@@ -93,7 +93,7 @@ export async function renderAllListings() {
       "position-relative",
       "p-0",
     );
-
+    cardHeader.style.cursor = "pointer";
     // listing header image container
     const listingHeaderImg = document.createElement("div");
     listingHeaderImg.classList.add("all-listings-header-img");
@@ -153,7 +153,8 @@ export async function renderAllListings() {
     // title
     const cardTitle = document.createElement("h5");
     cardTitle.classList.add("text-wrap", "card-title");
-    cardTitle.textContent = listing.title;
+    const titleText = truncateText(listing.title, 30);
+    cardTitle.textContent = titleText;
     cardBody.appendChild(cardTitle);
 
     // bids
@@ -205,6 +206,34 @@ export async function renderAllListings() {
 
     // cardBody.appendChild(bidsCount);
 
+    // listing owner
+    const listingOwner = document.createElement("div");
+    listingOwner.classList.add(
+      "d-flex",
+      "justify-content-center",
+      "align-items-center",
+      "mb-2",
+    );
+    const listingOwnerUsername = document.createElement("p");
+    listingOwnerUsername.classList.add(
+      "card-text",
+      "fst-italic",
+      "listing-owner",
+    );
+    listingOwnerUsername.textContent = `${listing.seller.name}`;
+    const listingOwnerAvatar = document.createElement("img");
+    listingOwnerAvatar.src = `${listing.seller.avatar.url}`;
+    listingOwnerAvatar.classList.add(
+      "listing-owner-avatar",
+      "rounded-circle",
+      "me-1",
+    );
+    listingOwnerAvatar.alt =
+      listing.seller.avatar.alt || "avatar of profile owner";
+    listingOwner.appendChild(listingOwnerAvatar);
+    listingOwner.appendChild(listingOwnerUsername);
+    // cardBody.appendChild(listingOwner);
+
     // Create the listing buttons container
     const listingBtns = document.createElement("div");
     listingBtns.classList.add(
@@ -238,10 +267,15 @@ export async function renderAllListings() {
 
     // Append listing buttons to the card body
     cardBody.appendChild(listingBtns);
+    cardBody.appendChild(listingOwner);
 
     // Append everything to the card
     listingCard.appendChild(cardHeader);
     listingCard.appendChild(cardBody);
+
+    cardHeader.addEventListener("click", () => {
+      window.location.href = `listing/?id=${listingID}`;
+    });
 
     listingsContainer.appendChild(listingCard);
     const getCoundown = listingCard.querySelector(".countdown p");

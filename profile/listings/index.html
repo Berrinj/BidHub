@@ -31,36 +31,7 @@
           <div class="navbar-nav col-lg-5 d-flex top-menu">
             <ul
               class="d-flex list-unstyled justify-content-end align-items-center"
-            >
-              <li class="nav-item logged-out">
-                <a
-                  class="nav-link"
-                  data-bs-toggle="modal"
-                  data-bs-target="#loginModal"
-                  >Login</a
-                >
-              </li>
-              <li class="nav-item logged-out">
-                <a
-                  class="nav-link"
-                  id="registerBtn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#registerModal"
-                  >Sign up</a
-                >
-              </li>
-              <!-- <li class="nav-item logged-in" hidden="true">
-              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#newListingModal"><img
-                  src="./src/images/svg/new-listing.svg">&nbsp;New Listing</a>
-            </li>
-            <li class="nav-item logged-in" hidden="true">
-              <a class="nav-link" id="myProfile" href="/profile"><img src="./src/images/svg/avatar.svg">&nbsp;My
-                profile</a>
-            </li>
-            <li class="nav-item logged-in" hidden="true">
-              <a class=" nav-link" id="hamburger"><img src="./src/images/svg/hamburger.svg"></a>
-            </li> -->
-            </ul>
+            ></ul>
           </div>
         </div>
       </nav>
@@ -252,7 +223,7 @@
               </div>
               <div class="modal-body d-flex flex-column">
                 <img
-                  src="../src/images/svg/bid-icon.svg"
+                  src="/src/images/svg/bid-icon.svg"
                   alt="Bid Hub Logo"
                   class="mx-auto"
                 />
@@ -304,6 +275,72 @@
                   New user? Register here
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Place bid modal -->
+      <div
+        class="modal fade"
+        id="bidModal"
+        tabindex="-1"
+        aria-labelledby="bidModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content bg-primary-custom text-white d-flex">
+            <div class="modal-header d-flex flex-column border-0 pb-0">
+              <button
+                type="button"
+                class="btn-close bg-light"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              <h1 class="modal-title" id="bidModalLabel"></h1>
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center"></div>
+            <div class="modal-footer border-0">
+              <button
+                type="button"
+                class="btn btn-primary-custom border border-1"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- place new listing modal -->
+      <div
+        class="modal fade"
+        id="newListingModal"
+        tabindex="-1"
+        aria-labelledby="newListingModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content bg-primary-custom text-white d-flex">
+            <div class="modal-header d-flex flex-column border-0 pb-0">
+              <button
+                type="button"
+                class="btn-close bg-light"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              <h1 class="modal-title" id="newListingModal"></h1>
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center"></div>
+            <div class="modal-footer border-0">
+              <button
+                type="button"
+                class="btn btn-primary-custom border border-1"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>

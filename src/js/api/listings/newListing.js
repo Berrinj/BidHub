@@ -7,11 +7,27 @@ export async function newListing() {
     const description = document.querySelector("#description").value;
     const tags = document.querySelector("#tags").value.split(",");
 
-    const media = [
-      {
-        url: document.querySelector("#media").value,
-      },
-    ];
+    // const media = [
+    //   {
+    //     url: document.querySelector("#imageURL").value,
+    //     alt: document.querySelector("#imageAltText").value,
+    //   },
+    // ];
+
+    const media = [];
+    const imageURLs = document.querySelectorAll('input[name="imageURL"]');
+    const imageAltTexts = document.querySelectorAll(
+      'input[name="imageAltText"]',
+    );
+
+    imageURLs.forEach((imageURL, index) => {
+      const url = imageURL.value;
+      const alt = imageAltTexts[index]?.value || "";
+      if (url) {
+        media.push({ url, alt });
+      }
+    });
+
     const endsAt = document.querySelector("#endsAt").value;
 
     if (!title) {
