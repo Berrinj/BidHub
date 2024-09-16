@@ -36,48 +36,19 @@
           <div class="navbar-nav col-lg-5 d-flex top-menu">
             <ul
               class="d-flex list-unstyled justify-content-end align-items-center"
-            >
-              <li class="nav-item logged-out">
-                <a
-                  class="nav-link"
-                  data-bs-toggle="modal"
-                  data-bs-target="#loginModal"
-                  >Login</a
-                >
-              </li>
-              <li class="nav-item logged-out">
-                <a
-                  class="nav-link"
-                  id="registerBtn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#registerModal"
-                  >Sign up</a
-                >
-              </li>
-              <!-- <li class="nav-item logged-in" hidden="true">
-              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#newListingModal"><img
-                  src="./src/images/svg/new-listing.svg">&nbsp;New Listing</a>
-            </li>
-            <li class="nav-item logged-in" hidden="true">
-              <a class="nav-link" id="myProfile" href="/profile"><img src="./src/images/svg/avatar.svg">&nbsp;My
-                profile</a>
-            </li>
-            <li class="nav-item logged-in" hidden="true">
-              <a class=" nav-link" id="hamburger"><img src="./src/images/svg/hamburger.svg"></a>
-            </li> -->
-            </ul>
+            ></ul>
           </div>
         </div>
       </nav>
     </header>
     <main>
       <div class="container header-container shadow">
-        <div class="header-content d-flex flex-wrap">
+        <div class="header-content w-100 flex-wrap justify-content-around">
           <div class="header-text text-center">
             <p class="header-first-p text-capitalize fs-2 mb-0"></p>
             <p class="header-second-p lead mb-0"></p>
           </div>
-          <div class="header-button mx-auto pb-3 pt-3">
+          <div class="header-button pb-3 pt-3">
             <button
               type="button"
               class="btn btn-secondary-custom"
@@ -121,17 +92,19 @@
       </div>
 
       <div
-        class="container col-lg-11 border d-flex rounded pb-3 bg-white main-content"
+        class="container col-lg-11 border d-flex flex-column rounded pb-3 bg-white main-content"
       >
         <!-- <div class="container d-flex"> -->
 
         <div class="row mt-2 justify-content-center">
           <div
-            class="most-wanted-container col-12 col-lg-6 d-flex flex-column align-items-center border-bottom border-end"
+            class="most-wanted-container col-12 col-xl-6 d-flex flex-column align-items-center border-bottom border-end"
           >
             <h2 class="text-center m-2 display-6">Most wanted</h2>
-            <div class="most-wanted-listings">
-              <p class="loading">Loading listings</p>
+            <div class="row col-12 col-sm-10">
+              <div class="most-wanted-listings">
+                <p class="loading">Loading listings</p>
+              </div>
             </div>
             <a
               href="#"
@@ -141,36 +114,36 @@
           </div>
 
           <div
-            class="newest-listings-container col-12 col-lg-6 d-flex flex-column align-items-center border-bottom"
+            class="newest-listings-container col-12 col-xl-6 d-flex flex-column align-items-center border-bottom"
           >
             <h2 class="text-center m-2 display-6">Newest</h2>
-            <div class="newest-listings">
-              <p class="loading">Loading listings</p>
-            </div>
-            <a
-              href="#"
-              class="btn btn-neutral-custom shadow-sm mt-3 mb-3 border"
-              >View more</a
-            >
-          </div>
-
-          <div class="ending-soon-container col-lg-12 d-flex flex-column">
-            <div class="ending-soon-heading">
-              <h2 class="text-center m-2 display-6">Ending Soon</h2>
-            </div>
-            <div class="row">
-              <div class="ending-soon-listings position-relative">
-                <p class="loading text-center">Loading listings</p>
+            <div class="row col-12 col-sm-10">
+              <div class="newest-listings">
+                <p class="loading">Loading listings</p>
               </div>
             </div>
-          </div>
-          <div class="viewall-btn d-flex justify-content-center">
             <a
               href="#"
               class="btn btn-neutral-custom shadow-sm mt-3 mb-3 border"
               >View more</a
             >
           </div>
+        </div>
+        <div class="row col-12 col-sm-10 col-xl-12 mx-auto">
+          <div class="ending-soon-container col-lg-12 d-flex flex-column">
+            <div class="ending-soon-heading col-12">
+              <h2 class="text-center m-2 display-6">Ending Soon</h2>
+            </div>
+
+            <div class="ending-soon-listings position-relative">
+              <p class="loading text-center">Loading listings</p>
+            </div>
+          </div>
+        </div>
+        <div class="viewall-btn d-flex justify-content-center">
+          <a href="#" class="btn btn-neutral-custom shadow-sm mt-3 mb-3 border"
+            >View more</a
+          >
         </div>
       </div>
       <div class="viewall-btn d-flex justify-content-center">
@@ -433,6 +406,38 @@
                 aria-label="Close"
               ></button>
               <h1 class="modal-title" id="bidModalLabel"></h1>
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center"></div>
+            <div class="modal-footer border-0">
+              <button
+                type="button"
+                class="btn btn-primary-custom border border-1"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- place new listing modal -->
+      <div
+        class="modal fade"
+        id="newListingModal"
+        tabindex="-1"
+        aria-labelledby="newListingModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content bg-primary-custom text-white d-flex">
+            <div class="modal-header d-flex flex-column border-0 pb-0">
+              <button
+                type="button"
+                class="btn-close bg-light"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              <h1 class="modal-title" id="newListingModal"></h1>
             </div>
             <div class="modal-body d-flex flex-column align-items-center"></div>
             <div class="modal-footer border-0">

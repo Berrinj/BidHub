@@ -1,5 +1,6 @@
 main {
   max-width: 1300px;
+  min-height: 90vh;
   margin: auto;
   padding: 1rem 1rem;
   .main-content-image {
@@ -11,8 +12,7 @@ main {
   }
   .main-content {
     max-width: 1300px;
-    min-width: 60vw;
-    min-height: 60vh;
+    // min-width: 60vw; baad idea, makes it overflow max-width
   }
   // .main-content {
   //   background-color: #fff;

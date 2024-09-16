@@ -1,6 +1,7 @@
 import { displayListings } from "../api/listings/display.js";
 import { countdownTimer } from "../handlers/timeDate.js";
 import { openBidModal } from "../handlers/bidModal.js";
+import { truncateText } from "../handlers/truncateText.js";
 
 export async function renderListingsLandingPage({
   mostBids = 3,
@@ -56,6 +57,7 @@ export async function renderListingsLandingPage({
 function renderListings(listings, selectContainer) {
   const container = document.querySelector(selectContainer);
   container.innerHTML = "";
+  const coinSVG = `../../../src/images/svg/noto--coin.svg`;
   //   const activeListings = listings.filter(
   //     (listing) => new Date(listing.endsAt) >= new Date(),
   //     console.log(activeListings),
@@ -71,6 +73,9 @@ function renderListings(listings, selectContainer) {
       "shadow-sm",
       "flex-wrap",
       "mx-auto",
+      "col-12",
+      "col-lg-10",
+      "col-xl-12",
     );
 
     const listingID = listing.id;
@@ -105,17 +110,20 @@ function renderListings(listings, selectContainer) {
         "flex-wrap",
         "justify-content-around",
       );
+      listingCard.classList.remove("col-xl-12");
       listingCard.classList.add(
         "ending-soon-card",
-        "col-12",
-        "col-sm-5",
-        "col-md-4",
+        // "col-12",
+
+        // "col-sm-5",
+        // "col-md-4",
+        // "col-lg-10",
         "col-xl-2",
         "m-1",
       );
+
       listingCard.classList.remove("mx-auto");
       cardHeader.classList.add("ending-soon-card-header");
-      cardHeader.classList.remove("card-header");
       listingImage.classList.remove("landing-listing-img");
       listingImage.classList.add("img-fluid", "ending-soon-img");
     }
@@ -168,29 +176,64 @@ function renderListings(listings, selectContainer) {
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "p-2");
     const cardTitle = document.createElement("h5");
-    cardTitle.classList.add("card-title", "text-truncate");
-    cardTitle.textContent = listing.title;
+    cardTitle.classList.add("card-title", "text-wrap");
+    //listen for window resize
+    window.addEventListener("resize", () => {
+      if (
+        selectContainer === ".ending-soon-listings" &&
+        window.innerWidth > 1200
+      ) {
+        const listingTitle = truncateText(listing.title, 14);
+        cardTitle.textContent = listingTitle;
+      } else {
+        const listingTitle = truncateText(listing.title, 25);
+        cardTitle.textContent = listingTitle;
+      }
+    });
+    const listingTitle = truncateText(listing.title, 25);
+    cardTitle.textContent = listingTitle;
     cardBody.appendChild(cardTitle);
+
     const bidContainer = document.createElement("div");
     bidContainer.classList.add("d-flex", "flex-row", "flex-wrap");
     const currentBid = document.createElement("p");
     currentBid.classList.add("card-text");
     let lastBidAmount = 0;
-    let lastBidder = "";
-    let bidderName = "";
+    // let lastBidder = "";
+    // let bidderName = "";
     if (listing.bids && listing.bids.length > 0) {
       const lastBid = listing.bids[listing.bids.length - 1];
       lastBidAmount = lastBid.amount;
-      lastBidder = `(@${lastBid.bidder.name})`;
-      bidderName = lastBid.bidder.name;
+      // lastBidder = `(@${lastBid.bidder.name})`;
+      // bidderName = lastBid.bidder.name;
     }
-    currentBid.textContent = `Price: ${lastBidAmount} credits`;
-    const lastBidderLink = document.createElement("a");
-    lastBidderLink.classList.add("card-text", "fst-italic", "ms-1");
-    lastBidderLink.textContent = lastBidder;
-    lastBidderLink.href = `/profile/?name=${bidderName}`;
-    bidContainer.appendChild(currentBid);
-    bidContainer.appendChild(lastBidderLink);
+    const priceContainer = document.createElement("div");
+    priceContainer.classList.add("d-inline-flex", "card-text");
+    const priceText = document.createElement("p");
+    priceText.classList.add(
+      "card-text",
+      "d-flex",
+      "align-items-center",
+      "fw-semibold",
+    );
+    priceText.textContent = "Price: ";
+    const coinImg = document.createElement("img");
+    coinImg.src = coinSVG;
+    coinImg.alt = "coin icon";
+    coinImg.classList.add("bids-img", "ms-1");
+    priceText.appendChild(coinImg);
+    const lastBidAmountText = document.createTextNode(lastBidAmount);
+    priceText.appendChild(lastBidAmountText);
+    priceContainer.appendChild(priceText);
+    bidContainer.appendChild(priceContainer);
+
+    // currentBid.textContent = `Price: ${lastBidAmount} credits`;
+    // const lastBidderLink = document.createElement("a");
+    // lastBidderLink.classList.add("card-text", "fst-italic", "ms-1");
+    // lastBidderLink.textContent = lastBidder;
+    // lastBidderLink.href = `/profile/?name=${bidderName}`;
+    // bidContainer.appendChild(currentBid);
+    // bidContainer.appendChild(lastBidderLink);
     // currentBid.appendChild(lastBidderLink);
     cardBody.appendChild(bidContainer);
     const bids = document.createElement("p");
@@ -215,6 +258,31 @@ function renderListings(listings, selectContainer) {
     bidBtn.addEventListener("click", () => {
       openBidModal(listing, listingID, mediaURL, lastBidAmount);
     });
+
+    if (
+      selectContainer === ".ending-soon-listings" &&
+      window.innerWidth > 1200
+    ) {
+      listingBtns.classList.add("flex-column");
+      bidBtn.classList.add("mb-2");
+    }
+
+    window.addEventListener("resize", () => {
+      if (
+        selectContainer === ".ending-soon-listings" &&
+        window.innerWidth < 1200
+      ) {
+        listingBtns.classList.remove("flex-column");
+        bidBtn.classList.remove("mb-2");
+      } else if (
+        selectContainer === ".ending-soon-listings" &&
+        window.innerWidth > 1200
+      ) {
+        listingBtns.classList.add("flex-column");
+        bidBtn.classList.add("mb-2");
+      }
+    });
+
     listingBtns.appendChild(bidBtn);
     bidBtn.textContent = "Bid now";
     const viewListingBtn = document.createElement("button");
