@@ -42,6 +42,7 @@
       >
         <div class="row listings-header d-none">
           <h1 class="text-center mt-3 mb-3 display-3">Listings</h1>
+          <h5 class="text-center search-header"></h5>
           <div class="filter-listings">
             <div class="filter-listings-container">
               <div
@@ -67,8 +68,10 @@
               </div>
             </div>
             <div class="container col-8 p-0">
-              <div class="input-group rounded-end mb-4 mt-3 border-1">
-                <button class="input-group-text border btn bg-white">
+              <div
+                class="search-container input-group rounded-end mb-4 mt-3 border-1"
+              >
+                <button class="input-group-text border btn bg-white search-btn">
                   <img
                     src="../src/images/svg/tabler--search.svg"
                     alt="Search Icon"
@@ -76,17 +79,25 @@
                 </button>
                 <input
                   type="search"
-                  class="form-control rounded-end border"
+                  name="search"
+                  class="form-control rounded-end border search-input"
                   placeholder="Search for items"
                   aria-label="search for items"
                 />
               </div>
+              <div
+                class="error-search fst-italic alert alert-warning d-none"
+                role="alert"
+              ></div>
             </div>
           </div>
         </div>
         <div class="all-listings-container">
           <p class="loading-text display-6 text-center">Loading listings...</p>
-          <div class="error-message"></div>
+          <div
+            class="error-message fst-italic alert alert-warning d-none"
+            role="alert"
+          ></div>
           <div class="row d-flex flex-wrap justify-content-center"></div>
         </div>
       </div>
