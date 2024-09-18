@@ -9,10 +9,11 @@ export async function renderProfile() {
     bidImg: "../../../src/images/placeholder-images/token-branded--bidz.png",
     bidSVG: "../../../src/images/svg/token--bidz.svg",
   };
+  const errorMsg = document.querySelector(".main-content");
   const storage = load("profile");
   const url = new URL(location.href);
   const getName = url.searchParams.get("name") || storage.name;
-  const profileInfo = await displayProfile(getName);
+  const profileInfo = await displayProfile(getName, errorMsg);
   console.log(profileInfo);
   const avatarURL = profileInfo.data.avatar.url || placeholders.avatar;
   const profileImg = document.querySelector(".profile-img");

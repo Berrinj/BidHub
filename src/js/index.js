@@ -26,6 +26,7 @@ switch (path) {
     break;
   case "/listings/":
     templates.renderAllListings();
+    templates.renderListingsBySearch();
     break;
   case "/listings/listing/":
     templates.renderSingleListing();

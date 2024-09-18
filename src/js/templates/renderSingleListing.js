@@ -6,9 +6,10 @@ import { openBidModal } from "../handlers/bidModal.js";
 
 export async function renderSingleListing() {
   //get id from url
+  const errorMsg = document.querySelector(".main-content");
   const url = new URL(window.location.href);
   const id = url.searchParams.get("id");
-  const response = await displayListing(id);
+  const response = await displayListing(id, errorMsg);
   const listing = response.data;
   //   const listingContainer = document.querySelector(".single-listings-container");
   const listingHeader = document.querySelector(".single-listing-header");

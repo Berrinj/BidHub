@@ -13,7 +13,7 @@ const wins = "_wins=true";
  * @throws {Error} If the name parameter is empty or an error occurs during the process.
  */
 
-export async function displayProfile(name) {
+export async function displayProfile(name, container) {
   try {
     if (!name) {
       throw new Error("get requires a profile name");
@@ -25,10 +25,11 @@ export async function displayProfile(name) {
       return await response.json();
     }
     if (response.status !== 200) {
-      errorTemplate();
+      errorTemplate(container);
       throw new Error("profile not found");
     }
   } catch (error) {
+    errorTemplate(container);
     console.error(error);
     throw new Error("Failed to display profile");
   }
