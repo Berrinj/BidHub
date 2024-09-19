@@ -126,7 +126,7 @@ export async function renderListingCard(container, listing) {
   bidsContainer.classList.add("d-flex", "bids", "flex-column");
 
   const priceContainer = document.createElement("div");
-  priceContainer.classList.add("d-inline-flex", "card-text");
+  priceContainer.classList.add("d-inline-flex", "card-text", "flex-wrap");
 
   // price
   const priceText = document.createElement("p");

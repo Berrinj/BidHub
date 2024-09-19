@@ -41,7 +41,11 @@
       <div
         class="container-fluid w-100 main-content border rounded-3 d-flex pb-3 bg-white d-flex flex-column mt-5"
       >
-        <a href="#" class="go-back fw-light">&#8249; Go back</a>
+        <div class="breadcrumbs">
+          <a href="/" class="home-link">&#8249; Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="current-page">Listings</span>
+        </div>
         <div class="row listings-header d-none">
           <h1 class="text-center mt-3 mb-3 display-3">Listings</h1>
           <h5 class="text-center search-header"></h5>
@@ -102,6 +106,7 @@
           ></div>
           <div class="row d-flex flex-wrap justify-content-center"></div>
         </div>
+        <div class="load-more mx-auto"></div>
       </div>
       <div
         class="modal"
