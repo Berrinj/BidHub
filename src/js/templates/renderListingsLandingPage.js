@@ -2,6 +2,8 @@ import { displayListings } from "../api/listings/display.js";
 import { countdownTimer } from "../handlers/timeDate.js";
 import { openBidModal } from "../handlers/bidModal.js";
 import { truncateText } from "../handlers/truncateText.js";
+import { load } from "../storage/index.js";
+const token = load("token");
 
 export async function renderListingsLandingPage({
   mostBids = 3,
@@ -88,6 +90,7 @@ function renderListings(listings, selectContainer) {
       "p-0",
       "mx-auto",
       "border-0",
+      "link",
     );
 
     const listingImage = document.createElement("img");
@@ -255,6 +258,10 @@ function renderListings(listings, selectContainer) {
     bidBtn.dataset.id = listingID;
     bidBtn.setAttribute("data-bs-target", "#bidModal");
     bidBtn.setAttribute("data-bs-toggle", "modal");
+    if (!token) {
+      bidBtn.disabled = true;
+      bidBtn.title = "Login to bid";
+    }
 
     bidBtn.addEventListener("click", () => {
       openBidModal(listing, listingID, mediaURL, lastBidAmount);
@@ -282,6 +289,9 @@ function renderListings(listings, selectContainer) {
         listingBtns.classList.add("flex-column");
         bidBtn.classList.add("mb-2");
       }
+    });
+    cardHeader.addEventListener("click", () => {
+      window.location.href = `/listings/listing/?id=${listingID}`;
     });
 
     listingBtns.appendChild(bidBtn);

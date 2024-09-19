@@ -3,8 +3,10 @@ import { countdownTimer } from "../handlers/timeDate.js";
 import { formatDate } from "../handlers/timeDate.js";
 import { load } from "../storage/index.js";
 import { openBidModal } from "../handlers/bidModal.js";
+import { goBackBtn } from "../handlers/goBackBtn.js";
 
 export async function renderSingleListing() {
+  goBackBtn();
   //get id from url
   const errorMsg = document.querySelector(".main-content");
   const url = new URL(window.location.href);

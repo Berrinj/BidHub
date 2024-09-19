@@ -3,8 +3,10 @@ import { displayListings } from "../api/listings/display.js";
 // import { openBidModal } from "../handlers/bidModal.js";
 // import { truncateText } from "../handlers/truncateText.js";
 import { renderListingCard } from "./listingCard.js";
+import { goBackBtn } from "../handlers/goBackBtn.js";
 
 export async function renderAllListings() {
+  goBackBtn();
   const errorMsg = document.querySelector(".main-content");
   // const listings = await displayListings();
   const firstResponse = await displayListings(1, errorMsg);

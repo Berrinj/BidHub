@@ -5,10 +5,12 @@ import { updateProfileForm } from "./updateProfileForm.js";
 import { setUpdateProfileFormListener } from "../handlers/updateProfile.js";
 import { renderListingCard } from "./listingCard.js";
 import { displayProfileListings } from "../api/profile/display.js";
+import { goBackBtn } from "../handlers/goBackBtn.js";
 // import { login } from "../api/auth/login.js";
 // import { getProfile } from "../profile/get.js";
 
 export async function renderProfile() {
+  goBackBtn();
   const placeholders = {
     avatar: "../../../src/images/placeholder-images/avatar.jpg",
     bidImg: "../../../src/images/placeholder-images/token-branded--bidz.png",
