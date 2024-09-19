@@ -4,6 +4,7 @@ import { formatDate } from "../handlers/timeDate.js";
 import { load } from "../storage/index.js";
 import { openBidModal } from "../handlers/bidModal.js";
 import { goBackBtn } from "../handlers/goBackBtn.js";
+import { deleteListing } from "../api/listings/delete.js";
 
 export async function renderSingleListing() {
   goBackBtn();
@@ -268,7 +269,7 @@ export async function renderSingleListing() {
   listingDetails.appendChild(Qs);
 
   const tagsContainer = document.createElement("div");
-  tagsContainer.classList.add("tags", "mb-2", "d-inline-block");
+  tagsContainer.classList.add("tags", "mb-2", "d-inline-block", "col-12");
   if (listing.tags.length === 0) {
     const noTags = document.createElement("p");
     noTags.textContent = "No tags provided";
@@ -288,6 +289,25 @@ export async function renderSingleListing() {
     tagsContainer.appendChild(tags);
   });
   listingDetails.appendChild(tagsContainer);
+
+  const deleteListingBtn = document.createElement("button");
+  deleteListingBtn.classList.add(
+    "btn",
+    "btn-outline-danger",
+    "delete-listing-btn",
+  );
+  deleteListingBtn.textContent = "Delete Listing? Click here";
+  deleteListingBtn.dataset.id = listing.id;
+  deleteListingBtn.addEventListener("click", async () => {
+    const response = await deleteListing(listingID);
+    if (response) {
+      window.location.href = "/listings";
+    }
+  });
+
+  if (load("profile") && listing.seller.name === load("profile").name) {
+    listingDetails.appendChild(deleteListingBtn);
+  }
 
   const bidsContainer = document.createElement("div");
   bidsContainer.classList.add("d-flex", "flex-column", "bids");
