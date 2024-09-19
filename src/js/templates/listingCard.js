@@ -37,9 +37,9 @@ export async function renderListingCard(container, listing) {
     "shadow-sm",
     "m-4",
   );
-  if (new Date(listing.endsAt) < new Date()) {
-    listingCard.classList.add("d-none");
-  }
+  // if (new Date(listing.endsAt) < new Date()) {
+  //   listingCard.classList.add("d-none");
+  // }
   listingCard.dataset.id = listingID;
   let mediaURL = "";
 
@@ -219,11 +219,15 @@ export async function renderListingCard(container, listing) {
 
   // Create the view listing button
   const viewBtn = document.createElement("a");
-  viewBtn.href = `listing/?id=${listingID}`;
+  viewBtn.href = `/listings/listing/?id=${listingID}`;
   viewBtn.classList.add("btn", "btn-primary-custom", "view-btn");
   viewBtn.textContent = "View listing";
 
   // Append buttons to the listing buttons container
+  if (new Date(listing.endsAt) < new Date()) {
+    bidBtn.disabled = true;
+    bidBtn.classList.add("disabled");
+  }
   listingBtns.appendChild(bidBtn);
   listingBtns.appendChild(viewBtn);
 
@@ -234,9 +238,9 @@ export async function renderListingCard(container, listing) {
   // Append everything to the card
   listingCard.appendChild(cardHeader);
   listingCard.appendChild(cardBody);
-
+  //get current url
   cardHeader.addEventListener("click", () => {
-    window.location.href = `listing/?id=${listingID}`;
+    window.location.href = `/listings/listing/?id=${listingID}`;
   });
 
   container.appendChild(listingCard);

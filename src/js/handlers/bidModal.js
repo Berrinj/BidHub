@@ -1,5 +1,6 @@
 import { getProfile } from "../api/profile/get.js";
 import { placeBid } from "../api/listings/bid.js";
+import { load } from "../storage/index.js";
 
 export async function openBidModal(
   listing,
@@ -8,7 +9,9 @@ export async function openBidModal(
   lastBidAmount,
 ) {
   // Profile data
-  const profile = await getProfile();
+  const name = load("profile").name;
+  const profile = await getProfile(name);
+  console.log("Profile data:", profile);
   const creditsAvailable = profile.data.credits;
   // Modal
   const modal = document.querySelector("#bidModal");
