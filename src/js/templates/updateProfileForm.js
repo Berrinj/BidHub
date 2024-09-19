@@ -1,4 +1,4 @@
-export function updateProfileForm(container, oldUrl) {
+export function updateProfileForm(container, oldUrl, oldBio) {
   container.innerHTML = "";
   const form = document.createElement("form");
   form.classList.add("update-profile-form");
@@ -22,6 +22,25 @@ export function updateProfileForm(container, oldUrl) {
   updateFormGroup.appendChild(updateLabel);
   updateFormGroup.appendChild(updateInput);
   form.appendChild(updateFormGroup);
+
+  const updateBio = document.createElement("div");
+  updateBio.classList.add("form-group", "mb-2");
+  const bioLabel = document.createElement("label");
+  bioLabel.setAttribute("for", "update-bio");
+  bioLabel.textContent = "Update Bio";
+  const bioInput = document.createElement("textarea");
+  bioInput.classList.add("form-control");
+  bioInput.setAttribute("id", "update-bio");
+  bioInput.setAttribute("type", "text");
+  bioInput.setAttribute("name", "update-bio");
+  bioInput.setAttribute("title", "Update your bio");
+  bioInput.setAttribute("placeholder", "Update your bio");
+  bioInput.textContent = oldBio;
+  updateBio.appendChild(bioLabel);
+  updateBio.appendChild(bioInput);
+
+  form.appendChild(updateBio);
+
   const submitBtn = document.createElement("button");
   submitBtn.classList.add(
     "update-profile-btn",

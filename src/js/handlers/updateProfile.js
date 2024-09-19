@@ -9,6 +9,7 @@ export async function setUpdateProfileFormListener() {
         url: formData.get("update-avatar"),
         alt: "",
       },
+      bio: formData.get("update-bio"),
     };
     console.log(profile);
     try {
