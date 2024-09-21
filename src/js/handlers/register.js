@@ -34,8 +34,17 @@ export function registerFormListener() {
     };
 
     try {
-      await register(profile);
-      console.log("Profile registered successfully:", profile);
+      const response = await register(profile);
+      if (response.ok) {
+        console.log("Profile registered successfully:", profile);
+        const successMsg = document.querySelector(".response-msg");
+        successMsg.textContent =
+          "Profile registered successfully! Now you can log in!";
+        const loginBtn = document.querySelector(".login-after-reg");
+        loginBtn.classList.remove("d-none");
+        const registerBtn = document.querySelector("#registerUserBtn");
+        registerBtn.classList.add("d-none");
+      }
     } catch (error) {
       console.error("Error registering profile:", error);
     }

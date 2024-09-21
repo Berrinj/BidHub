@@ -152,7 +152,7 @@
 
       <div class="container">
         <div
-          class="modal"
+          class="modal register-modal"
           id="registerModal"
           tabindex="-1"
           aria-labelledby="registerModalLabel"
@@ -285,6 +285,16 @@
                       REGISTER
                     </button>
                   </div>
+                  <div class="login-btn">
+                    <p
+                      class="login-after-reg link fst-italic d-none bg-primary-custom"
+                      data-bs-target="#loginModal"
+                      data-bs-toggle="modal"
+                    >
+                      Login here
+                    </p>
+                  </div>
+                  <div class="response-msg"></div>
                 </form>
               </div>
 
@@ -306,7 +316,7 @@
         </div>
 
         <div
-          class="modal fade"
+          class="modal fade login-modal"
           id="loginModal"
           aria-hidden="true"
           aria-labelledby="loginModalToggleLabel"
