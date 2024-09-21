@@ -47,29 +47,30 @@ export async function openNewListingModal() {
   form.appendChild(description);
 
   const tagsContainer = document.createElement("div");
-  const addTagsBtn = document.createElement("p");
-  addTagsBtn.classList.add("small", "btn", "btn-nav-footer-custom", "mt-2");
-  addTagsBtn.textContent = "+ Add tags";
-  addTagsBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    addTagsBtn.style.display = "none";
-    const tags = document.createElement("div");
-    tags.classList.add("form-group", "mb-2");
-    const tagsLabel = document.createElement("label");
-    tagsLabel.setAttribute("for", "tags");
-    tagsLabel.textContent = "Tags";
-    const tagsInput = document.createElement("input");
-    tagsInput.classList.add("form-control");
-    tagsInput.setAttribute("type", "text");
-    tagsInput.setAttribute("id", "tags");
-    tagsInput.setAttribute("name", "tags");
-    tagsInput.setAttribute("placeholder", "Separate tags with a comma (,)");
-    tags.appendChild(tagsLabel);
-    tags.appendChild(tagsInput);
-    tagsContainer.appendChild(tags);
-  });
+  // const addTagsBtn = document.createElement("p");
+
+  // addTagsBtn.classList.add("small", "btn", "btn-nav-footer-custom", "mt-2");
+  // addTagsBtn.textContent = "+ Add tags";
+  // addTagsBtn.addEventListener("click", (e) => {
+  //   e.preventDefault();
+  // addTagsBtn.style.display = "none";
+  const tags = document.createElement("div");
+  tags.classList.add("form-group", "mb-2");
+  const tagsLabel = document.createElement("label");
+  tagsLabel.setAttribute("for", "tags");
+  tagsLabel.textContent = "Tags";
+  const tagsInput = document.createElement("input");
+  tagsInput.classList.add("form-control");
+  tagsInput.setAttribute("type", "text");
+  tagsInput.setAttribute("id", "tags");
+  tagsInput.setAttribute("name", "tags");
+  tagsInput.setAttribute("placeholder", "Separate tags with a comma (,)");
+  tags.appendChild(tagsLabel);
+  tags.appendChild(tagsInput);
+  tagsContainer.appendChild(tags);
+  // });
   form.appendChild(tagsContainer);
-  form.appendChild(addTagsBtn);
+  // form.appendChild(addTagsBtn);
 
   //Image input
   const imagesContainer = document.createElement("div");
@@ -105,11 +106,10 @@ export async function openNewListingModal() {
   endsAt.appendChild(endsAtInput);
   //   endsAt.appendChild(error);
   form.appendChild(endsAt);
-  const errorMsg = document.createElement("div");
-  errorMsg.classList.add("error-message");
-  errorMsg.style.display = "none";
-  errorMsg.textContent = "Oh no! Something went wrong. Please try again.";
-  form.appendChild(errorMsg);
+  const statusMsg = document.createElement("div");
+  statusMsg.classList.add("error-message");
+  statusMsg.style.display = "none";
+  form.appendChild(statusMsg);
   const addListingBtn = document.createElement("button");
   addListingBtn.classList.add(
     "btn",
@@ -139,9 +139,15 @@ export async function openNewListingModal() {
     };
     const response = await newListing(newListingData);
     if (response.error) {
-      errorMsg.style.display = "block";
+      statusMsg.style.display = "block";
+      statusMsg.textContent = "Oh no! Something went wrong. Please try again.";
     } else {
-      errorMsg.style.display = "none";
+      statusMsg.style.display = "block";
+      statusMsg.textContent =
+        "Listing created successfully! Taking you there in 3 seconds...";
+      setTimeout(() => {
+        window.location.href = `/listings/listing/?id=${response.data.id}`;
+      }, 3000);
       console.log(response);
       form.reset();
     }

@@ -122,6 +122,9 @@ export async function openBidModal(
   placeBidBtn.type = "submit";
   placeBidBtn.textContent = "Place bid";
   placeBidBtn.dataset.id = listingID;
+  if (load("profile").name === listing.seller.name) {
+    placeBidBtn.disabled = true;
+  }
   modalBody.appendChild(placeBidBtn);
 
   placeBidBtn.addEventListener("click", async (event) => {
