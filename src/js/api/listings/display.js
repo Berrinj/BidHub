@@ -5,8 +5,8 @@ import { errorTemplate } from "../../templates/error.js";
 
 const bids = "_bids=true";
 const seller = "_seller=true";
-const sort = "sort=created";
-const order = "order=desc";
+// let sort = "created";
+// const order = "desc";
 
 // /**
 //  * Fetches all listings from the API
@@ -14,9 +14,9 @@ const order = "order=desc";
 //  * @throws {Error} If the name parameter is empty or an error occurs during the process.
 //  */
 
-export async function displayListings(page, container) {
+export async function displayListings(page, sort, sortOrder, container) {
   try {
-    const displayListingsURL = `${API_URL_LISTINGS}?${bids}&${seller}&${sort}&${order}&page=${page}`;
+    const displayListingsURL = `${API_URL_LISTINGS}?${bids}&${seller}&sort=${sort}&sortOrder=${sortOrder}&page=${page}`;
     const response = await authFetch(displayListingsURL);
     if (response.ok) {
       return await response.json();

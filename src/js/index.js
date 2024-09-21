@@ -27,7 +27,7 @@ switch (path) {
   case "/listings/":
     templates.renderAllListings();
     templates.renderListingsBySearch();
-    handlers.listenForFiltering();
+    // handlers.listenForFiltering();
     break;
   case "/listings/listing/":
     templates.renderSingleListing();

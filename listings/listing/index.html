@@ -354,6 +354,75 @@
           </div>
         </div>
       </div>
+
+      <!-- place update listing modal -->
+      <div
+        class="modal fade"
+        id="updateListingModal"
+        tabindex="-1"
+        aria-labelledby="updateListingModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content bg-primary-custom text-white d-flex">
+            <div class="modal-header d-flex flex-column border-0 pb-0">
+              <button
+                type="button"
+                class="btn-close bg-light"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              <h1 class="modal-title" id="updateListingModal">
+                Update Listing
+              </h1>
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center">
+              <form class="updateListingForm">
+                <div class="form-group">
+                  <label for="title" class="form-label">Title:</label>
+                  <input
+                    type="text"
+                    name="title"
+                    class="form-control"
+                    id="title"
+                  />
+                </div>
+                <div class="form-group mt-1">
+                  <label for="description" class="form-label"
+                    >Description:</label
+                  >
+                  <textarea
+                    name="description"
+                    class="form-control"
+                    id="description"
+                  ></textarea>
+                </div>
+                <div class="form-group mt-1">
+                  <label for="tags" class="form-label">tags:</label>
+                  <input
+                    type="text"
+                    name="tags"
+                    class="form-control"
+                    id="tags"
+                  />
+                </div>
+                <button type="submit" class="btn btn-secondary-custom mt-2">
+                  Update Listing
+                </button>
+              </form>
+            </div>
+            <div class="modal-footer border-0">
+              <button
+                type="button"
+                class="btn btn-primary-custom border border-1"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer>
       <div class="footer-container">

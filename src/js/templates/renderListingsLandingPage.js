@@ -13,7 +13,7 @@ export async function renderListingsLandingPage({
   let page = 1;
   const errorMsg = document.querySelector(".main-content");
   try {
-    const firstResponse = await displayListings(1, errorMsg);
+    const firstResponse = await displayListings(1, "created", "desc", errorMsg);
     console.log(firstResponse);
     const pageCount = firstResponse.meta.pageCount;
     console.log(`Page count: ${pageCount}`);
@@ -21,7 +21,7 @@ export async function renderListingsLandingPage({
     console.log(`Page ${page} data:`, firstResponse);
 
     for (let i = 2; i <= pageCount; i++) {
-      const response = await displayListings(i, errorMsg);
+      const response = await displayListings(i, "created", "desc", errorMsg);
       console.log(`Page ${i} data:`, response);
       allListings = allListings.concat(response.data);
       console.log(allListings);

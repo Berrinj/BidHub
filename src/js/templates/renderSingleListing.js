@@ -4,6 +4,7 @@ import { formatDate } from "../handlers/timeDate.js";
 import { load } from "../storage/index.js";
 import { openBidModal } from "../handlers/bidModal.js";
 import { deleteListing } from "../api/listings/delete.js";
+import { updateListingModal } from "./updateListingModal.js";
 
 export async function renderSingleListing() {
   //get id from url
@@ -266,6 +267,23 @@ export async function renderSingleListing() {
   Qs.innerHTML = `<strong>Questions?</strong> Send an email to the seller: <a href="mailto:${listing.seller.email}">${listing.seller.email}</a>`;
   listingDetails.appendChild(Qs);
 
+  const listingStats = document.createElement("div");
+  listingStats.classList.add("listing-stats", "d-flex", "flex-column", "mb-2");
+
+  const createdDate = formatDate(listing.created);
+  const updatedDate = formatDate(listing.updated);
+  const created = document.createElement("p");
+  created.classList.add("card-text", "created", "mb-0", "fst-italic");
+  created.innerHTML = `<strong>Created:</strong> ${createdDate}`;
+  const updated = document.createElement("p");
+  updated.classList.add("card-text", "updated", "mb-0", "fst-italic");
+  updated.innerHTML = `<strong>Updated:</strong> ${updatedDate}`;
+  listingStats.appendChild(created);
+  if (listing.updated > listing.created) {
+    listingStats.appendChild(updated);
+  }
+  listingDetails.appendChild(listingStats);
+
   const tagsContainer = document.createElement("div");
   tagsContainer.classList.add("tags", "mb-2", "d-inline-block", "col-12");
   if (listing.tags.length === 0) {
@@ -288,13 +306,22 @@ export async function renderSingleListing() {
   });
   listingDetails.appendChild(tagsContainer);
 
+  const editListingBtns = document.createElement("div");
+  editListingBtns.classList.add(
+    "edit-listing-btns",
+    "d-flex",
+    "flex-column",
+    "align-items-center",
+    "mb-2",
+  );
+
   const deleteListingBtn = document.createElement("button");
   deleteListingBtn.classList.add(
     "btn",
     "btn-outline-danger",
     "delete-listing-btn",
   );
-  deleteListingBtn.textContent = "Delete Listing? Click here";
+  deleteListingBtn.textContent = "Delete Listing";
   deleteListingBtn.dataset.id = listing.id;
   deleteListingBtn.addEventListener("click", async () => {
     const response = await deleteListing(listingID);
@@ -303,8 +330,26 @@ export async function renderSingleListing() {
     }
   });
 
+  const updateListingBtn = document.createElement("button");
+  updateListingBtn.classList.add(
+    "btn",
+    "btn-outline-primary",
+    "update-listing-btn",
+    "mt-2",
+  );
+  updateListingBtn.textContent = "Update Listing";
+  updateListingBtn.dataset.id = listing.id;
+  updateListingBtn.setAttribute("data-bs-target", "#updateListingModal");
+  updateListingBtn.setAttribute("data-bs-toggle", "modal");
+  updateListingBtn.addEventListener("click", () => {
+    updateListingModal(listing);
+  });
+
+  editListingBtns.appendChild(deleteListingBtn);
+  editListingBtns.appendChild(updateListingBtn);
+
   if (load("profile") && listing.seller.name === load("profile").name) {
-    listingDetails.appendChild(deleteListingBtn);
+    listingDetails.appendChild(editListingBtns);
   }
 
   const bidsContainer = document.createElement("div");
