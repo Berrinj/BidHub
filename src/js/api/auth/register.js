@@ -25,9 +25,6 @@ export async function register(profile) {
 
     const result = await response.json();
     console.log(result);
-    if (response.ok) {
-      window.location.reload();
-    }
 
     if (!response.ok) {
       throw new Error("Register failed: " + result.errors[0].message);
