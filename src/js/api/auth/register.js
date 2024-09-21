@@ -25,6 +25,13 @@ export async function register(profile) {
 
     const result = await response.json();
     console.log(result);
+    const successMsg = document.querySelector(".response-msg");
+    successMsg.textContent =
+      "Profile registered successfully! Now you can log in!";
+    const loginBtn = document.querySelector(".login-after-reg");
+    loginBtn.classList.remove("d-none");
+    const registerBtn = document.querySelector("#registerUserBtn");
+    registerBtn.classList.add("d-none");
 
     if (!response.ok) {
       throw new Error("Register failed: " + result.errors[0].message);
