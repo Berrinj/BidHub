@@ -7,8 +7,14 @@ export async function renderListingsBySearch() {
   const errorMsg = document.querySelector(".error-search");
   const searchInput = document.querySelector("input[name='search']");
   const searchBtn = document.querySelector(".search-btn");
+  const filter = document.querySelector(".filter-listings-container");
+  const showMore = document.querySelector(".load-more");
 
   async function handleSearch() {
+    filter.classList.add("d-none");
+    if (showMore) {
+      showMore.classList.add("d-none");
+    }
     const searchValue = searchInput.value;
     searchHeader.textContent = `Search results for: ${searchValue}`;
     errorMsg.innerHTML = "";
@@ -20,7 +26,7 @@ export async function renderListingsBySearch() {
       errorMsg.innerHTML = "You must enter a search value";
     }
     container.innerHTML = "";
-    const url = `${window.location.pathname}?q=${encodeURIComponent(searchValue)}`;
+    const url = `${window.location.pathname}?q=${searchValue}`;
 
     window.history.pushState({ path: url }, "", url);
 

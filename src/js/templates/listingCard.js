@@ -1,6 +1,8 @@
 import { countdownTimer } from "../handlers/timeDate.js";
 import { openBidModal } from "../handlers/bidModal.js";
 import { truncateText } from "../handlers/truncateText.js";
+import { load } from "../storage/index.js";
+const token = load("token");
 
 // const listingsContainer = document.querySelector(
 //   ".all-listings-container .row",
@@ -124,7 +126,7 @@ export async function renderListingCard(container, listing) {
   bidsContainer.classList.add("d-flex", "bids", "flex-column");
 
   const priceContainer = document.createElement("div");
-  priceContainer.classList.add("d-inline-flex", "card-text");
+  priceContainer.classList.add("d-inline-flex", "card-text", "flex-wrap");
 
   // price
   const priceText = document.createElement("p");
@@ -212,7 +214,11 @@ export async function renderListingCard(container, listing) {
   bidBtn.dataset.id = listingID;
   bidBtn.setAttribute("data-bs-target", "#bidModal");
   bidBtn.setAttribute("data-bs-toggle", "modal");
-
+  if (!token) {
+    bidBtn.disabled = true;
+    bidBtn.classList.add("disabled");
+    bidBtn.title = "You need to be logged in to bid";
+  }
   bidBtn.addEventListener("click", () => {
     openBidModal(listing, listingID, mediaURL, lastBidAmount);
   });

@@ -138,11 +138,11 @@ export async function openBidModal(
       bidError.style.display = "none";
       bidSuccess.style.display = "block";
       bidLabel.textContent =
-        "Your bid has been placed! Refreshing the page in 3 seconds...";
+        "Your bid has been placed! Going to listing in 3 seconds...";
       modalTopBidInfo.textContent = `${bidAmount} Credits`;
 
       setTimeout(() => {
-        window.location.reload();
+        window.location.href = `/listings/listing/?id=${listingID}`;
       }, 3000);
     } else {
       bidSuccess.style.display = "none";

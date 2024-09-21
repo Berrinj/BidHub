@@ -5,10 +5,12 @@ import { updateProfileForm } from "./updateProfileForm.js";
 import { setUpdateProfileFormListener } from "../handlers/updateProfile.js";
 import { renderListingCard } from "./listingCard.js";
 import { displayProfileListings } from "../api/profile/display.js";
+import { goBackBtn } from "../handlers/goBackBtn.js";
 // import { login } from "../api/auth/login.js";
 // import { getProfile } from "../profile/get.js";
 
 export async function renderProfile() {
+  goBackBtn();
   const placeholders = {
     avatar: "../../../src/images/placeholder-images/avatar.jpg",
     bidImg: "../../../src/images/placeholder-images/token-branded--bidz.png",
@@ -163,8 +165,8 @@ export async function renderProfile() {
     "profile-listings-sum",
     "d-flex",
     "align-items-center",
-    "col-md-6",
     "col-12",
+    "col-lg-4",
     "justify-content-center",
     "mt-4",
   );
@@ -195,6 +197,7 @@ export async function renderProfile() {
     "lead",
     "text-primary",
     "close-view",
+    "mb-0",
   );
   closeViewListings.style.cursor = "pointer";
   closeViewListings.textContent = "Close view";
@@ -205,7 +208,11 @@ export async function renderProfile() {
     if (!closeViewWins.classList.contains("d-none")) {
       closeViewWins.classList.add("d-none");
       viewAllWinsBtn.classList.remove("d-none");
+    } else if (!closeViewBids.classList.contains("d-none")) {
+      closeViewBids.classList.add("d-none");
+      viewAllBidsBtn.classList.remove("d-none");
     }
+
     viewListings.innerHTML = "";
     allListings.data.forEach((listing) => {
       renderListingCard(viewListings, listing);
@@ -232,8 +239,8 @@ export async function renderProfile() {
     "profile-listings-wins",
     "d-flex",
     "align-items-center",
-    "col-md-6",
     "col-12",
+    "col-lg-4",
     "justify-content-center",
     "mt-4",
   );
@@ -271,6 +278,7 @@ export async function renderProfile() {
     "lead",
     "text-primary",
     "close-view",
+    "mb-0",
   );
   closeViewWins.style.cursor = "pointer";
   closeViewWins.textContent = "Close view";
@@ -293,7 +301,11 @@ export async function renderProfile() {
     if (!closeViewListings.classList.contains("d-none")) {
       closeViewListings.classList.add("d-none");
       viewAllBtn.classList.remove("d-none");
+    } else if (!closeViewBids.classList.contains("d-none")) {
+      closeViewBids.classList.add("d-none");
+      viewAllBidsBtn.classList.remove("d-none");
     }
+
     viewAllWinsBtn.classList.add("d-none");
     viewListings.innerHTML = "";
     allWins.data.forEach((listing) => {
@@ -306,14 +318,115 @@ export async function renderProfile() {
     viewListings.innerHTML = "";
   });
 
-  //alll bids by the profile
-  // const allBidsByProfile = await displayProfileListings(
-  //   profileInfo.data.name,
-  //   "bids",
-  //   ".view-listings",
-  // );
-  // console.log(allBidsByProfile);
+  // alll bids by the profile
+  const allBids = await displayProfileListings(
+    profileInfo.data.name,
+    "bids",
+    ".view-listings",
+  );
+  console.log(allBids);
+  const listingsBidsContainer = document.createElement("div");
+  listingsBidsContainer.classList.add(
+    "profile-listings-bids",
+    "d-flex",
+    "align-items-center",
+    "col-12",
+    "col-lg-4",
+    "justify-content-center",
+    "mt-4",
+  );
+  const allBidsSum = allBids.data.length;
+  const listingsBidsImg = document.createElement("img");
+  listingsBidsImg.classList.add("profile-listings-img");
+  listingsBidsImg.src = placeholders.bidSVG;
+  const listingsBidsInfo = document.createElement("div");
+  listingsBidsInfo.classList.add("profile-listings-info");
+  const listingsBidsValue = document.createElement("p");
+  listingsBidsValue.classList.add("profile-listings", "lead", "mb-1");
+  listingsBidsValue.textContent = `${allBidsSum} Bids`;
 
+  const viewAllBidsBtn = document.createElement("a");
+  viewAllBidsBtn.classList.add(
+    "p-0",
+    "lead",
+    "text-primary",
+    "view-all-listings",
+  );
+  viewAllBidsBtn.style.cursor = "pointer";
+  viewAllBidsBtn.textContent = "View all";
+
+  const viewBids = document.createElement("div");
+  viewBids.classList.add(
+    "view-listings",
+    "col-12",
+    "d-inline-flex",
+    "flex-wrap",
+    "justify-content-center",
+  );
+
+  const closeViewBids = document.createElement("p");
+  closeViewBids.classList.add(
+    "p-0",
+    "d-none",
+    "lead",
+    "text-primary",
+    "close-view",
+    "mb-0",
+  );
+  closeViewBids.style.cursor = "pointer";
+  closeViewBids.textContent = "Close view";
+
+  listingsBidsContainer.appendChild(listingsBidsImg);
+  listingsBidsInfo.appendChild(listingsBidsValue);
+  listingsBidsInfo.appendChild(viewAllBidsBtn);
+  listingsBidsInfo.appendChild(closeViewBids);
+  listingsBidsContainer.appendChild(listingsBidsInfo);
+  listingsContainer.appendChild(listingsBidsContainer);
+
+  viewAllBidsBtn.addEventListener("click", () => {
+    closeViewBids.classList.remove("d-none");
+    if (!closeViewListings.classList.contains("d-none")) {
+      closeViewListings.classList.add("d-none");
+      viewAllBtn.classList.remove("d-none");
+    } else if (!closeViewWins.classList.contains("d-none")) {
+      closeViewWins.classList.add("d-none");
+      viewAllWinsBtn.classList.remove("d-none");
+    }
+
+    viewAllBidsBtn.classList.add("d-none");
+    viewListings.innerHTML = "";
+    const bidsList = document.createElement("div");
+    bidsList.classList.add(
+      "view-listings",
+      "col-12",
+      "d-inline-flex",
+      "flex-wrap",
+      "justify-content-center",
+    );
+    const bidsUl = document.createElement("ul");
+    bidsUl.classList.add("bids-list", "mt-5");
+    viewListings.appendChild(bidsList);
+    bidsList.appendChild(bidsUl);
+    allBids.data.forEach((bid) => {
+      const listingsBidOn = bid.listing;
+      const bidLi = document.createElement("li");
+      bidLi.classList.add("bid-li");
+      const bidLink = document.createElement("a");
+      bidLink.classList.add("bid-link");
+      bidLink.href = `/listings/listing/?id=${listingsBidOn.id}`;
+      bidLink.textContent = `Bid: ${bid.amount} credit, On: ${listingsBidOn.title}`;
+      bidLi.appendChild(bidLink);
+      bidsUl.appendChild(bidLi);
+      viewListings.appendChild(bidsList);
+    });
+  });
+  closeViewBids.addEventListener("click", () => {
+    closeViewBids.classList.add("d-none");
+    viewAllBidsBtn.classList.remove("d-none");
+    viewListings.innerHTML = "";
+  });
+
+  //append
   listingsContainer.appendChild(viewListings);
 
   // add logout button

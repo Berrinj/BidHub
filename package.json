@@ -1,6 +1,6 @@
 {
   "name": "bidhub",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "An auction site",
   "type": "module",
   "main": "index.js",
