@@ -1,6 +1,6 @@
 import { load } from "../storage/index.js";
 import { openNewListingModal } from "./newListingModal.js";
-const topNav = document.querySelector(".top-menu ul");
+const topNav = document.querySelector(".navbar-nav");
 
 export function navListener() {
   if (load("token")) {
@@ -12,11 +12,11 @@ export function navListener() {
     const profileListItem = document.createElement("li");
     profileListItem.classList.add("nav-item");
 
-    const hamburgerListItem = document.createElement("li");
-    hamburgerListItem.classList.add("nav-item");
+    const logoutListItem = document.createElement("li");
+    logoutListItem.classList.add("nav-item");
 
     const newListItemLink = document.createElement("a");
-    newListItemLink.classList.add("nav-link");
+    newListItemLink.classList.add("nav-link", "d-flex", "align-items-center");
     newListItemLink.setAttribute("data-bs-target", "#newListingModal");
     newListItemLink.setAttribute("data-bs-toggle", "modal");
     newListItemLink.innerHTML = `
@@ -31,7 +31,11 @@ export function navListener() {
     newListItem.addEventListener("click", openNewListingModal);
 
     const profileListItemLink = document.createElement("a");
-    profileListItemLink.classList.add("nav-link");
+    profileListItemLink.classList.add(
+      "nav-link",
+      "d-flex",
+      "align-items-center",
+    );
     profileListItemLink.id = "myProfile";
     profileListItemLink.href = "/profile";
     profileListItemLink.innerHTML = `
@@ -42,23 +46,26 @@ export function navListener() {
   &nbsp;My profile
 `;
 
-    const hamburgerListItemLink = document.createElement("a");
-    hamburgerListItemLink.classList.add("nav-link");
-    hamburgerListItemLink.id = "hamburger";
-    hamburgerListItemLink.innerHTML = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 16 16">
-    <path fill="none" stroke="#fbbf24" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
-    d="M2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5" />
-  </svg>
-`;
+    const logoutListItemLink = document.createElement("a");
+    logoutListItemLink.classList.add("nav-link");
+    logoutListItemLink.id = "logOut";
+    logoutListItemLink.innerHTML = `Logout&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1.6rem" height="1.6rem" viewBox="0 0 21 21">
+	<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m14.595 13.5l2.905-3l-2.905-3m2.905 3h-9m6-7l-8 .002c-1.104.001-2 .896-2 2v9.995a2 2 0 0 0 2 2h8.095" />
+</svg>`;
+    logoutListItemLink.addEventListener("click", () => {
+      localStorage.removeItem("profile");
+      localStorage.removeItem("token");
+      window.location.href = "/";
+    });
 
     newListItem.appendChild(newListItemLink);
     profileListItem.appendChild(profileListItemLink);
-    hamburgerListItem.appendChild(hamburgerListItemLink);
+    logoutListItem.appendChild(logoutListItemLink);
 
     topNav.appendChild(newListItem);
     topNav.appendChild(profileListItem);
-    topNav.appendChild(hamburgerListItem);
+    topNav.appendChild(logoutListItem);
+    // topNav.appendChild(hamburgerListItem);
   } else {
     topNav.innerHTML = ` <li class="nav-item logged-out">
               <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>

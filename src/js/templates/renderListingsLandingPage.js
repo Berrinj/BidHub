@@ -31,7 +31,8 @@ export async function renderListingsLandingPage({
       (listing) =>
         new Date(listing.endsAt) >= new Date() &&
         listing.title.toLowerCase() !== "test" &&
-        listing.title.toLowerCase() !== "test123",
+        listing.title.toLowerCase() !== "test123" &&
+        listing.seller.name !== "hjibfasduifd",
     );
     // const listings = response.data;
     // console.log(listings);
@@ -190,11 +191,11 @@ function renderListings(listings, selectContainer) {
         const listingTitle = truncateText(listing.title, 14);
         cardTitle.textContent = listingTitle;
       } else {
-        const listingTitle = truncateText(listing.title, 25);
+        const listingTitle = truncateText(listing.title, 20);
         cardTitle.textContent = listingTitle;
       }
     });
-    const listingTitle = truncateText(listing.title, 25);
+    const listingTitle = truncateText(listing.title, 20);
     cardTitle.textContent = listingTitle;
     cardBody.appendChild(cardTitle);
 
