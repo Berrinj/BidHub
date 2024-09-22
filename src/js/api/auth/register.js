@@ -24,17 +24,20 @@ export async function register(profile) {
     });
 
     const result = await response.json();
-    const successMsg = document.querySelector(".response-msg");
-    successMsg.textContent =
+    const responseMsg = document.querySelector(".response-msg");
+
+    if (!response.ok) {
+      responseMsg.classList.add("text-danger");
+      responseMsg.textContent = result.errors[0].message;
+      throw new Error("Register failed: " + result.errors[0].message);
+    }
+    responseMsg.classList.add("text-success");
+    responseMsg.textContent =
       "Profile registered successfully! Now you can log in!";
     const loginBtn = document.querySelector(".login-after-reg");
     loginBtn.classList.remove("d-none");
     const registerBtn = document.querySelector("#registerUserBtn");
     registerBtn.classList.add("d-none");
-
-    if (!response.ok) {
-      throw new Error("Register failed: " + result.errors[0].message);
-    }
     return result;
   } catch (error) {
     console.error(error);

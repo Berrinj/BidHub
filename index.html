@@ -159,7 +159,7 @@
 
       <div class="container">
         <div
-          class="modal register-modal"
+          class="modal fade register-modal"
           id="registerModal"
           tabindex="-1"
           aria-labelledby="registerModalLabel"
@@ -192,6 +192,7 @@
                       name="name"
                       class="form-control"
                       id="username"
+                      autocomplete="username"
                       aria-required="true"
                       required
                       pattern="^[\w]+$"
@@ -206,6 +207,7 @@
                       name="email"
                       class="form-control"
                       id="email"
+                      autocomplete="email"
                       aria-required="true"
                       required
                       pattern="^[\w\-.]+@stud.noroff.no$"
@@ -233,6 +235,7 @@
                       name="password"
                       class="form-control"
                       id="password"
+                      autocomplete="new-password"
                       aria-required="true"
                       minlength="8"
                       title="Min length is 8"
@@ -301,7 +304,7 @@
                       Login here
                     </p>
                   </div>
-                  <div class="response-msg"></div>
+                  <div class="response-msg text-center m-2"></div>
                 </form>
               </div>
 
@@ -359,6 +362,7 @@
                       name="email"
                       class="form-control"
                       id="email-login"
+                      autocomplete="email"
                       aria-required="true"
                       required
                       pattern="^[\w\-.]+@stud.noroff.no$"
@@ -373,6 +377,7 @@
                       name="password"
                       class="form-control"
                       id="password-login"
+                      autocomplete="current-password"
                       aria-required="true"
                       minlength="8"
                       title="Min length is 8"
@@ -387,6 +392,7 @@
                     >
                       LOG IN
                     </button>
+                    <div class="login-status text-center m-2"></div>
                   </div>
                 </form>
               </div>

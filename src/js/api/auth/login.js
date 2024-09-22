@@ -30,6 +30,10 @@ export async function login(profile) {
 
       return profile;
     }
+    const status = document.querySelector(".login-status");
+    const error = await response.json();
+    status.classList.add("text-danger");
+    status.textContent = error.errors[0].message;
     throw new Error("Login failed");
   } catch (error) {
     console.error(error);
