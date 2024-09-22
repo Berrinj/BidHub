@@ -13072,7 +13072,7 @@ main .main-content-image img {
 }
 main .main-content {
   max-width: 1300px;
-  min-height: 60vh;
+  min-height: 50vh;
 }
 
 footer {
@@ -13164,8 +13164,6 @@ footer .footer-content {
 }
 
 .bid-btn {
-  text-transform: uppercase;
-  color: #fff;
   font-weight: 500;
   font-size: small;
 }
@@ -13175,8 +13173,6 @@ footer .footer-content {
 }
 
 .header-button button {
-  text-transform: uppercase;
-  color: #fff;
   font-size: 1.5rem;
 }
 
