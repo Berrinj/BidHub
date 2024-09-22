@@ -13000,6 +13000,9 @@ nav .navbar {
   max-width: 1300px;
   padding: 0;
 }
+nav .nav-container {
+  max-width: 1300px;
+}
 nav .navbar-brand {
   color: #fbbf24;
   font-size: 1.7rem;
