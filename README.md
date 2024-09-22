@@ -1,6 +1,6 @@
 # Semester Project 2 - BidHub
 
-[![Automated Unit Testing](https://github.com/Berrinj/BidHub/actions/workflows/unit-test.yml/badge.svg?branch=master)](https://github.com/Berrinj/BidHub/actions/workflows/unit-test.yml)
+[![Automated Unit Testing](https://github.com/Berrinj/BidHub/actions/workflows/unit-test.yml/badge.svg)](https://github.com/Berrinj/BidHub/actions/workflows/unit-test.yml)
 
 [![Automated E2E Testing](https://github.com/Berrinj/BidHub/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/Berrinj/BidHub/actions/workflows/e2e-test.yml)
 
