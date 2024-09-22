@@ -1,6 +1,13 @@
 import { API_URL_PROFILE, API_KEY } from "../constants.js";
 import { load } from "../../storage/index.js";
 
+/**
+ * @name updateProfile
+ * @description Update a profile
+ * @param {*} profileData - The profile data to update, including the avatar URL and bio at this point in time.
+ * @returns - The updated profile data
+ */
+
 export async function updateProfile(profileData) {
   try {
     if (!profileData || !profileData.avatar || !profileData.avatar.url) {

@@ -4,6 +4,14 @@ import { truncateText } from "../handlers/truncateText.js";
 import { load } from "../storage/index.js";
 const token = load("token");
 
+/**
+ * @name renderListingCard
+ * @description template to render a listing card for each listing
+ * @param {*} container - the container to append the listing card to
+ * @param {*} listing - the listing object to render
+ * @returns {HTMLElement} - the listing card
+ */
+
 export async function renderListingCard(container, listing) {
   const coinSVG = `../../../src/images/svg/noto--coin.svg`;
   const listingID = listing.id;

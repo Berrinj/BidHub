@@ -4,6 +4,12 @@ import { load } from "../../storage/index.js";
 const action = "/auth/create-api-key";
 const apiKeyURL = API_URL + action;
 
+/**
+ * @name getAPIKey
+ * @description Fetches a new API key from the API
+ * @returns {Promise} The API key
+ */
+
 export async function getAPIKey() {
   const response = await fetch(apiKeyURL, {
     headers: {

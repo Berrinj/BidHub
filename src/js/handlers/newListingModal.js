@@ -1,6 +1,13 @@
 import { newListing } from "../api/listings/newListing.js";
 import { addImgInput } from "../templates/imgInput.js";
 
+/**
+ * @name openNewListingModal
+ * @description Open the new listing modal and add the form to create a new listing
+ * @returns {void} - No return value, but opens the new listing modal
+ * this is more of a template function, scared to move it so close to deadline
+ */
+
 export async function openNewListingModal() {
   const modal = document.querySelector("#newListingModal");
   const modalHeader = modal.querySelector(".modal-header");

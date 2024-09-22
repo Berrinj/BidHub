@@ -6,6 +6,12 @@ import { openBidModal } from "../handlers/bidModal.js";
 import { deleteListing } from "../api/listings/delete.js";
 import { updateListingModal } from "./updateListingModal.js";
 
+/**
+ * @name renderSingleListing
+ * @description Renders a single listing on the listing/index.html page
+ * @returns {void} - No return value, but renders the listing on the page
+ */
+
 export async function renderSingleListing() {
   //get id from url
   const errorMsg = document.querySelector(".main-content");

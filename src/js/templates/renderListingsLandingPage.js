@@ -5,6 +5,14 @@ import { truncateText } from "../handlers/truncateText.js";
 import { load } from "../storage/index.js";
 const token = load("token");
 
+/**
+ * @name renderListingsLandingPage
+ * @description Renders the landing page with the most wanted, newest and ending soon listings
+ * @param {*} param0 - object with the number of listings to display for mostBids, newest and endingSoon
+ * @returns {void} - No return value, but renders the listings on the landing page with the renderListings function
+ * @example this renders the landing page with 3 most wanted, 3 newest and 5 ending soon listings
+ */
+
 export async function renderListingsLandingPage({
   mostBids = 3,
   newest = 3,

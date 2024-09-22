@@ -1,4 +1,12 @@
 import { updateListing } from "../api/listings/update.js";
+
+/**
+ * @name updateListingModal
+ * @description Update the listing with the listing data, title, description and tags
+ * @param {*} listing - The listing data to be updated
+ * @returns updated listing
+ */
+
 export function updateListingModal(listing) {
   const updateListingModal = document.querySelector("#updateListingModal");
   const form = updateListingModal.querySelector("form");

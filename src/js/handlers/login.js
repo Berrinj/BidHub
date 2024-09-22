@@ -1,8 +1,9 @@
 import { login } from "../api/auth/login.js";
 
 /**
- * Register the form listener for the login form
- * Extract the form data and send a request to the API to login
+ * @name loginFormListener
+ * @description Register the form listener for the login form and extract the form data and send a request to the API to login
+ * @param {array} profile - The profile data to be logged in with
  */
 
 export function loginFormListener() {

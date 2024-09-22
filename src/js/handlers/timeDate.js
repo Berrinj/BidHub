@@ -1,9 +1,23 @@
+/**
+ * @description Format the date to a human-readable format, hour and minute
+ * @name formatDate
+ * @param {string} date - Date to format
+ * @returns {string} - Formatted date
+ */
+
 export function formatDate(date) {
   return new Date(date).toLocaleDateString("nb-NO", {
     hour: "numeric",
     minute: "numeric",
   });
 }
+
+/**
+ * @description Format the date to a human-readable format, day, month, year, hour and minute
+ * @name formattedUpdatedDate
+ * @param {string} date - Date to format
+ * @returns {string} - Formatted date
+ */
 
 export function formattedUpdatedDate(date) {
   return new Date(date).toLocaleDateString("nb-NO", {
@@ -14,6 +28,13 @@ export function formattedUpdatedDate(date) {
     minute: "numeric",
   });
 }
+
+/**
+ * @description Format the date to a human-readable format, Countdown timer for days, hours, minutes and seconds
+ * @param {*} date - The date to count down to
+ * @param {*} element - The element to display the countdown timer
+ * if the countdown is over, display "Ended"
+ */
 
 export function countdownTimer(date, element) {
   const countDownDate = new Date(date).getTime();

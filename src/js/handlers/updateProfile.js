@@ -1,4 +1,12 @@
 import { updateProfile } from "../api/profile/update.js";
+
+/**
+ * @name setUpdateProfileFormListener
+ * @description Register the form listener for the update profile form and extract the form data and send a request to the API to update the profile
+ * @throws {Error} If the update fails or an error occurs
+ * @returns {promise} The result of the update
+ */
+
 export async function setUpdateProfileFormListener() {
   const form = document.querySelector("#updateProfileForm");
   form.addEventListener("submit", async (event) => {

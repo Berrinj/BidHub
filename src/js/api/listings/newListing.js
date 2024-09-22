@@ -1,6 +1,13 @@
 import { API_URL_LISTINGS } from "../constants.js";
 import { authFetch } from "../authFetch.js";
 
+/**
+ * @name newListing
+ * @description a function that creates a new listing
+ * @throws {Error} if the POST fails or an error occurs during the process.
+ * @returns - the new listing
+ */
+
 export async function newListing() {
   try {
     const title = document.querySelector("#title").value;

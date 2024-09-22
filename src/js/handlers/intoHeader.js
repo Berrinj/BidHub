@@ -4,6 +4,12 @@ const headerBtn = document.querySelector(".header-button");
 const intro = document.querySelector(".intro");
 import { load } from "../storage/index.js";
 
+/**
+ * @name headerListener
+ * @description Check if the user is logged in
+ * if the user is logged in, change content and show the username in the header on landing page
+ */
+
 // Check if the user is logged in
 export function headerListener() {
   if (load("token")) {

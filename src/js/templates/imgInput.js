@@ -1,3 +1,9 @@
+/**
+ * @name assImgInput
+ * @description Add image URL and image ALT text input fields to the form, this happens upon clicking the "Add more images" button
+ * @returns {object} - The image URL and image ALT text input fields
+ */
+
 export function addImgInput() {
   const imagesContainer = document.querySelector(".images-container");
   const imageURL = document.createElement("div");
