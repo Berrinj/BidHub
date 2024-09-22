@@ -10,7 +10,6 @@ export async function updateProfile(profileData) {
     const storage = load("profile");
     const name = storage.name;
     const displayProfileURL = `${API_URL_PROFILE}/${name}`;
-    console.log("Profile data to send:", JSON.stringify(profileData));
 
     const response = await fetch(displayProfileURL, {
       method: "PUT",

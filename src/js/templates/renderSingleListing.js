@@ -13,12 +13,10 @@ export async function renderSingleListing() {
   const id = url.searchParams.get("id");
   const response = await displayListing(id, errorMsg);
   const listing = response.data;
-  //   const listingContainer = document.querySelector(".single-listings-container");
   const listingHeader = document.querySelector(".single-listing-header");
   const listingBody = document.querySelector(".single-listing-body");
   listingBody.innerHTML = "";
-  //   const listingFooter = document.querySelector(".single-listing-footer");
-  console.log(listing);
+
   const coinSVG = `../../../src/images/svg/noto--coin.svg`;
 
   const listingSellerAvatar = listing.seller.avatar.url || "";
@@ -66,17 +64,6 @@ export async function renderSingleListing() {
   //indicators
   const carouselIndicators = document.createElement("div");
   carouselIndicators.classList.add("carousel-indicators");
-  // listing.media.forEach((media, index) => {
-  //   const carouselIndicator = document.createElement("button");
-  //   carouselIndicator.setAttribute("type", "button");
-  //   carouselIndicator.setAttribute("data-bs-target", "#carouselControls");
-  //   carouselIndicator.setAttribute("data-bs-slide-to", index);
-  //   if (index === 0) {
-  //     carouselIndicator.classList.add("active");
-  //   }
-  //   carouselIndicators.appendChild(carouselIndicator);
-  // });
-  // carousel.appendChild(carouselIndicators);
 
   //Carousel inner
   const carouselInner = document.createElement("div");
@@ -204,19 +191,7 @@ export async function renderSingleListing() {
 
   // Create the countdown container
   const countdownContainer = document.createElement("div");
-  countdownContainer.classList.add(
-    "countdown",
-    "text-center",
-    "mb-2",
-    // "rounded",
-    // "d-flex",
-    // "justify-content-end",
-    // "position-absolute",
-    // "top-0",
-    // "start-0",
-    // "mt-1",
-    // "ms-1",
-  );
+  countdownContainer.classList.add("countdown", "text-center", "mb-2");
 
   //create img and text div for countdown
   const countdownSvgText = document.createElement("div");
@@ -385,29 +360,6 @@ export async function renderSingleListing() {
     openBidModal(listing, listingID, mediaURL, lastBidAmount);
   });
 
-  // const modal = document.querySelector("#bidModal");
-  // modal.setAttribute("data-id", listing.id);
-  // modal.setAttribute("data-title", listing.title);
-  // modal.setAttribute("data-price", lastBidAmount);
-  // const modalBody = modal.querySelector(".modal-body");
-
-  // const modalTitle = document.createElement("h5");
-  // modalTitle.classList.add("bid-modal-title");
-  // modalTitle.textContent = listing.title;
-  // modalBody.appendChild(modalTitle);
-  // const modalImg = document.createElement("img");
-  // modalImg.classList.add("bid-modal-img");
-  // modalImg.src = listing.media.url;
-  // modalImg.classList.add("bid-modal-img");
-  // modalBody.appendChild(modalImg);
-  // const modalId = document.createElement("p");
-  // modalId.classList.add("bid-modal-id");
-  // modalId.dataset.id = listing.id;
-  // modalId.textContent = "Listing ID: " + listing.id;
-  // modalId.classList.add("modal-id");
-  // modalId.textContent = listing.id;
-  // modalBody.appendChild(modalId);
-
   const bidHistoryTitle = document.createElement("p");
   bidHistoryTitle.classList.add("h6");
   bidHistoryTitle.textContent = "Bid History:";
@@ -446,13 +398,6 @@ export async function renderSingleListing() {
   }
   bidsContainer.appendChild(bids);
   listingDetails.appendChild(bidsContainer);
-
-  //   listingContainer.appendChild(listingBody);
-  //create button in footer
-  //   const bidButton = document.createElement("button");
-  //   bidButton.classList.add("btn", "btn-secondary-custom", "bid-btn");
-  //   bidButton.textContent = "Place Bid";
-  //   listingFooter.appendChild(bidButton);
 
   // Target the countdown element and start the countdown
   const getCoundown = listingBody.querySelector(".countdown p");

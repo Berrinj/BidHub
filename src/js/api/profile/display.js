@@ -20,7 +20,6 @@ export async function displayProfile(name, container) {
       throw new Error("get requires a profile name");
     }
     const displayProfileURL = `${API_URL_PROFILE}/${name}?${listings}&${bids}&${wins}`;
-    console.log(displayProfileURL);
     const response = await authFetch(displayProfileURL);
     if (response.ok) {
       return await response.json();

@@ -25,24 +25,17 @@ export async function login(profile) {
       storage.save("token", accessToken);
       storage.save("profile", profile);
 
-      //close the modal
-      //   const modal = document.querySelector("#loginModal");
-      //   const modalBackdrop = document.querySelector(".modal-backdrop");
-      //   modal.classList.remove("show");
-      //   modal.setAttribute("hidden", true);
-      //   modalBackdrop.remove();
-
-      //   document.body.style.overflow = "auto";
-
       //reload the current page
       window.location.reload();
 
-      // window.location.href = "/";
-
       return profile;
     }
+    const status = document.querySelector(".login-status");
+    const error = await response.json();
+    status.classList.add("text-danger");
+    status.textContent = error.errors[0].message;
     throw new Error("Login failed");
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }

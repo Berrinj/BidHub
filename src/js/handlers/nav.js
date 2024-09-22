@@ -65,12 +65,11 @@ export function navListener() {
     topNav.appendChild(newListItem);
     topNav.appendChild(profileListItem);
     topNav.appendChild(logoutListItem);
-    // topNav.appendChild(hamburgerListItem);
   } else {
-    topNav.innerHTML = ` <li class="nav-item logged-out">
+    topNav.innerHTML = ` <li class="nav-item logged-out login">
               <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
             </li>
-            <li class="nav-item logged-out">
+            <li class="nav-item logged-out register">
               <a class="nav-link" id="registerBtn" data-bs-toggle="modal" data-bs-target="#registerModal">Sign up</a>
             </li>`;
   }
