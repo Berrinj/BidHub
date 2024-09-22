@@ -4,10 +4,6 @@ import { truncateText } from "../handlers/truncateText.js";
 import { load } from "../storage/index.js";
 const token = load("token");
 
-// const listingsContainer = document.querySelector(
-//   ".all-listings-container .row",
-// );
-
 export async function renderListingCard(container, listing) {
   const coinSVG = `../../../src/images/svg/noto--coin.svg`;
   const listingID = listing.id;
@@ -39,10 +35,9 @@ export async function renderListingCard(container, listing) {
     "shadow-sm",
     "m-4",
   );
-  // if (new Date(listing.endsAt) < new Date()) {
-  //   listingCard.classList.add("d-none");
-  // }
+
   listingCard.dataset.id = listingID;
+
   let mediaURL = "";
 
   if (listing.media.length > 0) {
@@ -107,8 +102,26 @@ export async function renderListingCard(container, listing) {
   countdownSvgText.appendChild(countdownText);
   countdownContainer.appendChild(countdownSvgText);
 
-  // countdownContainer.appendChild(countdownText);
   cardHeader.appendChild(countdownContainer);
+
+  const galleryIcon = document.createElement("img");
+  const gallerySVG = `../../../src/images/svg/solar--gallery-add-bold.svg`;
+  galleryIcon.src = gallerySVG;
+  galleryIcon.classList.add(
+    "gallery-icon",
+    "position-absolute",
+    "bottom-0",
+    "end-0",
+    "m-1",
+  );
+  galleryIcon.setAttribute("alt", "Gallery icon");
+  galleryIcon.setAttribute("data-toggle", "tooltip");
+  galleryIcon.setAttribute("data-placement", "left");
+  galleryIcon.setAttribute("title", "More images available");
+
+  if (listing.media.length > 1) {
+    cardHeader.appendChild(galleryIcon);
+  }
 
   // Card body and its components
   const cardBody = document.createElement("div");
@@ -168,8 +181,6 @@ export async function renderListingCard(container, listing) {
   // Append bids container to card body
   cardBody.appendChild(bidsContainer);
 
-  // cardBody.appendChild(bidsCount);
-
   // listing owner
   const listingOwner = document.createElement("div");
   listingOwner.classList.add(
@@ -178,12 +189,13 @@ export async function renderListingCard(container, listing) {
     "align-items-center",
     "mb-2",
   );
-  const listingOwnerUsername = document.createElement("p");
+  const listingOwnerUsername = document.createElement("a");
   listingOwnerUsername.classList.add(
     "card-text",
     "fst-italic",
     "listing-owner",
   );
+  listingOwnerUsername.href = `/profile/?name=${listing.seller.name}`;
   listingOwnerUsername.textContent = `${listing.seller.name}`;
   const listingOwnerAvatar = document.createElement("img");
   listingOwnerAvatar.src = `${listing.seller.avatar.url}`;
@@ -196,7 +208,6 @@ export async function renderListingCard(container, listing) {
     listing.seller.avatar.alt || "avatar of profile owner";
   listingOwner.appendChild(listingOwnerAvatar);
   listingOwner.appendChild(listingOwnerUsername);
-  // cardBody.appendChild(listingOwner);
 
   // Create the listing buttons container
   const listingBtns = document.createElement("div");

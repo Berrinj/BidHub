@@ -11,7 +11,6 @@ export async function openBidModal(
   // Profile data
   const name = load("profile").name;
   const profile = await getProfile(name);
-  console.log("Profile data:", profile);
   const creditsAvailable = profile.data.credits;
   // Modal
   const modal = document.querySelector("#bidModal");
@@ -136,7 +135,6 @@ export async function openBidModal(
     }
     bidError.style.display = "none";
     const response = await placeBid(event.target.dataset.id, bidAmount);
-    console.log("Bid placed successfully:", response);
     if (response) {
       bidError.style.display = "none";
       bidSuccess.style.display = "block";

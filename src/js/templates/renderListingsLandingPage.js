@@ -10,21 +10,15 @@ export async function renderListingsLandingPage({
   newest = 3,
   endingSoon = 5,
 } = {}) {
-  let page = 1;
   const errorMsg = document.querySelector(".main-content");
   try {
     const firstResponse = await displayListings(1, "created", "desc", errorMsg);
-    console.log(firstResponse);
     const pageCount = firstResponse.meta.pageCount;
-    console.log(`Page count: ${pageCount}`);
     let allListings = [...firstResponse.data];
-    console.log(`Page ${page} data:`, firstResponse);
 
     for (let i = 2; i <= pageCount; i++) {
       const response = await displayListings(i, "created", "desc", errorMsg);
-      console.log(`Page ${i} data:`, response);
       allListings = allListings.concat(response.data);
-      console.log(allListings);
     }
 
     const activeListings = allListings.filter(
@@ -34,8 +28,6 @@ export async function renderListingsLandingPage({
         listing.title.toLowerCase() !== "test123" &&
         listing.seller.name !== "hjibfasduifd",
     );
-    // const listings = response.data;
-    // console.log(listings);
     const mostBidsListings = activeListings
       .sort((a, b) => b.bids.length - a.bids.length)
       .slice(0, mostBids);
@@ -43,12 +35,10 @@ export async function renderListingsLandingPage({
     const newestListings = activeListings
       .sort((a, b) => new Date(b.created) - new Date(a.created))
       .slice(0, newest);
-    console.log(newestListings);
 
     const endingSoonListings = activeListings
       .sort((a, b) => new Date(a.endsAt) - new Date(b.endsAt))
       .slice(0, endingSoon);
-    console.log(endingSoonListings);
 
     renderListings(mostBidsListings, ".most-wanted-listings");
     renderListings(newestListings, ".newest-listings");
@@ -62,10 +52,7 @@ function renderListings(listings, selectContainer) {
   const container = document.querySelector(selectContainer);
   container.innerHTML = "";
   const coinSVG = `../../../src/images/svg/noto--coin.svg`;
-  //   const activeListings = listings.filter(
-  //     (listing) => new Date(listing.endsAt) >= new Date(),
-  //     console.log(activeListings),
-  //   );
+
   listings.forEach((listing) => {
     const listingCard = document.createElement("div");
     listingCard.classList.add(
@@ -116,16 +103,7 @@ function renderListings(listings, selectContainer) {
         "justify-content-around",
       );
       listingCard.classList.remove("col-xl-12");
-      listingCard.classList.add(
-        "ending-soon-card",
-        // "col-12",
-
-        // "col-sm-5",
-        // "col-md-4",
-        // "col-lg-10",
-        "col-xl-2",
-        "m-1",
-      );
+      listingCard.classList.add("ending-soon-card", "col-xl-2", "m-1");
 
       listingCard.classList.remove("mx-auto");
       cardHeader.classList.add("ending-soon-card-header");
@@ -173,7 +151,6 @@ function renderListings(listings, selectContainer) {
     countdownSvgText.appendChild(countdownText);
     countdownContainer.appendChild(countdownSvgText);
 
-    // countdownContainer.appendChild(countdownText);
     cardHeader.appendChild(countdownContainer);
 
     listingCard.appendChild(cardHeader);
@@ -204,13 +181,10 @@ function renderListings(listings, selectContainer) {
     const currentBid = document.createElement("p");
     currentBid.classList.add("card-text");
     let lastBidAmount = 0;
-    // let lastBidder = "";
-    // let bidderName = "";
+
     if (listing.bids && listing.bids.length > 0) {
       const lastBid = listing.bids[listing.bids.length - 1];
       lastBidAmount = lastBid.amount;
-      // lastBidder = `(@${lastBid.bidder.name})`;
-      // bidderName = lastBid.bidder.name;
     }
     const priceContainer = document.createElement("div");
     priceContainer.classList.add("d-inline-flex", "card-text");
@@ -232,14 +206,6 @@ function renderListings(listings, selectContainer) {
     priceContainer.appendChild(priceText);
     bidContainer.appendChild(priceContainer);
 
-    // currentBid.textContent = `Price: ${lastBidAmount} credits`;
-    // const lastBidderLink = document.createElement("a");
-    // lastBidderLink.classList.add("card-text", "fst-italic", "ms-1");
-    // lastBidderLink.textContent = lastBidder;
-    // lastBidderLink.href = `/profile/?name=${bidderName}`;
-    // bidContainer.appendChild(currentBid);
-    // bidContainer.appendChild(lastBidderLink);
-    // currentBid.appendChild(lastBidderLink);
     cardBody.appendChild(bidContainer);
     const bids = document.createElement("p");
     bids.classList.add("card-text");

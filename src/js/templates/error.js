@@ -1,6 +1,5 @@
 export function errorTemplate(container) {
   container.innerHTML = "";
-  // const errorMsg = document.querySelector(".error-message");
   container.classList.add(
     "d-flex",
     "flex-column",
@@ -25,8 +24,4 @@ export function errorTemplate(container) {
   goBackLink.href = `/`;
   goBackLink.innerText = "< Go back to homepage";
   container.appendChild(goBackLink);
-  // errorMsg.appendChild(errorSVG);
-  // errorMsg.appendChild(errorMsgText);
-  // errorMsg.appendChild(goBackLink);
-  // placement.appendChild(errorMsg);
 }

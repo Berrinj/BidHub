@@ -6,8 +6,6 @@ import { setUpdateProfileFormListener } from "../handlers/updateProfile.js";
 import { renderListingCard } from "./listingCard.js";
 import { displayProfileListings } from "../api/profile/display.js";
 import { goBackBtn } from "../handlers/goBackBtn.js";
-// import { login } from "../api/auth/login.js";
-// import { getProfile } from "../profile/get.js";
 
 export async function renderProfile() {
   goBackBtn();
@@ -21,7 +19,7 @@ export async function renderProfile() {
     exitSettings: "../../../src/images/svg/fontisto--close.svg",
     logOut: "../../../src/images/svg/system-uicons--exit-left.svg",
   };
-  // const settingsSVG = "../../../src/images/svg/lucide--settings.svg";
+
   const loadingText = document.querySelector(".loading-text");
   const errorMsg = document.querySelector(".main-content");
   const storage = load("profile");
@@ -69,7 +67,6 @@ export async function renderProfile() {
   const url = new URL(location.href);
   const getName = url.searchParams.get("name") || storage.name;
   const profileInfo = await displayProfile(getName, errorMsg);
-  console.log(profileInfo);
   loadingText.style.display = "none";
   const avatarURL = profileInfo.data.avatar.url || placeholders.avatar;
   const profileImg = document.querySelector(".profile-img");
@@ -113,7 +110,6 @@ export async function renderProfile() {
     exitEditMode.classList.remove("d-none");
     updateProfileForm(profileBody, avatarURL, profileInfo.data.bio);
     setUpdateProfileFormListener();
-    // https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
   });
   exitEditMode.addEventListener("click", () => {
     window.location.reload();
@@ -150,8 +146,6 @@ export async function renderProfile() {
     "profile-credits",
     "text-primary-custom",
     "fst-italic",
-    // "mb-0",
-    // "fw-light",
   );
   profileCredits.textContent = `${profileInfo.data.credits} credits available`;
 
@@ -179,7 +173,6 @@ export async function renderProfile() {
   listingsValue.classList.add("profile-listings", "lead", "mb-1");
   listingsValue.textContent = `${listings} Listings`;
   const viewAllBtn = document.createElement("a");
-  // viewAllBtn.classList.add("btn", "btn-primary", "btn-sm");
   viewAllBtn.classList.add("p-0", "lead", "text-primary");
   viewAllBtn.style.cursor = "pointer";
   viewAllBtn.textContent = "View all";
@@ -324,7 +317,7 @@ export async function renderProfile() {
     "bids",
     ".view-listings",
   );
-  console.log(allBids);
+
   const listingsBidsContainer = document.createElement("div");
   listingsBidsContainer.classList.add(
     "profile-listings-bids",
@@ -456,8 +449,4 @@ export async function renderProfile() {
   }
   profileBody.appendChild(profileBio);
   profileBody.appendChild(profileEmail);
-  //   listingsContainer.appendChild(listingsImg);
-  //   listingsInfo.appendChild(listingsValue);
-  //   listingsInfo.appendChild(viewAllBtn);
-  //   listingsContainer.appendChild(listingsInfo);
 }

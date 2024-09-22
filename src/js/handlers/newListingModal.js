@@ -47,13 +47,6 @@ export async function openNewListingModal() {
   form.appendChild(description);
 
   const tagsContainer = document.createElement("div");
-  // const addTagsBtn = document.createElement("p");
-
-  // addTagsBtn.classList.add("small", "btn", "btn-nav-footer-custom", "mt-2");
-  // addTagsBtn.textContent = "+ Add tags";
-  // addTagsBtn.addEventListener("click", (e) => {
-  //   e.preventDefault();
-  // addTagsBtn.style.display = "none";
   const tags = document.createElement("div");
   tags.classList.add("form-group", "mb-2");
   const tagsLabel = document.createElement("label");
@@ -68,9 +61,7 @@ export async function openNewListingModal() {
   tags.appendChild(tagsLabel);
   tags.appendChild(tagsInput);
   tagsContainer.appendChild(tags);
-  // });
   form.appendChild(tagsContainer);
-  // form.appendChild(addTagsBtn);
 
   //Image input
   const imagesContainer = document.createElement("div");
@@ -97,15 +88,10 @@ export async function openNewListingModal() {
   endsAtInput.setAttribute("id", "endsAt");
   endsAtInput.setAttribute("name", "endsAt");
   endsAtInput.setAttribute("required", true);
-  //   const error = document.createElement("div");
-  //   error.classList.add("invalid-entry");
-  //   error.textContent =
-  //     "Please enter a valid date and time, it must be in the future";
-  //   error.style.display = "none";
   endsAt.appendChild(endsAtLabel);
   endsAt.appendChild(endsAtInput);
-  //   endsAt.appendChild(error);
   form.appendChild(endsAt);
+
   const statusMsg = document.createElement("div");
   statusMsg.classList.add("error-message");
   statusMsg.style.display = "none";
@@ -148,7 +134,6 @@ export async function openNewListingModal() {
       setTimeout(() => {
         window.location.href = `/listings/listing/?id=${response.data.id}`;
       }, 3000);
-      console.log(response);
       form.reset();
     }
   });

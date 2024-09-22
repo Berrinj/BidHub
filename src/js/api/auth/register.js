@@ -24,7 +24,6 @@ export async function register(profile) {
     });
 
     const result = await response.json();
-    console.log(result);
     const successMsg = document.querySelector(".response-msg");
     successMsg.textContent =
       "Profile registered successfully! Now you can log in!";
@@ -38,6 +37,6 @@ export async function register(profile) {
     }
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }

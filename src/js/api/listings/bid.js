@@ -21,7 +21,6 @@ export async function placeBid(id, amount) {
       return await response.json();
     }
     if (response.status !== 200) {
-      console.log("OH NOOOO");
       throw new Error("Bid not placed");
     }
   } catch (error) {

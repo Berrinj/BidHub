@@ -25,24 +25,13 @@ export async function login(profile) {
       storage.save("token", accessToken);
       storage.save("profile", profile);
 
-      //close the modal
-      //   const modal = document.querySelector("#loginModal");
-      //   const modalBackdrop = document.querySelector(".modal-backdrop");
-      //   modal.classList.remove("show");
-      //   modal.setAttribute("hidden", true);
-      //   modalBackdrop.remove();
-
-      //   document.body.style.overflow = "auto";
-
       //reload the current page
       window.location.reload();
-
-      // window.location.href = "/";
 
       return profile;
     }
     throw new Error("Login failed");
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
