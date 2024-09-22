@@ -1,6 +1,12 @@
 import { displayListingsBySearch } from "../api/listings/display.js";
 import { renderListingCard } from "./listingCard.js";
 
+/**
+ * @name renderListingsBySearch
+ * @description renders listings by search
+ * @returns {void} - No return value but renders listings by search to the page with the renderListingCard function
+ */
+
 export async function renderListingsBySearch() {
   const container = document.querySelector(".all-listings-container .row");
   const searchHeader = document.querySelector(".search-header");

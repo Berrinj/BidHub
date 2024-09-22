@@ -1,3 +1,12 @@
+/**
+ * @name updateProfileForm
+ * @description Update the profile with the profile data, avatar and bio
+ * @param {*} container - The container to update the profile form
+ * @param {*} oldUrl - The old avatar url plaved in the input field
+ * @param {*} oldBio - The old bio placed in the input field
+ * @returns updated profile
+ */
+
 export function updateProfileForm(container, oldUrl, oldBio) {
   container.innerHTML = "";
   const form = document.createElement("form");

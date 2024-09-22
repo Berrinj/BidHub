@@ -4,6 +4,11 @@ import { renderListingCard } from "./listingCard.js";
 let currentPage = 1;
 let totalPageCount = 1;
 
+/**
+ * @name renderAllListings
+ * @description renders all listings on the all listings page
+ */
+
 export async function renderAllListings() {
   const errorMsg = document.querySelector(".main-content");
   const listingsContainer = document.querySelector(
@@ -16,6 +21,13 @@ export async function renderAllListings() {
   addSortListener(listingsContainer, errorMsg);
 }
 
+/**
+ * @name addSortListener
+ * @description adds a sort listener to the sort dropdown
+ * @param {*} listingsContainer - the container to append the listing card to
+ * @param {*} errorMsg - the error message container
+ */
+
 function addSortListener(listingsContainer, errorMsg) {
   const sortElement = document.querySelector("#sort");
 
@@ -23,6 +35,14 @@ function addSortListener(listingsContainer, errorMsg) {
     await loadListingsPage(listingsContainer, errorMsg);
   });
 }
+
+/**
+ * @name loadListingsPage
+ * @description loads the listings page with the selected sort value, or newest by default
+ * @param {*} container - the container to append the listing card to
+ * @param {*} errorMsg - the error message container
+ * @returns {void} - No return value, but appends the listings to the container with the renderListingCard function
+ */
 
 async function loadListingsPage(container, errorMsg) {
   currentPage = 1;

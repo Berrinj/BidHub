@@ -1,3 +1,10 @@
+/**
+ * @name errorTemplate
+ * @description Display an error message when the API request fails
+ * @param {container} container - The container to display the error message
+ * @returns {HTMLElement} - The error message template
+ */
+
 export function errorTemplate(container) {
   container.innerHTML = "";
   container.classList.add(

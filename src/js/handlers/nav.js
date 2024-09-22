@@ -2,6 +2,12 @@ import { load } from "../storage/index.js";
 import { openNewListingModal } from "./newListingModal.js";
 const topNav = document.querySelector(".navbar-nav");
 
+/**
+ * @name navListener
+ * @description Check if the user is logged in and change the links in the topNav
+ * this is more of a template function, scared to move it so close to deadline
+ */
+
 export function navListener() {
   if (load("token")) {
     // change the links in the topNav

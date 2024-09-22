@@ -2,6 +2,17 @@ import { getProfile } from "../api/profile/get.js";
 import { placeBid } from "../api/listings/bid.js";
 import { load } from "../storage/index.js";
 
+/**
+ * @name openBidModal
+ * @description Open the bid modal and populate it with the listing data
+ * @param {*} listing - The listing object
+ * @param {*} listingID - The ID of the listing
+ * @param {*} mediaURL - The URL of the first listing media
+ * @param {*} lastBidAmount - The amount of the last bid
+ * @returns {void} - No return value, but opens the bid modal
+ * this is more of a template function, scared to move it so close to deadline
+ */
+
 export async function openBidModal(
   listing,
   listingID,

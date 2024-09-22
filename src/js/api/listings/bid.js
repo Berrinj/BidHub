@@ -1,6 +1,15 @@
 import { API_URL_LISTINGS } from "../constants.js";
 import { authFetch } from "../authFetch.js";
 
+/**
+ * @name placeBid
+ * @description a function that places a bid
+ * @param {string} id - the listing id
+ * @param {number} amount - the amount to bid
+ * @throws {Error} if the POST fails or an error occurs during the process.
+ * @returns - the response of the bid
+ */
+
 export async function placeBid(id, amount) {
   try {
     if (!id) {

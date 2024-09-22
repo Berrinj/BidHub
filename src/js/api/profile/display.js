@@ -35,6 +35,15 @@ export async function displayProfile(name, container) {
   }
 }
 
+/**
+ * @name displayProfileListings
+ * @description Fetches a single profile from the API and gets the listings for that profile
+ * @param {*} name - the username of the profile to fetch
+ * @param {*} data - the type of data to fetch for the profile, either listings, bids, or wins
+ * @param {*} container - the container to display the data
+ * @returns
+ */
+
 export async function displayProfileListings(name, data, container) {
   try {
     if (!name) {

@@ -6,11 +6,15 @@ import { errorTemplate } from "../../templates/error.js";
 const bids = "_bids=true";
 const seller = "_seller=true";
 
-// /**
-//  * Fetches all listings from the API
-//  * @returns {promise} result of the get
-//  * @throws {Error} If the name parameter is empty or an error occurs during the process.
-//  */
+/**
+ * @description Fetches all listings from the API
+ * @param {number} page - the page number to fetch
+ * @param {string} sort - the field to sort by
+ * @param {string} sortOrder - the order to sort by
+ * @param {HTMLElement} container - the container to display the listings
+ * @returns {promise} result of the get
+ * @throws {Error} If the name parameter is empty or an error occurs during the process.
+ */
 
 export async function displayListings(page, sort, sortOrder, container) {
   try {
@@ -28,6 +32,14 @@ export async function displayListings(page, sort, sortOrder, container) {
     throw new Error("Failed to display listings");
   }
 }
+
+/**
+ * @name displayListing
+ * @description Fetches a single listing from the API
+ * @param {*} id - the listing id
+ * @param {*} container - the container to display the listing
+ * @returns - the listing data
+ */
 
 export async function displayListing(id, container) {
   try {
@@ -48,6 +60,14 @@ export async function displayListing(id, container) {
     throw new Error("Failed to display listing");
   }
 }
+
+/**
+ * @name displayListingsBySearch
+ * @param {*} page - the page number to fetch
+ * @param {*} searchValue - the search value to fetch
+ * @param {*} container - the container to display the listings
+ * @returns the listings data based on the search value
+ */
 
 export async function displayListingsBySearch(page, searchValue, container) {
   try {

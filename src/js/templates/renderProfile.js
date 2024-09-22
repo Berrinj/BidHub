@@ -7,6 +7,13 @@ import { renderListingCard } from "./listingCard.js";
 import { displayProfileListings } from "../api/profile/display.js";
 import { goBackBtn } from "../handlers/goBackBtn.js";
 
+/**
+ * @name renderProfile
+ * @description renders the profile page, with the user's profile information and stats. If the user is not logged in, it will display an error message
+ * @returns {void} - No return value, but renders the profile page with the user's information
+ * @throws {error} - If the user is not logged in, it will display an error message
+ */
+
 export async function renderProfile() {
   goBackBtn();
   const placeholders = {

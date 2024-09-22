@@ -1,9 +1,11 @@
 import { register } from "../api/auth/register.js";
 
 /**
- * Event listener for the register form
- * Extract the form data and send a request to the API to register
+ * @name registerFormListener
+ * @description Event listener for the register form, extract the form data and send a request to the API to register
  * @param {array} profile - The profile data to be registered
+ * @throws {Error} If the registration fails or an error occurs
+ * @returns {promise} The result of the registration
  */
 
 export function registerFormListener() {
