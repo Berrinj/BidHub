@@ -24,7 +24,9 @@ export async function placeBid(id, amount) {
       throw new Error("Bid not placed");
     }
   } catch (error) {
-    console.error(error);
+    const errorMsg = document.querySelector(".bid-error");
+    errorMsg.style.display = "block";
+    errorMsg.textContent = error.message;
     throw new Error("Failed to place bid");
   }
 }

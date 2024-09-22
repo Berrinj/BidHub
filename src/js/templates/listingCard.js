@@ -87,6 +87,7 @@ export async function renderListingCard(container, listing) {
   // Create the countdown SVG
   const countdownSVG = document.createElement("img");
   countdownSVG.src = `../../../src/images/svg/eos-icons--hourglass.svg`;
+  countdownSVG.alt = "countdown icon";
   countdownSVG.classList.add("countdown-svg", "pb-1", "ps-1", "pe-1");
 
   const countdownText = document.createElement("p");
@@ -220,7 +221,12 @@ export async function renderListingCard(container, listing) {
 
   // Create the bid now button
   const bidBtn = document.createElement("button");
-  bidBtn.classList.add("btn", "btn-secondary-custom", "bid-btn");
+  bidBtn.classList.add(
+    "btn",
+    "btn-secondary-custom",
+    "bid-btn",
+    "text-uppercase",
+  );
   bidBtn.textContent = "Bid now";
   bidBtn.dataset.id = listingID;
   bidBtn.setAttribute("data-bs-target", "#bidModal");

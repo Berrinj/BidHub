@@ -91,7 +91,7 @@ export async function renderProfile() {
     "mx-auto",
     "d-flex",
   );
-  editProfileBtn.innerHTML = `<img class="me-1" src="${SVG.settings}">Edit Profile`;
+  editProfileBtn.innerHTML = `<img class="me-1" src="${SVG.settings}" alt="settings icon">Edit Profile`;
   editProfileBtn.style.cursor = "pointer";
   const exitEditMode = document.createElement("p");
   exitEditMode.classList.add(
@@ -102,7 +102,7 @@ export async function renderProfile() {
     "d-flex",
     "d-none",
   );
-  exitEditMode.innerHTML = `<img class="me-1" src="${SVG.exitSettings}">Exit Edit Mode`;
+  exitEditMode.innerHTML = `<img class="me-1" src="${SVG.exitSettings}" alt="exit settings icon">Exit Edit Mode`;
   exitEditMode.style.cursor = "pointer";
 
   editProfileBtn.addEventListener("click", () => {
@@ -167,6 +167,7 @@ export async function renderProfile() {
   const listingsImg = document.createElement("img");
   listingsImg.classList.add("profile-listings-img");
   listingsImg.src = placeholders.bidSVG;
+  listingsImg.alt = "listings hammer icon";
   const listingsInfo = document.createElement("div");
   listingsInfo.classList.add("profile-listings-info");
   const listingsValue = document.createElement("p");
@@ -240,6 +241,7 @@ export async function renderProfile() {
   const listingsWinsImg = document.createElement("img");
   listingsWinsImg.classList.add("profile-listings-img");
   listingsWinsImg.src = placeholders.bidSVG;
+  listingsWinsImg.alt = "listings hammer icon";
   const listingsWinsInfo = document.createElement("div");
   listingsWinsInfo.classList.add("profile-listings-info");
   const listingsWinsValue = document.createElement("p");
@@ -332,6 +334,7 @@ export async function renderProfile() {
   const listingsBidsImg = document.createElement("img");
   listingsBidsImg.classList.add("profile-listings-img");
   listingsBidsImg.src = placeholders.bidSVG;
+  listingsBidsImg.alt = "listings hammer icon";
   const listingsBidsInfo = document.createElement("div");
   listingsBidsInfo.classList.add("profile-listings-info");
   const listingsBidsValue = document.createElement("p");
@@ -432,7 +435,7 @@ export async function renderProfile() {
     "log-out",
     "text-uppercase",
   );
-  logoutBtnLink.innerHTML = `<img class="me-1" src="${SVG.logOut}">Log out`;
+  logoutBtnLink.innerHTML = `<img class="me-1" src="${SVG.logOut}" alt="log out icon">Log out`;
   logoutBtn.addEventListener("click", () => {
     remove("profile");
     remove("token");

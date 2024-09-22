@@ -47,6 +47,10 @@ export async function renderListingsBySearch() {
         listing.title.toLowerCase() !== "test" &&
         listing.title.toLowerCase() !== "test123",
     );
+    if (activeListings.length === 0) {
+      errorMsg.classList.remove("d-none");
+      errorMsg.innerHTML = "No active listings found.";
+    }
     activeListings.forEach((listing) => {
       renderListingCard(container, listing);
     });

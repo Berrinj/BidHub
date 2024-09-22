@@ -100,7 +100,7 @@ export async function openNewListingModal() {
   addListingBtn.classList.add(
     "btn",
     "btn-secondary-custom",
-    "text-white",
+    "text-nav-footer-custom",
     "mt-2",
     "w-100",
   );

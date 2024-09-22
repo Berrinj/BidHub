@@ -13042,6 +13042,27 @@ a {
   color: #1e3a8a;
 }
 
+p,
+li,
+a {
+  font-family: "Roboto", sans-serif;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  font-family: "Montserrat", sans-serif;
+}
+
 .header-container {
   margin: 30px auto;
   background-color: #1e3a8a;
@@ -13072,7 +13093,7 @@ main .main-content-image img {
 }
 main .main-content {
   max-width: 1300px;
-  min-height: 60vh;
+  min-height: 50vh;
 }
 
 footer {
@@ -13164,8 +13185,6 @@ footer .footer-content {
 }
 
 .bid-btn {
-  text-transform: uppercase;
-  color: #fff;
   font-weight: 500;
   font-size: small;
 }
@@ -13175,8 +13194,6 @@ footer .footer-content {
 }
 
 .header-button button {
-  text-transform: uppercase;
-  color: #fff;
   font-size: 1.5rem;
 }
 

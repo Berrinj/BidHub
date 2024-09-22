@@ -135,6 +135,7 @@ function renderListings(listings, selectContainer) {
 
     // Create the countdown SVG
     const countdownSVG = document.createElement("img");
+    countdownSVG.alt = "hourglass icon";
     countdownSVG.src = `../../../src/images/svg/eos-icons--hourglass.svg`;
     countdownSVG.classList.add("countdown-svg", "pb-1", "ps-1", "pe-1");
 
@@ -157,8 +158,8 @@ function renderListings(listings, selectContainer) {
 
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body", "p-2");
-    const cardTitle = document.createElement("h5");
-    cardTitle.classList.add("card-title", "text-wrap");
+    const cardTitle = document.createElement("h3");
+    cardTitle.classList.add("card-title", "text-wrap", "h5");
     //listen for window resize
     window.addEventListener("resize", () => {
       if (
@@ -221,7 +222,13 @@ function renderListings(listings, selectContainer) {
       "mt-2",
     );
     const bidBtn = document.createElement("button");
-    bidBtn.classList.add("btn", "btn-secondary-custom", "bid-btn");
+    bidBtn.classList.add(
+      "btn",
+      "btn-secondary-custom",
+      "bid-btn",
+      "text-uppercase",
+      "text-nav-footer-custom",
+    );
     bidBtn.dataset.id = listingID;
     bidBtn.setAttribute("data-bs-target", "#bidModal");
     bidBtn.setAttribute("data-bs-toggle", "modal");
