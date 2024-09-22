@@ -1,7 +1,4 @@
 import { displayListings } from "../api/listings/display.js";
-// import { countdownTimer } from "../handlers/timeDate.js";
-// import { openBidModal } from "../handlers/bidModal.js";
-// import { truncateText } from "../handlers/truncateText.js";
 import { renderListingCard } from "./listingCard.js";
 
 let currentPage = 1;
@@ -48,10 +45,6 @@ async function loadListingsPage(container, errorMsg) {
       sortField = "created";
       sortOrder = "asc";
       break;
-    // case "most-wanted":
-    //   sortField = "bids.length";
-    //   sortOrder = "desc";
-    //   break;
     case "ending-soon":
       sortField = "endsAt";
       sortOrder = "asc";
@@ -60,14 +53,6 @@ async function loadListingsPage(container, errorMsg) {
       sortField = "endsAt";
       sortOrder = "desc";
       break;
-    // case "price-low":
-    //   sortField = "bids.length";
-    //   sortOrder = "asc";
-    //   break;
-    // case "price-high":
-    //   sortField = "bids.length";
-    //   sortOrder = "desc";
-    //   break;
     default:
       sortField = "created";
       sortOrder = "desc";
@@ -81,17 +66,12 @@ async function loadListingsPage(container, errorMsg) {
   );
 
   totalPageCount = response.meta.pageCount;
-  console.log("Total page count:", totalPageCount);
-  console.log("Page 1 data:", response);
 
   let allListings = [...response.data];
   for (let i = 2; i <= totalPageCount; i++) {
     const response = await displayListings(i, sortField, sortOrder, errorMsg);
-    console.log(`Page ${i} data:`, response);
     allListings = allListings.concat(response.data);
   }
-  console.log("All listings in API:", allListings);
-  // let listingsArray = response.data;
 
   let filteredListings = [];
   if (sortValue === "most-wanted") {
@@ -131,7 +111,6 @@ async function loadListingsPage(container, errorMsg) {
       listing.title.toLowerCase() !== "test123" &&
       listing.seller.name !== "hjibfasduifd",
   );
-  console.log("Active listings:", activeListings);
 
   const listingsHeader = document.querySelector(".listings-header");
   listingsHeader.classList.remove("d-none");
@@ -146,60 +125,3 @@ async function loadListingsPage(container, errorMsg) {
     renderListingCard(container, listing);
   });
 }
-
-// async function loadMoreListings() {
-//   currentPage++;
-
-//   const listingsContainer = document.querySelector(
-//     ".all-listings-container .row",
-//   );
-//   const errorMsg = document.querySelector(".main-content");
-
-//   if (currentPage <= totalPageCount) {
-//     await loadListingsPage(listingsContainer, errorMsg);
-
-//     if (currentPage >= totalPageCount) {
-//       hideShowMoreBtn();
-//     }
-//   }
-// }
-
-// export async function renderAllListings() {
-//   goBackBtn();
-//   const errorMsg = document.querySelector(".main-content");
-//   const firstResponse = await displayListings(1, errorMsg);
-//   const pageCount = firstResponse.meta.pageCount;
-//   let allListings = [...firstResponse.data];
-
-//   for (let i = 2; i <= pageCount; i++) {
-//     const response = await displayListings(i, errorMsg);
-//     console.log(`Page ${i} data:`, response);
-//     allListings = allListings.concat(response.data);
-//   }
-
-//   const listingsArray = allListings;
-//   listingsArray.sort((a, b) => new Date(b.created) - new Date(a.created));
-
-//   const activeListings = listingsArray.filter(
-//     (listing) =>
-//       new Date(listing.endsAt) >= new Date() &&
-//       listing.title.toLowerCase() !== "test" &&
-//       listing.title.toLowerCase() !== "test123",
-//   );
-//   console.log("Active listings:", activeListings);
-
-//   const listingsHeader = document.querySelector(".listings-header");
-//   listingsHeader.classList.remove("d-none");
-//   const listingsContainer = document.querySelector(
-//     ".all-listings-container .row",
-//   );
-
-//   const loading = document.querySelector(".loading-text");
-//   loading.innerHTML = "";
-//   if (activeListings.length === 0) {
-//     loading.textContent = "No active listings found.";
-//   }
-//   activeListings.forEach((listing) => {
-//     renderListingCard(listingsContainer, listing);
-//   });
-// }

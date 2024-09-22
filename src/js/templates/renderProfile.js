@@ -6,8 +6,6 @@ import { setUpdateProfileFormListener } from "../handlers/updateProfile.js";
 import { renderListingCard } from "./listingCard.js";
 import { displayProfileListings } from "../api/profile/display.js";
 import { goBackBtn } from "../handlers/goBackBtn.js";
-// import { login } from "../api/auth/login.js";
-// import { getProfile } from "../profile/get.js";
 
 export async function renderProfile() {
   goBackBtn();
@@ -21,7 +19,7 @@ export async function renderProfile() {
     exitSettings: "../../../src/images/svg/fontisto--close.svg",
     logOut: "../../../src/images/svg/system-uicons--exit-left.svg",
   };
-  // const settingsSVG = "../../../src/images/svg/lucide--settings.svg";
+
   const loadingText = document.querySelector(".loading-text");
   const errorMsg = document.querySelector(".main-content");
   const storage = load("profile");
@@ -69,7 +67,6 @@ export async function renderProfile() {
   const url = new URL(location.href);
   const getName = url.searchParams.get("name") || storage.name;
   const profileInfo = await displayProfile(getName, errorMsg);
-  console.log(profileInfo);
   loadingText.style.display = "none";
   const avatarURL = profileInfo.data.avatar.url || placeholders.avatar;
   const profileImg = document.querySelector(".profile-img");
@@ -94,7 +91,7 @@ export async function renderProfile() {
     "mx-auto",
     "d-flex",
   );
-  editProfileBtn.innerHTML = `<img class="me-1" src="${SVG.settings}">Edit Profile`;
+  editProfileBtn.innerHTML = `<img class="me-1" src="${SVG.settings}" alt="settings icon">Edit Profile`;
   editProfileBtn.style.cursor = "pointer";
   const exitEditMode = document.createElement("p");
   exitEditMode.classList.add(
@@ -105,7 +102,7 @@ export async function renderProfile() {
     "d-flex",
     "d-none",
   );
-  exitEditMode.innerHTML = `<img class="me-1" src="${SVG.exitSettings}">Exit Edit Mode`;
+  exitEditMode.innerHTML = `<img class="me-1" src="${SVG.exitSettings}" alt="exit settings icon">Exit Edit Mode`;
   exitEditMode.style.cursor = "pointer";
 
   editProfileBtn.addEventListener("click", () => {
@@ -113,7 +110,6 @@ export async function renderProfile() {
     exitEditMode.classList.remove("d-none");
     updateProfileForm(profileBody, avatarURL, profileInfo.data.bio);
     setUpdateProfileFormListener();
-    // https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
   });
   exitEditMode.addEventListener("click", () => {
     window.location.reload();
@@ -150,8 +146,6 @@ export async function renderProfile() {
     "profile-credits",
     "text-primary-custom",
     "fst-italic",
-    // "mb-0",
-    // "fw-light",
   );
   profileCredits.textContent = `${profileInfo.data.credits} credits available`;
 
@@ -173,13 +167,13 @@ export async function renderProfile() {
   const listingsImg = document.createElement("img");
   listingsImg.classList.add("profile-listings-img");
   listingsImg.src = placeholders.bidSVG;
+  listingsImg.alt = "listings hammer icon";
   const listingsInfo = document.createElement("div");
   listingsInfo.classList.add("profile-listings-info");
   const listingsValue = document.createElement("p");
   listingsValue.classList.add("profile-listings", "lead", "mb-1");
   listingsValue.textContent = `${listings} Listings`;
   const viewAllBtn = document.createElement("a");
-  // viewAllBtn.classList.add("btn", "btn-primary", "btn-sm");
   viewAllBtn.classList.add("p-0", "lead", "text-primary");
   viewAllBtn.style.cursor = "pointer";
   viewAllBtn.textContent = "View all";
@@ -247,6 +241,7 @@ export async function renderProfile() {
   const listingsWinsImg = document.createElement("img");
   listingsWinsImg.classList.add("profile-listings-img");
   listingsWinsImg.src = placeholders.bidSVG;
+  listingsWinsImg.alt = "listings hammer icon";
   const listingsWinsInfo = document.createElement("div");
   listingsWinsInfo.classList.add("profile-listings-info");
   const listingsWinsValue = document.createElement("p");
@@ -324,7 +319,7 @@ export async function renderProfile() {
     "bids",
     ".view-listings",
   );
-  console.log(allBids);
+
   const listingsBidsContainer = document.createElement("div");
   listingsBidsContainer.classList.add(
     "profile-listings-bids",
@@ -339,6 +334,7 @@ export async function renderProfile() {
   const listingsBidsImg = document.createElement("img");
   listingsBidsImg.classList.add("profile-listings-img");
   listingsBidsImg.src = placeholders.bidSVG;
+  listingsBidsImg.alt = "listings hammer icon";
   const listingsBidsInfo = document.createElement("div");
   listingsBidsInfo.classList.add("profile-listings-info");
   const listingsBidsValue = document.createElement("p");
@@ -439,7 +435,7 @@ export async function renderProfile() {
     "log-out",
     "text-uppercase",
   );
-  logoutBtnLink.innerHTML = `<img class="me-1" src="${SVG.logOut}">Log out`;
+  logoutBtnLink.innerHTML = `<img class="me-1" src="${SVG.logOut}" alt="log out icon">Log out`;
   logoutBtn.addEventListener("click", () => {
     remove("profile");
     remove("token");
@@ -456,8 +452,4 @@ export async function renderProfile() {
   }
   profileBody.appendChild(profileBio);
   profileBody.appendChild(profileEmail);
-  //   listingsContainer.appendChild(listingsImg);
-  //   listingsInfo.appendChild(listingsValue);
-  //   listingsInfo.appendChild(viewAllBtn);
-  //   listingsContainer.appendChild(listingsInfo);
 }

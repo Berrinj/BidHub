@@ -5,8 +5,6 @@ import { errorTemplate } from "../../templates/error.js";
 
 const bids = "_bids=true";
 const seller = "_seller=true";
-// let sort = "created";
-// const order = "desc";
 
 // /**
 //  * Fetches all listings from the API

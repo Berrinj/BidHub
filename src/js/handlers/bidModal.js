@@ -11,7 +11,6 @@ export async function openBidModal(
   // Profile data
   const name = load("profile").name;
   const profile = await getProfile(name);
-  console.log("Profile data:", profile);
   const creditsAvailable = profile.data.credits;
   // Modal
   const modal = document.querySelector("#bidModal");
@@ -92,11 +91,17 @@ export async function openBidModal(
   tokensAvailable.innerHTML = `<small>You have ${creditsAvailable} credits available</small>`;
 
   const bidError = document.createElement("p");
-  bidError.classList.add("text-danger", "fst-italic", "mb-2");
+  bidError.classList.add("text-warning", "fst-italic", "mb-2", "bid-error");
   bidError.textContent = "Bid amount must be greater than the current bid";
   bidError.style.display = "none";
   const bidSuccess = document.createElement("p");
-  bidSuccess.classList.add("text-success", "fst-italic", "mb-2");
+  bidSuccess.classList.add(
+    "bg-success",
+    "text-white",
+    "fst-italic",
+    "mb-2",
+    "rounded",
+  );
   bidSuccess.textContent = "Bid placed successfully";
   bidSuccess.style.display = "none";
 
@@ -115,9 +120,10 @@ export async function openBidModal(
     "btn-secondary-custom",
     "place-bid-btn",
     "text-uppercase",
-    "text-white",
+    "text-nav-footer-custom",
     "mt-2",
     "mb-3",
+    "fw-semibold",
   );
   placeBidBtn.type = "submit";
   placeBidBtn.textContent = "Place bid";
@@ -136,7 +142,6 @@ export async function openBidModal(
     }
     bidError.style.display = "none";
     const response = await placeBid(event.target.dataset.id, bidAmount);
-    console.log("Bid placed successfully:", response);
     if (response) {
       bidError.style.display = "none";
       bidSuccess.style.display = "block";
@@ -147,10 +152,6 @@ export async function openBidModal(
       setTimeout(() => {
         window.location.href = `/listings/listing/?id=${listingID}`;
       }, 3000);
-    } else {
-      bidSuccess.style.display = "none";
-      bidError.style.display = "block";
-      bidLabel.textContent = "Failed to place bid";
     }
   });
 

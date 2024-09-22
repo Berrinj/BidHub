@@ -7,13 +7,6 @@ export async function newListing() {
     const description = document.querySelector("#description").value;
     const tags = document.querySelector("#tags").value.split(",");
 
-    // const media = [
-    //   {
-    //     url: document.querySelector("#imageURL").value,
-    //     alt: document.querySelector("#imageAltText").value,
-    //   },
-    // ];
-
     const media = [];
     const imageURLs = document.querySelectorAll('input[name="imageURL"]');
     const imageAltTexts = document.querySelectorAll(
@@ -56,7 +49,6 @@ export async function newListing() {
       return await response.json();
     }
     if (response.status !== 200) {
-      console.log("OH NOOOO");
       throw new Error("Listing not created");
     }
   } catch (error) {

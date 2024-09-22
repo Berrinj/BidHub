@@ -1,8 +1,5 @@
 export function formatDate(date) {
   return new Date(date).toLocaleDateString("nb-NO", {
-    // day: "numeric",
-    // month: "long",
-    // year: "numeric",
     hour: "numeric",
     minute: "numeric",
   });
@@ -35,5 +32,5 @@ export function countdownTimer(date, element) {
       clearInterval(interval);
       element.innerHTML = "Ended";
     }
-  }, 1000); // Update every second
+  }, 1000);
 }

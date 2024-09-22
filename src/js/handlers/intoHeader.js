@@ -2,8 +2,6 @@ const headerTextP1 = document.querySelector(".header-first-p");
 const headerTextP2 = document.querySelector(".header-second-p");
 const headerBtn = document.querySelector(".header-button");
 const intro = document.querySelector(".intro");
-// const loggedIn = document.querySelectorAll(".logged-in");
-// const loggedOut = document.querySelectorAll(".logged-out");
 import { load } from "../storage/index.js";
 
 // Check if the user is logged in
@@ -21,14 +19,6 @@ export function headerListener() {
       });
       //hide the intro
       intro.setAttribute("hidden", true);
-      // //remove all the hidden attributes from the logged in section
-      // loggedIn.forEach((element) => {
-      //   element.removeAttribute("hidden");
-      // });
-      // //add hidden attribute to the logged out section
-      // loggedOut.forEach((element) => {
-      //   element.setAttribute("hidden", true);
-      // });
     }
   } else {
     headerTextP1.textContent = "Sign up now";

@@ -11,7 +11,6 @@ export async function setUpdateProfileFormListener() {
       },
       bio: formData.get("update-bio"),
     };
-    console.log(profile);
     try {
       await updateProfile(profile);
       setTimeout(() => {

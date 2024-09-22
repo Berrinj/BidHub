@@ -21,11 +21,12 @@ export async function placeBid(id, amount) {
       return await response.json();
     }
     if (response.status !== 200) {
-      console.log("OH NOOOO");
       throw new Error("Bid not placed");
     }
   } catch (error) {
-    console.error(error);
+    const errorMsg = document.querySelector(".bid-error");
+    errorMsg.style.display = "block";
+    errorMsg.textContent = error.message;
     throw new Error("Failed to place bid");
   }
 }

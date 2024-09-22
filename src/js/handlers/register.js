@@ -36,7 +36,6 @@ export function registerFormListener() {
     try {
       const response = await register(profile);
       if (response.ok) {
-        console.log("Profile registered successfully:", profile);
         const successMsg = document.querySelector(".response-msg");
         successMsg.textContent =
           "Profile registered successfully! Now you can log in!";

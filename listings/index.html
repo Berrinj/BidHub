@@ -3,7 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bid Hub</title>
+    <meta
+      name="description"
+      content="All BidHub listings, you can filter and search through them"
+    />
+    <meta
+      name="keywords"
+      content="bidhub, auction, buy, sell, listings, items, win, all listings, filter, search"
+    />
+    <meta name="author" content="Marte Lilleberre" />
+    <title>Bid Hub - All listings</title>
+    <link
+      rel="icon"
+      type="image"
+      href="/src/images/placeholder-images/token-branded--bidz.png"
+    />
     <!-- <link
       rel="stylesheet"
       href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
@@ -85,11 +99,6 @@
                     <option value="price-high">Price: High to Low</option>
                   </select>
                 </div>
-                <!-- <div class="filter-listings-content-item ms-2">
-                            <button class="btn btn-primary-custom" id="filterBtn">
-                                Filter
-                            </button>
-                        </div> -->
               </div>
             </div>
             <div class="container col-8 p-0">
@@ -127,8 +136,10 @@
         </div>
         <div class="load-more mx-auto"></div>
       </div>
+
+      <!-- Register modal-->
       <div
-        class="modal"
+        class="modal fade register-modal"
         id="registerModal"
         tabindex="-1"
         aria-labelledby="registerModalLabel"
@@ -161,6 +172,7 @@
                     name="name"
                     class="form-control"
                     id="username"
+                    autocomplete="username"
                     aria-required="true"
                     required
                     pattern="^[\w]+$"
@@ -175,6 +187,7 @@
                     name="email"
                     class="form-control"
                     id="email"
+                    autocomplete="email"
                     aria-required="true"
                     required
                     pattern="^[\w\-.]+@stud.noroff.no$"
@@ -202,6 +215,7 @@
                     name="password"
                     class="form-control"
                     id="password"
+                    autocomplete="new-password"
                     aria-required="true"
                     minlength="8"
                     title="Min length is 8"
@@ -257,6 +271,16 @@
                     REGISTER
                   </button>
                 </div>
+                <div class="login-btn">
+                  <p
+                    class="login-after-reg link fst-italic d-none bg-primary-custom d-inline-block p-3 text-light rounded"
+                    data-bs-target="#loginModal"
+                    data-bs-toggle="modal"
+                  >
+                    Login here
+                  </p>
+                </div>
+                <div class="response-msg text-center m-2"></div>
               </form>
             </div>
 
@@ -276,9 +300,9 @@
           </div>
         </div>
       </div>
-
+      <!-- login modal-->
       <div
-        class="modal fade"
+        class="modal fade login-modal"
         id="loginModal"
         aria-hidden="true"
         aria-labelledby="loginModalToggleLabel"
@@ -302,18 +326,19 @@
             </div>
             <div class="modal-body d-flex flex-column">
               <img
-                src="../src/images/svg/bid-icon.svg"
+                src="/src/images/svg/bid-icon.svg"
                 alt="Bid Hub Logo"
                 class="mx-auto"
               />
               <form class="loginForm">
                 <div class="form-group mb-3">
-                  <label for="email" class="form-label">Email:</label>
+                  <label for="email-login" class="form-label">Email:</label>
                   <input
                     type="email"
                     name="email"
                     class="form-control"
-                    id="email"
+                    id="email-login"
+                    autocomplete="email"
                     aria-required="true"
                     required
                     pattern="^[\w\-.]+@stud.noroff.no$"
@@ -322,12 +347,15 @@
                 </div>
 
                 <div class="form-group mb-4">
-                  <label for="password" class="form-label">Password:</label>
+                  <label for="password-login" class="form-label"
+                    >Password:</label
+                  >
                   <input
                     type="password"
                     name="password"
                     class="form-control"
-                    id="password"
+                    id="password-login"
+                    autocomplete="current-password"
                     aria-required="true"
                     minlength="8"
                     title="Min length is 8"
@@ -342,6 +370,7 @@
                   >
                     LOG IN
                   </button>
+                  <div class="login-status text-center m-2"></div>
                 </div>
               </form>
             </div>
@@ -358,7 +387,7 @@
         </div>
       </div>
 
-      <!-- Place bid modal -->
+      <!-- Bid modal -->
       <div
         class="modal fade"
         id="bidModal"
@@ -398,7 +427,7 @@
         </div>
       </div>
 
-      <!-- place new listing modal -->
+      <!-- New listing modal -->
       <div
         class="modal fade"
         id="newListingModal"
@@ -433,7 +462,7 @@
     </main>
     <footer>
       <div class="footer-container">
-        <div class="footer-content">
+        <div class="footer-content text-accent-custom">
           <img src="../src/images/svg/bid-icon.svg" alt="Bid Hub Logo" />
           <p>BidHub &copy; 2024</p>
           <!-- <div class="footer-links">

@@ -1,5 +1,4 @@
 import { login } from "../api/auth/login.js";
-// import { getListings } from "../api/listings/display.js";
 
 /**
  * Register the form listener for the login form
@@ -20,8 +19,6 @@ export function loginFormListener() {
 
     try {
       await login(profile);
-      //   const listings = await getListings();
-      //   console.log(listings);
     } catch (error) {
       console.error("Error logging in profile:", error);
     }
