@@ -4,6 +4,8 @@
 
 [![Automated E2E Testing](https://github.com/Berrinj/BidHub/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/Berrinj/BidHub/actions/workflows/e2e-test.yml)
 
+![Semester Project 2 Preview](src/images/preview-live.png) <br>
+
 This is my semester project for semester 3 at Noroff.<br>
 Fall 2024
 
